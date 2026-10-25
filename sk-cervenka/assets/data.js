@@ -19,7 +19,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-10-20',
+  aktualizovano: '2026-10-25',
   strelec: { jmeno: 'Vojtěch Schulmeister', goly: 14, nejvic: true },   // nejvic: vede tabulku střelců soutěže
 
   zapasy: [
@@ -55,20 +55,20 @@ window.SEZONA = {
 
   // tabulka ke dni "aktualizovano"
   tabulka: [
-    { tym: 'FC Hněvotín',           z: 10, skore: '47:7',  b: 28 },
-    { tym: 'TJ Sokol Slavonín B',   z: 10, skore: '28:18', b: 23 },
-    { tym: 'SK Červenka',           z: 9,  skore: '31:17', b: 20, nas: true },
-    { tym: 'Sokol Velký Újezd',     z: 9,  skore: '23:15', b: 18 },
-    { tym: 'FK Nemilany',           z: 10, skore: '28:13', b: 17 },
-    { tym: 'Sokol Mladeč',          z: 10, skore: '26:27', b: 16 },
-    { tym: 'SFK Nedvězí',           z: 10, skore: '24:22', b: 15 },
-    { tym: 'SK Chválkovice B',      z: 10, skore: '31:24', b: 14 },
-    { tym: 'TJ Blatec',             z: 10, skore: '24:24', b: 13 },
-    { tym: 'SK Grygov',             z: 10, skore: '20:28', b: 12 },
-    { tym: 'TJ Štěpánov u Olomouce', z: 10, skore: '17:29', b: 11 },
-    { tym: 'TJ Mladějovice',        z: 10, skore: '23:31', b: 10 },
-    { tym: 'Sokol Dlouhá Loučka',   z: 10, skore: '17:38', b: 10 },
-    { tym: 'SK Šumvald',            z: 10, skore: '9:55',  b: 0 }
+    { tym: 'FC Hněvotín',            z: 11,  skore: '48:9',   b: 28 },
+    { tym: 'SK Červenka',            z: 10,  skore: '36:21',  b: 23, nas: true },
+    { tym: 'TJ Sokol Slavonín B',    z: 11,  skore: '29:21',  b: 23 },
+    { tym: 'FK Nemilany',            z: 11,  skore: '30:14',  b: 20 },
+    { tym: 'Sokol Velký Újezd',      z: 9,   skore: '23:15',  b: 18 },
+    { tym: 'SFK Nedvězí',            z: 11,  skore: '28:24',  b: 18 },
+    { tym: 'Sokol Mladeč',           z: 10,  skore: '26:27',  b: 16 },
+    { tym: 'SK Chválkovice B',       z: 10,  skore: '31:24',  b: 14 },
+    { tym: 'TJ Štěpánov u Olomouce', z: 11,  skore: '20:30',  b: 14 },
+    { tym: 'TJ Blatec',              z: 11,  skore: '28:29',  b: 13 },
+    { tym: 'SK Grygov',              z: 10,  skore: '20:28',  b: 12 },
+    { tym: 'TJ Mladějovice',         z: 11,  skore: '25:35',  b: 10 },
+    { tym: 'Sokol Dlouhá Loučka',    z: 10,  skore: '17:38',  b: 10 },
+    { tym: 'SK Šumvald',             z: 10,  skore: '9:55',   b: 0 }
   ]
 };
 
