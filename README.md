@@ -5,33 +5,38 @@ Na internet se nahrává jen obsah složky `sk-cervenka`.
 
 Data jsou v souborech `.js` (ne `.json`), aby web fungoval i po otevření dvojklikem bez serveru.
 
-## Každý týden: výsledky, tabulka, rozpis
+## Výsledky, tabulka, rozpis: samy
 
-Všechno je v jediném souboru `sk-cervenka/assets/data.js`. Nikde jinde se výsledky ani tabulka nepíšou.
-Další zápas a odpočet dní si web vybere sám podle data.
+Všechno je v jediném souboru `sk-cervenka/assets/data.js`. Každé pondělí ráno ho GitHub přepíše
+podle fotbalunas.cz a web znovu nasadí. Nic se nemusí psát ručně:
 
-1. **Výsledek:** najděte zápas podle data v seznamu `zapasy` a doplňte skóre.
-   Skóre se píše vždy z pohledu Červenky (naše góly : góly soupeře), i když hrajeme venku.
-   ```js
-   { datum: '2026-10-24T14:30', doma: false, souper: 'Blatec', skore: '2:1' },
-   ```
-   Remíza rozhodnutá penaltami: `skore: '2:2', pen: 'V'` (vyhráli jsme) nebo `pen: 'P'` (prohráli jsme).
-2. **Tabulka: sama.** Každé pondělí ráno ji GitHub stáhne z fotbalunas.cz, přepíše v `data.js`
-   (i datum `aktualizovano`) a web znovu nasadí. Dělá to `.github/workflows/tabulka.yml`
-   se skriptem `nastroje/aktualizovat-tabulku.mjs`.
-   Ručně hned teď: na GitHubu Actions → „Tabulka a nasazení webu“ → Run workflow
-   (nebo na počítači s Node: `node nastroje/aktualizovat-tabulku.mjs`).
-   Když fotbalunas.cz nejde nebo změní vzhled stránky, skript nic nepřepíše a zůstane poslední tabulka.
-   Pokud by to někdy selhalo, jde to pořád ručně: v seznamu `tabulka` přepište `z`, skóre a `b`,
-   seřaďte řádky a nechte `nas: true` u Červenky.
-3. **Střelec:** `strelec: { jmeno, goly, nejvic }`. `nejvic: true` jen když vede tabulku střelců soutěže.
-4. **Datum aktualizace:** `aktualizovano: 'RRRR-MM-DD'` (ukazuje se jako „Stav k …“).
-5. **Přeložený zápas:** změňte `datum`. Poznámka u zápasu: `pozn: 'dohrávka'`.
+- **tabulka** soutěže a datum „Stav k …“ (`aktualizovano`),
+- **rozpis a výsledky** Červenky (`zapasy`): přeložené termíny, prohozené domácí a hosté, poznámka „dohrávka“,
+- **zápasy na penalty:** fotbalunas.cz ukazuje jen výsledek penalt, remízu z hrací doby skript dopočítá z tabulky,
+- **střelec** (`strelec`): počet gólů a jestli vede celou soutěž.
 
-Odkud brát čísla: [fotbalunas.cz, Červenka](https://fotbalunas.cz/tym/2726),
-[tabulka soutěže](https://fotbalunas.cz/tabulky/soutez/249), [rozlosování](https://fotbalunas.cz/rozlosovani/soutez/249).
+Další zápas a odpočet dní si web vybere sám podle data. Dělá to `.github/workflows/tabulka.yml`
+se skripty `nastroje/aktualizovat-tabulku.mjs` a `nastroje/fotbalunas.mjs`. Bot zapisuje do `data.js`,
+proto před vlastní úpravou udělejte `git pull`.
 
-Pozor na čárky a apostrofy. Když se po úpravě sekce Zápasy vyprázdní, je v souboru překlep.
+- **Ručně hned teď:** na GitHubu Actions → „Tabulka a nasazení webu“ → Run workflow.
+  Se zaškrtnutým „Jen vyzkoušet“ se data jen stáhnou a vypíšou, nic se neuloží.
+  Na počítači s Node: `node nastroje/aktualizovat-tabulku.mjs` (jen zkouška: `--zkouska`).
+- **Když něco nejde** (fotbalunas.cz neodpovídá, zablokuje automatické stažení, změní vzhled stránky):
+  dotčená část `data.js` zůstane beze změny, web běží s posledními daty a běh na GitHubu skončí
+  červeně, takže přijde e-mail. V kroku „Stáhnout data z fotbalunas.cz“ je napsané, co selhalo.
+- **Co skript sám nepozná:** když nejlepším střelcem Červenky začne být jiný hráč než ten v `strelec.jmeno`.
+  Pak stačí jméno v `data.js` přepsat, počet gólů si už doplní sám.
+
+Ruční úprava, kdyby automatika delší dobu nešla. Skóre se píše vždy z pohledu Červenky (naše góly : góly soupeře):
+```js
+{ datum: '2026-10-24T14:30', doma: false, souper: 'Blatec', skore: '5:4', id: 611178 },
+```
+Remíza rozhodnutá penaltami: `skore: '2:2', pen: 'V'` (vyhráli jsme) nebo `pen: 'P'` (prohráli jsme).
+`id` je číslo zápasu na fotbalunas.cz (z adresy `fotbalunas.cz/zapas/611178/`), podle něj skript zápasy páruje.
+
+Odkud se berou čísla: [tabulka soutěže](https://fotbalunas.cz/tabulky/soutez/249),
+[rozlosování](https://fotbalunas.cz/rozlosovani/soutez/249), [střelci](https://fotbalunas.cz/statistiky/soutez/249/strelci).
 
 ## Partneři
 

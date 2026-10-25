@@ -1,6 +1,7 @@
-# Každé pondělí ráno stáhne aktuální tabulku z fotbalunas.cz, uloží ji do sk-cervenka/assets/data.js
-# a nasadí web na GitHub Pages. Nasadí ho i po každém tvém pushi.
+# Každé pondělí ráno stáhne z fotbalunas.cz tabulku, termíny a výsledky Červenky a střelce,
+# uloží je do sk-cervenka/assets/data.js a nasadí web na GitHub Pages. Nasadí ho i po každém tvém pushi.
 # Ručně jde spustit v záložce Actions → „Tabulka a nasazení webu“ → Run workflow.
+# Se zaškrtnutým „Jen vyzkoušet“ data jen stáhne a vypíše, nic neuloží ani nenasadí.
 
 name: Tabulka a nasazení webu
 
@@ -8,6 +9,11 @@ on:
   schedule:
     - cron: '17 6 * * 1'   # pondělí 6:17 UTC = 7:17 v zimě, 8:17 v létě
   workflow_dispatch:
+    inputs:
+      zkouska:
+        description: 'Jen vyzkoušet stažení dat, nic neukládat ani nenasazovat'
+        type: boolean
+        default: false
   push:
     branches: [main]
 
@@ -33,29 +39,40 @@ jobs:
         with:
           node-version: 22
 
-      - name: Stáhnout tabulku
+      - name: Stáhnout data z fotbalunas.cz
+        id: data
         if: github.event_name != 'push'
-        # když fotbalunas.cz nejde, web se nasadí s poslední platnou tabulkou
+        # když fotbalunas.cz nejde, web se nasadí s posledními platnými daty a na konci se ohlásí chyba
         continue-on-error: true
-        run: node nastroje/aktualizovat-tabulku.mjs
+        run: node nastroje/aktualizovat-tabulku.mjs ${{ inputs.zkouska && '--zkouska' || '' }}
 
-      - name: Uložit změny tabulky
-        if: github.event_name != 'push'
+      - name: Uložit změny dat
+        if: github.event_name != 'push' && !inputs.zkouska
         run: |
           if git diff --quiet; then
-            echo "Tabulka se nezměnila."
+            echo "Data se nezměnila."
             exit 0
           fi
           git config user.name "tabulka-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Tabulka k $(date +%Y-%m-%d)"
+          git commit -am "Data k $(date +%Y-%m-%d)"
           git push
 
       - uses: actions/configure-pages@v5
+        if: ${{ !inputs.zkouska }}
 
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ !inputs.zkouska }}
         with:
           path: sk-cervenka
 
       - id: deploy
+        if: ${{ !inputs.zkouska }}
         uses: actions/deploy-pages@v4
+
+      # GitHub pošle e-mail jen o neúspěšném běhu, proto se chyba stažení ohlásí až po nasazení
+      - name: Ohlásit chybu stažení
+        if: steps.data.outcome == 'failure'
+        run: |
+          echo "::error::Část dat z fotbalunas.cz se nepodařilo stáhnout. Web běží s posledními platnými daty, podrobnosti jsou v kroku Stáhnout data."
+          exit 1
