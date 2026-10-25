@@ -1,0 +1,61 @@
+# Každé pondělí ráno stáhne aktuální tabulku z fotbalunas.cz, uloží ji do sk-cervenka/assets/data.js
+# a nasadí web na GitHub Pages. Nasadí ho i po každém tvém pushi.
+# Ručně jde spustit v záložce Actions → „Tabulka a nasazení webu“ → Run workflow.
+
+name: Tabulka a nasazení webu
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'   # pondělí 6:17 UTC = 7:17 v zimě, 8:17 v létě
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Stáhnout tabulku
+        if: github.event_name != 'push'
+        # když fotbalunas.cz nejde, web se nasadí s poslední platnou tabulkou
+        continue-on-error: true
+        run: node nastroje/aktualizovat-tabulku.mjs
+
+      - name: Uložit změny tabulky
+        if: github.event_name != 'push'
+        run: |
+          if git diff --quiet; then
+            echo "Tabulka se nezměnila."
+            exit 0
+          fi
+          git config user.name "tabulka-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Tabulka k $(date +%Y-%m-%d)"
+          git push
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: sk-cervenka
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SK Červenka | Fotbal na Hané od roku 1945</title>
+<meta name="description" content="Fotbalový klub SK Červenka u Litovle. Zápasy a tabulka okresního přeboru, historie od roku 1945, týmy, galerie a kontakt.">
+<meta name="theme-color" content="#0d2618">
+<!-- DEPLOY STEP: až bude web online, doplnit do og:url a og:image plnou adresu webu (https://...) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="SK Červenka">
+<meta property="og:description" content="Fotbal na Hané od roku 1945. Zápasy, tabulka, historie a galerie klubu.">
+<meta property="og:url" content="">
+<meta property="og:image" content="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23f4f6ef' stroke='%231f5a36' stroke-width='5'/%3E%3Cpath d='M6 40Q32 28 58 40V46Q32 34 6 46Z' fill='%232c7a49'/%3E%3Cpath d='M17 39C13 30 14 20 17 11C20 20 21 30 17 39Z' fill='%231f5a36'/%3E%3Ccircle cx='42' cy='21' r='8' fill='%23fff' stroke='%2310241a' stroke-width='2'/%3E%3Cpath d='M42 16.5l4.3 3.1-1.6 5h-5.4l-1.6-5z' fill='%23cf3b25'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="znak-sit" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0H7M0 0V7" stroke="#8fa898" stroke-width=".8" fill="none"/>
+    </pattern>
+    <clipPath id="znak-kruh"><circle cx="60" cy="60" r="52"/></clipPath>
+    <symbol id="znak" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="57" fill="#f4f6ef"/>
+      <g clip-path="url(#znak-kruh)">
+        <rect x="0" y="0" width="120" height="78" fill="url(#znak-sit)"/>
+        <path d="M2 74Q60 50 118 74V92Q60 70 2 92Z" fill="#2c7a49"/>
+      </g>
+      <path d="M31 77C25 62 26 42 31 22C36 42 37 62 31 77Z" fill="#1f5a36"/>
+      <path d="M41 74C36 61 37 46 41 33C45 46 46 61 41 74Z" fill="#2a6b42"/>
+      <g transform="translate(80 35)">
+        <circle r="10" fill="#fff" stroke="#10241a" stroke-width="1.8"/>
+        <path d="M0-5 4.76-1.55 2.94 4.05H-2.94L-4.76-1.55Z" fill="#cf3b25"/>
+      </g>
+      <path id="znak-pas" d="M12 87Q60 67 108 87" fill="none"/>
+      <text fill="#f4f6ef" font-family="'Big Shoulders Display','Arial Narrow',sans-serif" font-weight="900" font-size="15" letter-spacing="1.2"><textPath href="#znak-pas" startOffset="50%" text-anchor="middle">ČERVENKA</textPath></text>
+      <path id="znak-spodek" d="M22.5 91.5A49 49 0 0 0 97.5 91.5" fill="none"/>
+      <text fill="#1f5a36" font-family="'Big Shoulders Display','Arial Narrow',sans-serif" font-weight="800" font-size="8.4" letter-spacing="1.7"><textPath href="#znak-spodek" startOffset="50%" text-anchor="middle">SPORTOVNÍ KLUB</textPath></text>
+      <circle cx="60" cy="60" r="57" fill="none" stroke="#1f5a36" stroke-width="3.2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Přeskočit na obsah</a>
+<div class="env" aria-hidden="true"></div>
+
+<header class="nav" data-nav>
+  <div class="nav-in wrap">
+    <a class="brand" href="#uvod" aria-label="SK Červenka, na začátek stránky">
+      <svg class="brand-znak" aria-hidden="true"><use href="#znak"/></svg>
+      <span class="brand-t">SK Červenka</span>
+    </a>
+    <nav class="nav-links" aria-label="Hlavní menu">
+      <a href="#zapasy">Zápasy</a>
+      <a href="#klub">Klub</a>
+      <a href="#tymy">Týmy</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#partneri">Partneři</a>
+      <a href="#pridej-se">Kontakt</a>
+    </nav>
+    <a class="btn btn-accent btn-s nav-cta" href="#pridej-se">Přidejte se</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>
+      <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="menu" id="menu" hidden data-menu>
+    <nav aria-label="Menu pro mobil">
+      <a href="#zapasy">Zápasy</a>
+      <a href="#klub">Klub</a>
+      <a href="#tymy">Týmy</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#partneri">Partneři</a>
+      <a href="#pridej-se">Kontakt</a>
+    </nav>
+    <a class="btn btn-accent" href="#pridej-se">Přidejte se</a>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ÚVOD: pohled zpoza branky, míč letí do sítě podle scrollování -->
+  <section class="hero" id="uvod" aria-label="Úvod">
+    <div class="stage" data-stage>
+      <canvas class="scene" aria-hidden="true" data-scene></canvas>
+      <div class="mist" aria-hidden="true"><i></i><i></i></div>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div class="band band-1" data-band data-a="0" data-b="0.42" data-ramp="0.1">
+        <div class="wrap band-top">
+          <p class="kicker">Sportovní klub · Červenka u Litovle</p>
+          <h1 class="h-hero"><span class="sr-only">SK Červenka</span><span class="split" data-split="chars" aria-hidden="true">SK Červenka</span></h1>
+          <p class="lede">Fotbal na Hané od roku 1945.</p>
+        </div>
+      </div>
+
+      <div class="hero-gap" aria-hidden="true" data-hero-gap></div>
+
+      <div class="band band-2" data-band data-a="0.46" data-b="1" data-ramp="0.2">
+        <div class="wrap band-top">
+          <h2 class="h-settle"><span class="sr-only">Hrajeme za Červenku.</span><span class="split" data-split="words" aria-hidden="true">Hrajeme za Červenku.</span></h2>
+          <p class="sub">Muži hrají okresní přebor Olomoucka. Přijďte fandit.</p>
+        </div>
+        <div class="wrap band-bottom">
+          <a class="chip" href="#zapasy" data-next-home>
+            <span class="chip-k">Další zápas doma</span>
+            <span class="chip-v" data-next-home-text>Rozpis zápasů</span>
+          </a>
+          <div class="ctas">
+            <a class="btn btn-accent" href="#pridej-se">Přidejte se</a>
+            <a class="btn btn-ghost" href="#zapasy">Zápasy a tabulka</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="cue" href="#zapasy" data-cue>
+        <span>Dolů na hřiště</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ZÁPASY -->
+  <section class="sec sec-dark zapasy" id="zapasy" aria-labelledby="zapasy-h">
+    <div class="wrap">
+      <header class="sec-head sec-head-row" data-reveal>
+        <div>
+          <p class="kicker" data-season-label>Sezóna 2026/27 · Okresní přebor mužů</p>
+          <h2 class="h2" id="zapasy-h">Zápasy a tabulka</h2>
+        </div>
+        <p class="stamp" data-updated></p>
+      </header>
+
+      <div class="board">
+        <article class="next" data-reveal aria-labelledby="next-h">
+          <p class="next-k"><span class="pulse" aria-hidden="true"></span><span id="next-h">Další zápas</span><span class="next-when" data-next-when></span></p>
+          <div class="plates" data-next></div>
+          <p class="next-meta" data-next-meta></p>
+          <p class="next-home" data-next-home-line hidden></p>
+        </article>
+
+        <article class="results" data-reveal aria-labelledby="res-h">
+          <h3 class="h3" id="res-h">Poslední výsledky</h3>
+          <ol class="res" data-results></ol>
+        </article>
+
+        <aside class="table-card" data-reveal aria-labelledby="tab-h">
+          <h3 class="h3" id="tab-h">Tabulka</h3>
+          <div class="tab-wrap">
+            <table class="tab">
+              <thead><tr><th scope="col"><abbr title="Pořadí">#</abbr></th><th scope="col">Tým</th><th scope="col"><abbr title="Zápasy">Z</abbr></th><th scope="col" class="tab-score">Skóre</th><th scope="col"><abbr title="Body">B</abbr></th></tr></thead>
+              <tbody data-table></tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+
+      <dl class="stats" data-reveal data-stats></dl>
+
+      <details class="season" data-reveal>
+        <summary><span>Celý rozpis sezóny</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <div class="season-in" data-schedule></div>
+      </details>
+
+      <p class="src"><a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da" target="_blank" rel="noopener" data-link-fotbalcz>Oficiální výsledky na fotbal.cz</a></p>
+      <noscript><p class="src">Rozpis a výsledky najdete na <a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da">fotbal.cz</a>.</p></noscript>
+    </div>
+  </section>
+
+  <!-- KLUB / HISTORIE -->
+  <section class="sec klub" id="klub" aria-labelledby="klub-h">
+    <div class="wrap klub-grid">
+      <div class="klub-intro">
+        <div class="klub-sticky" data-reveal>
+          <p class="kicker">Od roku 1945</p>
+          <h2 class="h2" id="klub-h">Třikrát pod vodou. Pořád hrajeme.</h2>
+          <p class="lead">Červenka leží na Hané, dva kilometry od Litovle. Fotbal se tu hraje od roku 1945. Za tu dobu bylo hřiště třikrát pod vodou a pokaždé jsme ho dali zase dohromady.</p>
+          <figure class="slot slot-wide" data-slot="historie">
+            <div class="ph ph-history" aria-hidden="true">
+              <svg viewBox="0 0 400 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="40" y="30" width="320" height="190" rx="4"/><path d="M40 190 130 120l60 50 50-40 120 80"/><circle cx="290" cy="80" r="18"/></g></svg>
+            </div>
+            <figcaption class="slot-cap">Máte doma starou fotku týmu? <a href="#pridej-se">Pošlete nám ji</a>, rádi ji sem dáme.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="timeline" data-timeline>
+        <svg class="touchline" viewBox="0 0 10 1000" preserveAspectRatio="none" aria-hidden="true"><path d="M5 0V1000" pathLength="1"/></svg>
+        <ol class="tl-list">
+          <li class="tl" data-reveal>
+            <p class="tl-year">1945</p>
+            <h3 class="tl-h">Začínáme</h3>
+            <p>V Července se začíná hrát fotbal. Odtud se počítá všech osmdesát let.</p>
+          </li>
+          <li class="tl" data-reveal>
+            <p class="tl-year">1997</p>
+            <h3 class="tl-h">Velká voda</h3>
+            <p>Povodeň na Moravě zaplavila i naše hřiště. Uklidilo se a hrálo se dál.</p>
+          </li>
+          <li class="tl" data-reveal>
+            <p class="tl-year">2006</p>
+            <h3 class="tl-h">Znovu</h3>
+            <p>Voda přišla podruhé. Zase úklid, zase sušení, zase fotbal.</p>
+          </li>
+          <li class="tl tl-flood" data-reveal>
+            <p class="tl-year">2024</p>
+            <h3 class="tl-h">Potřetí</h3>
+            <p>V září stálo na hřišti půl metru vody a v šatnách 55 centimetrů. Techniku jsme stihli odvézt, i tak škoda vyšla zhruba na 200 tisíc korun.</p>
+            <div class="gauge" role="img" aria-label="Vodočet: v září 2024 sahala voda v šatnách do výšky 55 centimetrů.">
+              <div class="gauge-scale" aria-hidden="true">
+                <span>100</span><span>80</span><span>60</span><span>40</span><span>20</span><span>0</span>
+              </div>
+              <div class="gauge-tube" aria-hidden="true">
+                <div class="gauge-water"><svg class="gauge-wave" viewBox="0 0 120 10" preserveAspectRatio="none"><path d="M0 5Q15 0 30 5T60 5T90 5T120 5V10H0Z"/></svg></div>
+                <div class="gauge-mark"><span>55 cm</span></div>
+              </div>
+              <p class="gauge-cap" aria-hidden="true">Šatny, září 2024</p>
+            </div>
+          </li>
+          <li class="tl" data-reveal>
+            <p class="tl-year">2025</p>
+            <h3 class="tl-h">80 let</h3>
+            <p>Desátého května jsme slavili osmdesát let fotbalu. Na programu byly zápasy mládeže, utkání bývalých hráčů Červenky proti Sigi teamu s Antonínem Panenkou a koncert.</p>
+          </li>
+          <li class="tl tl-now" data-reveal>
+            <p class="tl-year">Dnes</p>
+            <h3 class="tl-h">Okresní přebor</h3>
+            <p>Muži hrají okresní přebor Olomoucka, mládež své soutěže. Další kapitolu píšeme každý víkend.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PENALTA: interaktivní moment -->
+  <section class="sec sec-dark penalta" id="penalta" aria-labelledby="pen-h">
+    <div class="wrap pen-grid">
+      <div class="pen-copy" data-reveal>
+        <p class="kicker">Zkuste si to</p>
+        <h2 class="h2" id="pen-h">Kopněte penaltu jako Panenka</h2>
+        <p class="pen-p">Vyberte, kam kopnete. Brankář skočí, kam ho napadne.</p>
+        <div class="pen-score" aria-label="Skóre penalt">
+          <span class="pen-team">Vy</span>
+          <span class="plate" data-pen-you>0</span>
+          <span class="pen-colon" aria-hidden="true">:</span>
+          <span class="plate" data-pen-gk>0</span>
+          <span class="pen-team">Brankář</span>
+        </div>
+        <p class="pen-msg" data-pen-msg aria-live="polite"></p>
+        <p class="pen-story" data-pen-story hidden>V roce 1976 takhle Antonín Panenka rozhodl finále mistrovství Evropy. Brankář skočil a míč šel jemně doprostřed.</p>
+        <p class="pen-cta" data-pen-cta hidden>Na hřišti je to ještě lepší. <a href="#pridej-se">Přidejte se k nám.</a></p>
+      </div>
+
+      <div class="pen-stage" data-reveal>
+        <svg class="pen-svg" viewBox="0 0 800 470" aria-hidden="true" data-pen-svg>
+          <defs>
+            <pattern id="pen-sit" width="18" height="18" patternUnits="userSpaceOnUse">
+              <path d="M0 0H18M0 0V18" fill="none" stroke="#e9efe6" stroke-opacity=".34" stroke-width="1.1"/>
+            </pattern>
+            <radialGradient id="pen-ballg" cx=".36" cy=".32" r=".75">
+              <stop offset="0" stop-color="#ffffff"/><stop offset=".65" stop-color="#e6ece3"/><stop offset="1" stop-color="#9fb2a5"/>
+            </radialGradient>
+            <linearGradient id="pen-grass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1d5534"/><stop offset="1" stop-color="#123821"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="300" width="800" height="170" fill="url(#pen-grass)"/>
+          <path d="M0 330H800" stroke="#eef2ea" stroke-opacity=".7" stroke-width="3"/>
+          <path d="M70 330 30 470M730 330 770 470" stroke="#eef2ea" stroke-opacity=".45" stroke-width="3"/>
+          <ellipse cx="400" cy="420" rx="9" ry="3.5" fill="#eef2ea" fill-opacity=".75"/>
+          <g class="pen-net" data-pen-net>
+            <rect x="150" y="60" width="500" height="270" fill="url(#pen-sit)"/>
+            <path d="M150 60 182 82V312L150 330M650 60 618 82V312L650 330M182 82H618" fill="none" stroke="#e9efe6" stroke-opacity=".28" stroke-width="1.2"/>
+          </g>
+          <g class="pen-frame" fill="#f1f4ee">
+            <rect x="142" y="52" width="10" height="280" rx="2"/>
+            <rect x="648" y="52" width="10" height="280" rx="2"/>
+            <rect x="142" y="52" width="516" height="10" rx="2"/>
+          </g>
+          <g class="pen-gk" data-pen-gk-fig>
+            <ellipse cx="400" cy="331" rx="46" ry="6" fill="#06140c" fill-opacity=".35"/>
+            <g class="pen-gk-body">
+              <rect x="381" y="266" width="15" height="62" rx="7" fill="#7d9585"/>
+              <rect x="404" y="266" width="15" height="62" rx="7" fill="#7d9585"/>
+              <rect x="372" y="196" width="56" height="78" rx="16" fill="#b9c8bc"/>
+              <path d="M374 210 338 176M426 210 462 176" stroke="#b9c8bc" stroke-width="15" stroke-linecap="round"/>
+              <circle cx="334" cy="171" r="11" fill="#f1f4ee"/>
+              <circle cx="466" cy="171" r="11" fill="#f1f4ee"/>
+              <circle cx="400" cy="178" r="17" fill="#b9c8bc"/>
+            </g>
+          </g>
+          <g class="pen-ball" data-pen-ball>
+            <circle cx="400" cy="408" r="15" fill="url(#pen-ballg)"/>
+            <path d="M400 401.5 406.2 406 403.8 413.2H396.2L393.8 406Z" fill="#10241a"/>
+            <circle cx="400" cy="408" r="15" fill="none" stroke="#0a1a11" stroke-opacity=".35"/>
+          </g>
+        </svg>
+        <div class="pen-btns" role="group" aria-label="Kam kopnout">
+          <button type="button" class="btn btn-pen" data-shot="left">Vlevo</button>
+          <button type="button" class="btn btn-pen btn-pen-mid" data-shot="mid">Doprostřed jako Panenka</button>
+          <button type="button" class="btn btn-pen" data-shot="right">Vpravo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÝMY -->
+  <section class="sec tymy" id="tymy" aria-labelledby="tymy-h">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">Kdo za Červenku kope</p>
+        <h2 class="h2" id="tymy-h">Týmy</h2>
+      </header>
+      <div class="cards" data-reveal>
+        <article class="card">
+          <figure class="slot" data-slot="muzi">
+            <div class="ph" aria-hidden="true">
+              <svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M70 40 52 48 28 72l20 22 14-12v86h76V82l14 12 20-22-24-24-18-8c-4 12-16 18-30 18S74 52 70 40Z"/><circle cx="120" cy="94" r="8"/><path d="M62 150h76"/></g></svg>
+            </div>
+          </figure>
+          <div class="card-b">
+            <h3 class="h3">Muži</h3>
+            <p>Okresní přebor Olomoucka. Zápasy hrajeme o víkendech, doma i venku.</p>
+            <a class="more" href="#zapasy">Rozpis zápasů</a>
+          </div>
+        </article>
+        <article class="card">
+          <figure class="slot" data-slot="mladez">
+            <div class="ph" aria-hidden="true">
+              <svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><circle cx="100" cy="112" r="34"/><path d="m100 92 18 13-7 21H89l-7-21Z"/><path d="M30 168h140M44 150l10-30 10 30M136 150l10-30 10 30"/></g></svg>
+            </div>
+          </figure>
+          <div class="card-b">
+            <h3 class="h3">Mládež</h3>
+            <p>Fotbal pro děti z Červenky a okolí. Chcete, aby vaše dítě hrálo? Ozvěte se a domluvíme první trénink.</p>
+            <a class="more" href="#pridej-se" data-zajem="dite">Přihlásit dítě</a>
+          </div>
+        </article>
+        <article class="card">
+          <figure class="slot" data-slot="fanousci">
+            <div class="ph" aria-hidden="true">
+              <svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M40 160V40"/><path d="M40 44c30-12 50 12 80 0s40-6 50 0v60c-10-6-20-12-50 0s-50-12-80 0"/><path d="M78 160v-22M116 160v-30M154 160v-18"/></g></svg>
+            </div>
+          </figure>
+          <div class="card-b">
+            <h3 class="h3">Fanoušci</h3>
+            <p>Bez nich to nejde. Na derby přijde plno lidí a v okrese umíme i pořádné choreo.</p>
+            <a class="more" href="#zapasy">Kdy hrajeme doma</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="sec galerie" id="galerie" aria-labelledby="gal-h">
+    <div class="wrap">
+      <header class="sec-head sec-head-row" data-reveal>
+        <div>
+          <p class="kicker">Fotky</p>
+          <h2 class="h2" id="gal-h">Galerie</h2>
+        </div>
+        <p class="sec-sub">Zápasy, oslavy a všechno kolem nich.</p>
+      </header>
+      <div class="gal" data-gallery></div>
+    </div>
+  </section>
+
+  <!-- PARTNEŘI: obsah se skládá z assets/partneri.js -->
+  <section class="sec partneri" id="partneri" aria-labelledby="partneri-h">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">Podpora klubu</p>
+        <h2 class="h2" id="partneri-h">Partneři klubu</h2>
+        <p class="lead">Po povodni v září 2024 jsme šatny i hřiště dávali znovu dohromady. S podporou partnerů opravíme zbytek zázemí a dětem z mládeže dáme lepší podmínky k fotbalu.</p>
+      </header>
+
+      <h3 class="mini-h" id="loga-h">Současní partneři</h3>
+      <ul class="loga" aria-labelledby="loga-h" data-loga data-reveal></ul>
+
+      <h3 class="h3 balicky-h">Balíčky pro partnery</h3>
+      <div class="balicky" data-balicky data-reveal></div>
+
+      <h3 class="mini-h" id="doplnky-h">Další možnosti</h3>
+      <ul class="doplnky" aria-labelledby="doplnky-h" data-doplnky data-reveal></ul>
+
+      <div class="partneri-cta" data-reveal>
+        <a class="btn btn-accent btn-l" href="#pridej-se" data-zajem="partnerstvi">Chci se stát partnerem</a>
+        <p>Napište nám a domluvíme, co dává smysl vaší firmě.</p>
+      </div>
+      <noscript><p class="lead">O možnostech partnerství nám napište přes kontakt níže.</p></noscript>
+    </div>
+  </section>
+
+  <!-- KONTAKT: jediná hlavní výzva -->
+  <section class="sec sec-dark kontakt" id="pridej-se" aria-labelledby="kontakt-h">
+    <div class="wrap kontakt-grid">
+      <div class="kontakt-copy" data-reveal>
+        <p class="kicker">Kontakt</p>
+        <h2 class="h2" id="kontakt-h">Přidejte se k nám.</h2>
+        <p class="lead">Hledáme hráče, děti do mládeže, lidi, kteří pomůžou u zápasů, i firmy, které chtějí podpořit fotbal ve vsi. Napište nám, co vás láká.</p>
+        <dl class="contacts" data-contacts>
+          <div><dt>Adresa</dt><dd data-c-adresa>SK Červenka, Jižní 24, 784 01 Červenka</dd><dd><a href="https://mapy.cz/zakladni?q=SK%20%C4%8Cervenka%20fotbalov%C3%A9%20h%C5%99i%C5%A1t%C4%9B" target="_blank" rel="noopener" data-c-mapa>Navigovat na hřiště</a></dd></div>
+          <div data-c-tel-row><dt>Telefon</dt><dd><a href="tel:+420605272347" data-c-tel>+420 605 272 347</a></dd></div>
+          <div><dt>Facebook</dt><dd><a href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-c-fb>SK Červenka na Facebooku</a></dd></div>
+        </dl>
+      </div>
+
+      <form class="form" data-form novalidate data-reveal>
+        <div class="field">
+          <label for="f-jmeno">Jméno a příjmení</label>
+          <input id="f-jmeno" name="jmeno" type="text" autocomplete="name" placeholder="Jan Novák" required>
+          <p class="err" id="e-jmeno" hidden>Vyplňte prosím jméno.</p>
+        </div>
+        <div class="field">
+          <label for="f-kontakt">E-mail nebo telefon</label>
+          <input id="f-kontakt" name="kontakt" type="text" autocomplete="email" placeholder="jan@email.cz nebo 777 123 456" required>
+          <p class="err" id="e-kontakt" hidden>Napište nám e-mail nebo telefon, ať se můžeme ozvat.</p>
+        </div>
+        <fieldset class="field chips">
+          <legend>Co vás zajímá?</legend>
+          <label><input type="checkbox" name="zajem" value="Chci hrát"><span>Chci hrát</span></label>
+          <label><input type="checkbox" name="zajem" value="Přihlásit dítě" data-zajem-volba="dite"><span>Přihlásit dítě</span></label>
+          <label><input type="checkbox" name="zajem" value="Pomáhat u zápasů"><span>Pomáhat u zápasů</span></label>
+          <label><input type="checkbox" name="zajem" value="Partnerství" data-zajem-volba="partnerstvi"><span>Partnerství</span></label>
+        </fieldset>
+        <div class="field">
+          <label for="f-zprava">Zpráva <span class="opt">(nepovinné)</span></label>
+          <textarea id="f-zprava" name="zprava" rows="4" placeholder="Pár slov o sobě, věk dítěte, cokoliv."></textarea>
+        </div>
+        <button class="btn btn-accent btn-l" type="submit">Odeslat zprávu</button>
+        <p class="form-note" data-form-note>Po odeslání se otevře váš e-mail s připravenou zprávou. Stačí ji poslat.</p>
+        <div class="form-done" data-form-done hidden tabindex="-1">
+          <p class="form-done-h">Hotovo.</p>
+          <p>Zpráva čeká ve vašem e-mailu, stačí ji odeslat. Ozveme se co nejdřív.</p>
+        </div>
+        <div class="form-done" data-form-noemail hidden tabindex="-1">
+          <p class="form-done-h">Ještě chvilku.</p>
+          <p>E-mail klubu teprve doplňujeme. Zatím nám prosím napište na <a href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener">Facebooku</a> nebo zavolejte.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <svg class="foot-znak" aria-hidden="true"><use href="#znak"/></svg>
+      <div>
+        <p class="foot-name">SK Červenka</p>
+        <p class="foot-tag">Fotbal na Hané od roku 1945.</p>
+      </div>
+    </div>
+    <div class="foot-col">
+      <p class="foot-k">Klub</p>
+      <p data-f-adresa>Jižní 24, 784 01 Červenka</p>
+      <p>IČO 45213046</p>
+    </div>
+    <div class="foot-col">
+      <p class="foot-k">Odkazy</p>
+      <p><a href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener">Facebook</a></p>
+      <p><a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da" target="_blank" rel="noopener">Výsledky na fotbal.cz</a></p>
+    </div>
+    <p class="foot-copy">© <span data-year>2026</span> SK Červenka</p>
+  </div>
+</footer>
+
+<dialog class="lightbox" data-lightbox aria-label="Fotka z galerie">
+  <figure class="lb-fig">
+    <img class="lb-img" alt="" data-lb-img>
+    <figcaption class="lb-cap" data-lb-cap></figcaption>
+  </figure>
+  <p class="lb-count" data-lb-count></p>
+  <button class="lb-btn lb-close" type="button" data-lb-close aria-label="Zavřít"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="Předchozí fotka"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lb-btn lb-next" type="button" data-lb-next aria-label="Další fotka"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</dialog>
+
+<script src="assets/data.js"></script>
+<script src="assets/galerie.js"></script>
+<script src="assets/partneri.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
