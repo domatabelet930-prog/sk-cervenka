@@ -20,7 +20,7 @@ window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
   aktualizovano: '2026-10-25',
-  strelec: { jmeno: 'Vojtěch Schulmeister', goly: 14, nejvic: true },   // nejvic: vede tabulku střelců soutěže
+  strelec: { jmeno: 'Vojtěch Schulmeister', goly: 19, nejvic: true },   // nejvic: vede tabulku střelců soutěže
 
   zapasy: [
     // podzim 2026
@@ -33,7 +33,7 @@ window.SEZONA = {
     { datum: '2026-10-03T15:00', doma: true,  souper: 'Štěpánov',      skore: '4:1' },
     { datum: '2026-10-10T15:00', doma: false, souper: 'Hněvotín',      skore: '0:5' },
     { datum: '2026-10-17T14:30', doma: true,  souper: 'Grygov',        skore: '3:4' },
-    { datum: '2026-10-24T14:30', doma: false, souper: 'Blatec' },
+    { datum: '2026-10-24T14:30', doma: false, souper: 'Blatec',        skore: '5:4' },
     { datum: '2026-10-28T15:00', doma: false, souper: 'Velký Újezd', pozn: 'dohrávka' },
     { datum: '2026-10-31T14:00', doma: true,  souper: 'Nemilany' },
     { datum: '2026-11-07T14:00', doma: false, souper: 'Dlouhá Loučka' },
