@@ -19,7 +19,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-10-25',
+  aktualizovano: '2026-10-26',
   strelec: { jmeno: 'Vojtěch Schulmeister', goly: 19, nejvic: true },   // nejvic: vede tabulku střelců soutěže
 
   zapasy: [
@@ -58,16 +58,16 @@ window.SEZONA = {
     { tym: 'FC Hněvotín',            z: 11,  skore: '48:9',   b: 28 },
     { tym: 'SK Červenka',            z: 10,  skore: '36:21',  b: 23, nas: true },
     { tym: 'TJ Sokol Slavonín B',    z: 11,  skore: '29:21',  b: 23 },
+    { tym: 'Sokol Velký Újezd',      z: 10,  skore: '26:16',  b: 21 },
     { tym: 'FK Nemilany',            z: 11,  skore: '30:14',  b: 20 },
-    { tym: 'Sokol Velký Újezd',      z: 9,   skore: '23:15',  b: 18 },
     { tym: 'SFK Nedvězí',            z: 11,  skore: '28:24',  b: 18 },
-    { tym: 'Sokol Mladeč',           z: 10,  skore: '26:27',  b: 16 },
+    { tym: 'Sokol Mladeč',           z: 11,  skore: '27:30',  b: 16 },
+    { tym: 'SK Grygov',              z: 11,  skore: '24:29',  b: 15 },
     { tym: 'SK Chválkovice B',       z: 10,  skore: '31:24',  b: 14 },
     { tym: 'TJ Štěpánov u Olomouce', z: 11,  skore: '20:30',  b: 14 },
     { tym: 'TJ Blatec',              z: 11,  skore: '28:29',  b: 13 },
-    { tym: 'SK Grygov',              z: 10,  skore: '20:28',  b: 12 },
     { tym: 'TJ Mladějovice',         z: 11,  skore: '25:35',  b: 10 },
-    { tym: 'Sokol Dlouhá Loučka',    z: 10,  skore: '17:38',  b: 10 },
+    { tym: 'Sokol Dlouhá Loučka',    z: 11,  skore: '18:42',  b: 10 },
     { tym: 'SK Šumvald',             z: 10,  skore: '9:55',   b: 0 }
   ]
 };
