@@ -21,6 +21,7 @@
   const FOTKY = window.FOTKY || {};
   const GALERIE = Array.isArray(window.GALERIE) ? window.GALERIE : [];
   const PARTNERI = window.PARTNERI || {};
+  const AREAL = Array.isArray(window.AREAL) ? window.AREAL : [];
 
   /* ---------- data, datumy ---------- */
   const DNY = ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'];
@@ -175,6 +176,24 @@
       if (cap && f.popis) cap.textContent = f.popis;
       else if (cap) cap.hidden = true;
     });
+  }
+
+  /* ---------- areál: projekty s fotkami před a po ---------- */
+  function renderAreal() {
+    const box = $('[data-areal]');
+    if (!box) return;
+    const sekce = box.closest('section');
+    const projekty = AREAL.filter(p => p && p.nazev && Array.isArray(p.fotky) && p.fotky.length);
+    if (!projekty.length) { if (sekce) sekce.hidden = true; return; }
+    const sipka = '<span class="projekt-sipka" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+    box.innerHTML = projekty.map(p => {
+      const fotky = p.fotky.slice(0, 2);
+      const obr = fotky.map(f => `<figure><img src="${esc(f.src)}" alt="${esc(f.alt || p.nazev)}" loading="lazy" decoding="async">` +
+        `${f.stitek ? `<figcaption class="projekt-stitek">${esc(f.stitek)}</figcaption>` : ''}</figure>`).join('');
+      return `<article class="projekt"><div class="projekt-foto projekt-foto-${fotky.length}">${obr}` +
+        `${fotky.length === 2 && p.sipka !== false ? sipka : ''}</div>` +
+        `<div class="projekt-b"><h3 class="projekt-n">${esc(p.nazev)}</h3>${p.text ? `<p>${esc(p.text)}</p>` : ''}</div></article>`;
+    }).join('');
   }
 
   /* ---------- partneři: loga, balíčky, doplňky ---------- */
@@ -893,6 +912,7 @@
   renderZapasy();
   renderKontakty();
   renderFotky();
+  renderAreal();
   renderPartneri();
   initGallery();
   initHero();

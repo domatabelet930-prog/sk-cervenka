@@ -179,5 +179,41 @@ window.GALERIE = [
         "nw":  720,
         "nh":  405,
         "popis":  "Kuželky, únor 2026"
+    },
+    {
+        "src":  "assets/galerie/21-hody-2020-dechovka.jpg",
+        "w":  1920,
+        "h":  1440,
+        "nahled":  "assets/galerie/21-hody-2020-dechovka-nahled.jpg",
+        "nw":  720,
+        "nh":  540,
+        "popis":  "Hody 2020 – dechovka"
+    },
+    {
+        "src":  "assets/galerie/22-hody-2020-kapela-pod-pergolou.jpg",
+        "w":  1920,
+        "h":  1440,
+        "nahled":  "assets/galerie/22-hody-2020-kapela-pod-pergolou-nahled.jpg",
+        "nw":  720,
+        "nh":  540,
+        "popis":  "Hody 2020 – kapela pod pergolou"
+    },
+    {
+        "src":  "assets/galerie/23-fronta-u-noveho-kiosku-srpen-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/23-fronta-u-noveho-kiosku-srpen-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Fronta u nového kiosku, srpen 2025"
+    },
+    {
+        "src":  "assets/galerie/24-priprava-makrel-rijen-2021.jpg",
+        "w":  1920,
+        "h":  1440,
+        "nahled":  "assets/galerie/24-priprava-makrel-rijen-2021-nahled.jpg",
+        "nw":  720,
+        "nh":  540,
+        "popis":  "Příprava makrel, říjen 2021"
     }
 ];
