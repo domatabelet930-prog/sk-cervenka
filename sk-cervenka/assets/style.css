@@ -20,7 +20,6 @@
   --accent-hover:#b5301b;
   --accent-ink:#fff8f4;
   --accent-muted:rgba(207,59,37,.22);
-  --water:#5d8f95;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-io:cubic-bezier(.65,0,.35,1);
   --nav-h:68px;
@@ -100,7 +99,19 @@ main:focus{outline:none}
 .menu nav{display:flex;flex-direction:column}
 .menu nav a{font:900 42px/1.15 var(--f-display);text-transform:uppercase;text-decoration:none;color:var(--chalk);padding:10px 0;border-bottom:1px solid rgba(185,200,188,.14)}
 .menu .btn{align-self:flex-start}
-@media (max-width:920px){.nav-links,.nav-cta{display:none}.menu-btn{display:inline-block}}
+/* sociální sítě: ikony v hlavičce, v kontaktu a v patičce */
+.soc{display:inline-flex;align-items:center;justify-content:center;gap:9px;color:inherit;text-decoration:none}
+.soc svg{width:22px;height:22px;flex:none}
+.nav-social{display:flex;gap:2px;margin-inline:-8px -4px}
+.nav-social .soc{width:40px;height:40px;border-radius:50%;opacity:.84;transition:opacity .25s,background-color .25s}
+.nav-social .soc:hover{opacity:1;background:rgba(241,244,236,.1)}
+.soc-list{display:flex;flex-wrap:wrap;gap:10px}
+.soc-l{min-height:44px;padding:0 18px 0 13px;border:1.5px solid rgba(241,244,236,.38);border-radius:999px;font-weight:700;transition:border-color .25s,background-color .25s}
+.soc-l:hover{border-color:var(--chalk);background:rgba(241,244,236,.08)}
+.brand-t{white-space:nowrap}
+@media (max-width:1180px){.nav-in{gap:20px}.nav-links{gap:18px}}
+@media (max-width:1100px){.nav-cta{display:none}.nav-links{gap:14px}}
+@media (max-width:920px){.nav-links,.nav-cta{display:none}.menu-btn{display:inline-block}.nav-in{gap:10px}}
 @media (max-width:420px){.brand-t{font-size:20px}.brand-znak{width:40px;height:40px}}
 
 /* ---------- úvod (hero) ---------- */
@@ -172,6 +183,36 @@ html:not(.js) .cue{display:none}
   .ctas .btn{flex:1 1 auto}
 }
 @media (max-height:560px){.cue{display:none}}
+
+/* úvod, varianta "foto": přepíná HERO_VARIANT v index.html */
+[data-hero="foto"] .hero,html:not([data-hero="foto"]) .hero-foto{display:none}
+.hero-foto{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;background:var(--pitch-950);color:var(--chalk);overflow:hidden;isolation:isolate}
+.hf-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.hf-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,12,8,.62) 0%,rgba(4,12,8,.12) 24%,rgba(4,12,8,.2) 48%,rgba(4,12,8,.86) 100%),radial-gradient(ellipse 70% 60% at 15% 85%,rgba(4,12,8,.45),rgba(4,12,8,0) 70%)}
+.hf-in{padding-top:calc(var(--nav-h) + 48px);padding-bottom:clamp(32px,7vh,72px);text-shadow:var(--tshadow)}
+.hero-foto .kicker{color:var(--chalk-2);text-shadow:0 1px 3px rgba(3,10,6,.9)}
+.hero-foto .h-hero{font-size:clamp(58px,min(13vw,19vh),190px)}
+.hero-foto .lede{max-width:36ch}
+.hf-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:clamp(26px,4.5vh,44px)}
+.hf-row .btn,.hf-row .chip{text-shadow:none}
+@media (max-width: 720px){.hf-row{flex-direction:column;align-items:stretch}}
+
+/* ---------- pruh partnerů pod úvodem ---------- */
+.pruh{position:relative;background:var(--panel);border-bottom:1px solid var(--line);padding-block:clamp(22px,3vw,34px)}
+.pruh-in{display:flex;align-items:center;gap:18px clamp(20px,3vw,44px)}
+.pruh-h{flex:none;margin:0;font:500 12.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.pruh-loga{flex:1;min-width:0;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.logo{display:grid;place-items:center;height:76px;padding:12px 16px;border-radius:12px;background:var(--canvas);border:1px solid var(--line)}
+.logo a{display:grid;place-items:center;width:100%;height:100%}
+.logo img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .4s var(--ease-out),opacity .4s var(--ease-out)}
+.logo:hover img,.logo a:focus-visible img{filter:none;opacity:1}
+.logo-ph{background:#e2e7df;border:2px dashed #b7c2b6;color:#536458;font:500 11px/1.35 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-align:center}
+.pruh .more{flex:none;margin:0;align-self:center;font-size:15px}
+@media (max-width:900px){
+  .pruh-in{flex-wrap:wrap}
+  .pruh-h{width:100%}
+  .pruh-loga{flex-basis:100%;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 
 /* ---------- sekce ---------- */
 .sec{position:relative;padding-block:clamp(84px,11vw,150px)}
@@ -263,6 +304,32 @@ html:not(.js) .cue{display:none}
 .s-row .us{font-weight:700;color:var(--chalk)}
 .s-row.is-next{background:rgba(241,244,236,.07);border-radius:8px;border-top-color:transparent}
 .src{margin:24px 0 0;font-size:15px;color:var(--chalk-2)}
+/* zápasy mládeže: stejné karty jako u mužů */
+.mz{margin-top:clamp(72px,9vw,120px);padding-top:clamp(48px,6vw,72px);border-top:1px solid rgba(185,200,188,.16)}
+.mz .mz-h{font-size:clamp(40px,5vw,72px)}
+.mz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,24px);align-items:start}
+.mz-kat{grid-area:auto}
+.mz-kat .next-k{margin-bottom:18px}
+.mz-kat .plates{grid-template-columns:minmax(0,1fr);gap:12px}
+.mz-kat .team+.vs+.team{align-items:flex-start;text-align:left}
+.mz-kat .team+.vs+.team .team-n{justify-content:flex-start}
+.mz-kat .vs{flex-direction:row;align-items:center;gap:14px}
+.mz-kat .team-n{font-size:clamp(24px,9cqi,38px)}
+.mz-kat .plate-time{font-size:28px;min-width:88px;height:52px}
+.mz-kat .next-meta{margin-top:18px;padding-top:14px}
+.mz-turnaj{display:flex;align-items:center;gap:16px;margin:0}
+.mz-turnaj>span:last-child{display:flex;flex-direction:column;gap:6px;min-width:0}
+.mz-turnaj-s{font:800 clamp(20px,6.4cqi,26px)/1.05 var(--f-display);text-transform:uppercase}
+.mz-soutez{margin:12px 0 0;font:500 12px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-3)}
+.mz-season{margin-top:18px;background:rgba(9,27,17,.35)}
+.mz-season summary{min-height:52px;font-size:19px}
+.mz-list{list-style:none;margin:0;padding:0 clamp(14px,2vw,20px) clamp(10px,1.6vw,16px)}
+.mz-list .s-row{grid-template-columns:minmax(0,1fr);row-gap:2px}
+.mz-list .s-row.is-played{opacity:.55}
+
+.mz-list .s-t{color:var(--chalk)}
+@media (max-width:1100px){.mz-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.mz-grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:980px){
   .board{grid-template-columns:minmax(0,1fr);grid-template-areas:"next" "results" "table"}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
@@ -310,53 +377,37 @@ html:not(.js) .cue{display:none}
 .tl-year{font:900 clamp(44px,5vw,70px)/.9 var(--f-display);color:var(--crest);margin:0;font-variant-numeric:tabular-nums}
 .tl-h{font:800 22px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.04em;margin:.4em 0 .35em}
 .tl p:not(.tl-year){max-width:50ch;color:var(--ink-2);margin:0}
-.gauge{display:grid;grid-template-columns:auto 62px auto;align-items:stretch;gap:12px 14px;height:230px;margin-top:24px}
-.gauge-scale{display:flex;flex-direction:column;justify-content:space-between;font:500 11.5px/1 var(--f-mono);color:var(--ink-2);text-align:right;padding:0 0 0}
-.gauge-scale span{transform:translateY(-.1em)}
-.gauge-tube{position:relative;border:2px solid var(--line-strong);border-radius:6px;background:repeating-linear-gradient(0deg,rgba(16,36,26,0) 0 calc(10% - 1px),rgba(16,36,26,.2) calc(10% - 1px) 10%),var(--panel)}
-.gauge-water{position:absolute;left:0;right:0;bottom:0;height:55%;border-radius:0 0 4px 4px;background:linear-gradient(180deg,rgba(93,143,149,.92),rgba(55,98,104,.95));transform-origin:50% 100%;transform:scaleY(0);transition:transform 1.9s var(--ease-out) .25s;clip-path:inset(-10px 0 0 0)}
-.tl-flood.in .gauge-water{transform:scaleY(1)}
-.gauge-wave{position:absolute;left:0;top:-7px;width:200%;height:8px;fill:rgba(93,143,149,.92)}
-.inview .gauge-wave{animation:wave 6s linear infinite;animation-delay:-2s}
-@keyframes wave{to{transform:translateX(-50%)}}
-.gauge-mark{position:absolute;left:-10px;right:-10px;bottom:55%;border-top:2px solid var(--accent)}
-.gauge-mark span{position:absolute;left:calc(100% + 10px);top:-.78em;white-space:nowrap;font:700 15px/1.4 var(--f-mono);color:var(--accent-hover)}
-.gauge-cap{align-self:end;margin:0 0 0 70px;font:500 11.5px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.tl .tl-year+p{margin-top:12px}
+.tl-year.tl-doplnit{display:inline-block;padding:6px 12px 4px;border:2px dashed #b7c2b6;border-radius:8px;background:#e2e7df;color:#536458;font-size:clamp(28px,3vw,40px)}
+.tl-foto{position:relative;max-width:400px;aspect-ratio:3/2;margin:18px 0 0;border-radius:12px;overflow:hidden;background:var(--pitch-800)}
+.tl-foto .ph::after{content:attr(data-label)}
+.tl-foto-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.tl-foto-btn img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .9s var(--ease-out)}
+.tl-foto-btn:hover img{transform:scale(1.04)}
+.tl-foto-btn:focus-visible{outline-offset:-3px;border-radius:12px}
+/* zástupný text, dokud klub nedodá údaje */
+.doplnit{display:inline-block;padding:1px 8px;border:1.5px dashed var(--line-strong);border-radius:6px;background:#e2e7df;color:#536458;font:700 12px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
 @media (max-width:900px){
   .klub-grid{grid-template-columns:minmax(0,1fr)}
   .klub-sticky{position:static}
 }
 
-/* ---------- penalta ---------- */
-.pen-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(32px,5vw,80px);align-items:start}
-.penalta .h2{font-size:clamp(44px,5.4vw,82px)}
-.pen-stage{margin-top:clamp(0px,3vw,44px)}
-.pen-p{color:var(--chalk-2);font-size:clamp(17px,1.4vw,20px);max-width:32ch}
-.pen-score{display:flex;align-items:center;gap:12px;margin:28px 0 18px}
-.pen-team{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-2)}
-.pen-colon{font:900 40px/1 var(--f-display);color:var(--chalk-2)}
-.plate.flip{animation:flip .36s var(--ease-io)}
-@keyframes flip{50%{transform:rotateX(90deg)}}
-.pen-msg{min-height:1.4em;font:900 clamp(28px,3vw,40px)/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.02em;margin:0 0 14px}
-.pen-story,.pen-cta{max-width:40ch;color:var(--chalk-2);animation:fadeup .7s var(--ease-out) both}
-.pen-cta a{color:var(--chalk);font-weight:700}
-@keyframes fadeup{from{opacity:0;transform:translateY(10px)}}
-.pen-stage{display:flex;flex-direction:column;gap:18px}
-.pen-svg{width:100%;height:auto;border-radius:var(--radius);background:radial-gradient(ellipse 70% 60% at 50% 35%,rgba(44,122,73,.32),rgba(44,122,73,0) 70%),linear-gradient(180deg,#0b2016,#0f2a1b 64%);border:1px solid rgba(185,200,188,.14);overflow:hidden}
-.pen-ball{transform-box:fill-box;transform-origin:50% 50%}
-.inview .pen-ball.idle{animation:breathe 4.4s var(--ease-io) infinite;animation-delay:-1s}
-@keyframes breathe{50%{transform:scale(1.08)}}
-.pen-gk-body{transform-box:view-box;transform-origin:400px 330px}
-.pen-net{transform-box:view-box}
-.pen-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.btn-pen{--fg:var(--chalk);border-color:rgba(241,244,236,.5);min-width:120px}
-.btn-pen:hover{border-color:var(--chalk);background:rgba(241,244,236,.08)}
-.btn-pen[aria-disabled="true"]{opacity:.5;cursor:default}
-@media (max-width:900px){.pen-grid{grid-template-columns:minmax(0,1fr)}.pen-stage{order:2}}
-@media (max-width:480px){.btn-pen{flex:1 1 40%;min-width:0;padding:0 12px}.btn-pen-mid{flex-basis:100%;order:3}}
-
 /* ---------- týmy ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.cards-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cards-2 .card .slot{aspect-ratio:16/9}
+.kat .slot{aspect-ratio:21/9}
+@media (max-width:1180px){.kat-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mladez{margin-top:clamp(72px,9vw,120px)}
+.mladez-head{margin-bottom:clamp(28px,4vw,48px)}
+.mladez .mladez-h{font-size:clamp(40px,5vw,72px)}
+.kat-info{display:grid;margin:0 0 26px}
+.kat-info>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
+.kat-info>div:first-child{border-top:0;padding-top:0}
+.kat-info dt{font:500 11.5px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.kat-info dd{margin:0;font-weight:500}
+.kat-info a{font-weight:700}
+.kat-btn{margin-top:auto;align-self:flex-start}
 .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
 .card:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(16,36,26,.13)}
 .card .slot{aspect-ratio:4/3}
@@ -411,12 +462,6 @@ html:not(.js) .cue{display:none}
 /* ---------- partneři ---------- */
 .partneri .lead{margin:0;max-width:54ch}
 .mini-h{font:500 12.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 16px}
-.loga{list-style:none;margin:0 0 clamp(56px,7vw,92px);padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.logo{display:grid;place-items:center;aspect-ratio:3/2;padding:16px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
-.logo a{display:grid;place-items:center;width:100%;height:100%}
-.logo img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(1);opacity:.78;transition:filter .4s var(--ease-out),opacity .4s var(--ease-out)}
-.logo:hover img,.logo a:focus-visible img{filter:none;opacity:1}
-.logo-ph{background:#e2e7df;border:2px dashed #b7c2b6;color:#536458;font:500 11.5px/1.35 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-align:center}
 .balicky-h{margin-bottom:26px}
 .balicky{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px);align-items:stretch;margin-bottom:clamp(44px,5vw,64px)}
 .balicek{position:relative;display:flex;flex-direction:column;padding:clamp(22px,2.2vw,30px);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
@@ -445,15 +490,11 @@ html:not(.js) .cue{display:none}
   .balicky{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
   .doplnky{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (max-width:900px){.loga{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:620px){
   .balicky{grid-template-columns:minmax(0,1fr)}
   .partneri-cta .btn{width:100%}
 }
 @media (max-width:480px){
-  .loga{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .logo{aspect-ratio:2/1;padding:12px}
-  .logo-ph:nth-child(n+5){display:none}
   .doplnky{grid-template-columns:minmax(0,1fr)}
 }
 
@@ -485,6 +526,7 @@ html:not(.js) .cue{display:none}
 .form .btn-l{width:100%}
 .form-note{margin:14px 0 0;font-size:14.5px;color:var(--ink-2);text-align:center}
 .form-done{margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(44,122,73,.12);border:1px solid rgba(44,122,73,.3);animation:fadeup .6s var(--ease-out) both}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}}
 .form-done:focus{outline:none}
 .form-done p{margin:0}
 .form-done-h{font:900 26px/1 var(--f-display);text-transform:uppercase;margin-bottom:6px !important}
@@ -538,7 +580,6 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important;transition-delay:0s !important}
   .js [data-reveal]>*{opacity:1 !important;translate:none !important}
-  .gauge-water{transform:scaleY(1) !important}
   .touchline path{stroke-dashoffset:0 !important}
   body{animation:none}
 }

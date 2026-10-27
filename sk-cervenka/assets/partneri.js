@@ -6,12 +6,13 @@
 */
 
 window.PARTNERI = {
-  // Loga současných partnerů. Soubory patří do složky assets/partneri/.
+  // Loga partnerů v pruhu hned pod úvodem. Soubory patří do složky assets/partneri/.
+  // Logo je šedé a při najetí myší barevné; web = kam logo odkazuje (nepovinné).
   // Příklad: { nazev: 'Firma s.r.o.', soubor: 'assets/partneri/firma.png', web: 'https://www.firma.cz' }
   loga: [],
 
-  // Kolik políček má mřížka log mít. Chybějící místa se vyplní políčkem "Vaše logo zde".
-  pocetPolicek: 6,
+  // Kolik políček má pruh aspoň mít. Chybějící místa se vyplní polem "Místo pro vaše logo".
+  pocetPolicek: 4,
 
   balicky: [
     {

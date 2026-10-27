@@ -2,3 +2,5 @@ fotky/
 *.zip
 *.pdf
 .claude/
+fotky*/
+*.ics

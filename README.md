@@ -48,12 +48,36 @@ Soubor `sk-cervenka/assets/partneri.js`.
   ```js
   { nazev: 'Firma s.r.o.', soubor: 'assets/partneri/firma.png', web: 'https://www.firma.cz' },
   ```
-  Volná místa do počtu `pocetPolicek` (teď 6) se vyplní políčkem „Vaše logo zde“.
+  Loga se ukazují v pruhu „Partneři klubu“ hned pod úvodem, šedá a při najetí myší barevná.
+  Volná místa do počtu `pocetPolicek` (teď 4) se vyplní polem „Místo pro vaše logo“.
   Nejlépe vypadají loga na průhledném pozadí (PNG nebo SVG).
+
+## Úvod webu
+
+Na začátku `sk-cervenka/index.html` je řádek `var HERO_VARIANT = "branka";`.
+`"branka"` = kreslená branka s míčem, `"foto"` = velká fotka přes celou šířku.
+Bez úpravy kódu jde varianta ukázat i adresou: `...index.html?uvod=foto` nebo `?uvod=branka`.
+Fotka pro variantu „foto“ je zatím zástupná (hřiště z galerie), mění se v `src` u `hf-img` v `index.html`.
+
+## Mládež
+
+Karty kategorií (Žáci, Benjamínci) jsou ve `window.MLADEZ` v `data.js`: věk a ročníky, tréninky, místo, trenér,
+kontakt a soutěž. Co je `'DOPLNIT'`, se na webu ukáže jako zvýrazněné DOPLNIT. Další kategorii přidáte
+zkopírováním celého bloku `{ ... }`. Tlačítko „Přihlásit dítě“ zaškrtne ve formuláři volbu a předvyplní kategorii.
+Rozpis zápasů mládeže (`rozpis`) je převzatý z kalendářů (.ics), které jdou stáhnout u soutěže na fotbal.cz.
+Automat ho neaktualizuje (fotbal.cz pouští jen lidi, ne skripty), takže nové termíny je potřeba doplnit ručně
+nebo kalendáře stáhnout znovu a nechat je převést. Výsledky ani tabulky v kalendářích nejsou.
+
+## Historie
+
+Milníky jsou přímo v `index.html` v sekci KLUB / HISTORIE (rok + jedna věta). Historickou fotku stačí
+uložit do `sk-cervenka/assets/historie/` pod názvem roku, třeba `1945.jpg`: u milníku s `data-tl-foto`
+se sama objeví místo zástupného pole a po kliknutí se otevře přes celou obrazovku.
 
 ## Kontakty a fotky
 
-- Telefon, adresa, e-mail pro formulář, Facebook: `window.KLUB` na začátku `data.js`.
+- Telefon, adresa, e-mail pro formulář, Facebook a Instagram: `window.KLUB` na začátku `data.js`.
+  Prázdná adresa sociální sítě = ikona se na webu neukáže.
 - Fotky do galerie: dejte je do složky `fotky` a spusťte
   `powershell -ExecutionPolicy Bypass -File nastroje\pripravit-fotky.ps1`.
   Skript je otočí, zmenší a zapíše do `assets/galerie.js`. Popisek se vezme z názvu souboru.

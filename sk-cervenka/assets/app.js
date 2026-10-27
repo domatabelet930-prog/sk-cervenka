@@ -22,6 +22,7 @@
   const GALERIE = Array.isArray(window.GALERIE) ? window.GALERIE : [];
   const PARTNERI = window.PARTNERI || {};
   const AREAL = Array.isArray(window.AREAL) ? window.AREAL : [];
+  const MLADEZ = Array.isArray(window.MLADEZ) ? window.MLADEZ : [];
 
   /* ---------- data, datumy ---------- */
   const DNY = ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'];
@@ -51,6 +52,7 @@
   const domaHoste = z => (z.doma ? [NAS, z.souper] : [z.souper, NAS]);
   const skoreDH = z => { const [a, b] = z.skore.split(':'); return z.doma ? `${a}:${b}` : `${b}:${a}`; };
   const ZNAK = '<svg class="team-znak" aria-hidden="true"><use href="#znak"/></svg>';
+  const tymBox = (n, tag) => `<div class="team"><span class="team-tag">${tag}</span><span class="team-n">${n === NAS ? ZNAK : ''}${esc(n)}</span></div>`;
 
   function renderZapasy() {
     const box = $('[data-next]');
@@ -61,10 +63,9 @@
         meta.hidden = true;
       } else {
         const [h, a] = domaHoste(dalsi);
-        const team = (n, tag) => `<div class="team"><span class="team-tag">${tag}</span><span class="team-n">${n === NAS ? ZNAK : ''}${esc(n)}</span></div>`;
-        box.innerHTML = team(h, 'Domácí') +
+        box.innerHTML = tymBox(h, 'Domácí') +
           `<div class="vs"><span class="plate plate-time">${cas(dalsi.dt)}</span><span class="vs-date">${kratce(dalsi.dt)}</span></div>` +
-          team(a, 'Hosté');
+          tymBox(a, 'Hosté');
         when.textContent = zaKolik(dniDo(dalsi.dt));
         meta.textContent = `${dlouze(dalsi.dt)} · výkop ${cas(dalsi.dt)} · ${dalsi.doma ? 'doma v Července' : 'venku'}${dalsi.pozn ? ' · ' + dalsi.pozn : ''}`;
         if (!dalsi.doma && dalsiDoma) {
@@ -74,11 +75,12 @@
       }
     }
 
-    const chip = $('[data-next-home-text]');
-    if (chip) {
+    $$('[data-next-home]').forEach(a => {
+      const chip = $('[data-next-home-text]', a), k = $('.chip-k', a);
+      if (!chip) return;
       if (dalsiDoma) chip.textContent = `${kratce(dalsiDoma.dt)} · ${cas(dalsiDoma.dt)} · ${dalsiDoma.souper}`;
-      else { chip.textContent = 'Rozpis a výsledky'; const k = $('[data-next-home] .chip-k'); if (k) k.textContent = `Sezóna ${SEZONA.rocnik || ''}`; }
-    }
+      else { chip.textContent = 'Rozpis a výsledky'; if (k) k.textContent = `Sezóna ${SEZONA.rocnik || ''}`; }
+    });
 
     const res = $('[data-results]');
     if (res) {
@@ -156,7 +158,11 @@
       const f = $('[data-f-adresa]'); if (f) f.textContent = KLUB.adresa;
     }
     if (KLUB.mapa) { const m = $('[data-c-mapa]'); if (m) m.href = KLUB.mapa; }
-    if (KLUB.facebook) $$('a[href*="facebook.com"]').forEach(a => { a.href = KLUB.facebook; });
+    // sociální sítě: adresa z KLUB, bez adresy se odkaz schová
+    $$('[data-social]').forEach(a => {
+      const url = String(KLUB[a.dataset.social] || '').trim();
+      if (url) { a.href = url; a.hidden = false; } else a.hidden = true;
+    });
     if (KLUB.fotbalcz) $$('a[href*="fotbal.cz"]').forEach(a => { a.href = KLUB.fotbalcz; });
     const y = $('[data-year]'); if (y) y.textContent = new Date().getFullYear();
   }
@@ -196,18 +202,86 @@
     }).join('');
   }
 
+  /* ---------- mládež: karta pro každou kategorii ---------- */
+  function renderMladez() {
+    const box = $('[data-mladez]');
+    if (!box) return;
+    const kat = MLADEZ.filter(k => k && k.nazev);
+    if (!kat.length) { const s = box.closest('section'); if (s) s.hidden = true; return; }
+    const DOPLNIT = '<span class="doplnit">DOPLNIT</span>';
+    const hodnota = v => { const s = String(v == null ? '' : v).trim(); return !s || /^doplnit$/i.test(s) ? DOPLNIT : esc(s); };
+    const kontakt = v => {
+      const s = String(v == null ? '' : v).trim();
+      if (/^\+?[\d\s]{9,}$/.test(s)) return `<a href="tel:${s.replace(/\s/g, '')}">${esc(s)}</a>`;
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) return `<a href="mailto:${esc(s)}">${esc(s)}</a>`;
+      return hodnota(s);
+    };
+    const ikona = '<svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><circle cx="100" cy="112" r="34"/><path d="m100 92 18 13-7 21H89l-7-21Z"/><path d="M30 168h140M44 150l10-30 10 30M136 150l10-30 10 30"/></g></svg>';
+    const radek = (dt, dd) => `<div><dt>${dt}</dt><dd>${dd}</dd></div>`;
+    box.innerHTML = kat.map(k => `<article class="card kat">` +
+      `${k.foto ? `<figure class="slot" data-slot="${esc(k.foto)}"><div class="ph" aria-hidden="true">${ikona}</div></figure>` : ''}` +
+      `<div class="card-b"><h4 class="h3">${esc(k.nazev)}</h4>` +
+      `<dl class="kat-info">${radek('Věk a ročníky', hodnota(k.vek))}${radek('Tréninky', hodnota(k.treninky))}${radek('Kde', hodnota(k.misto))}` +
+      `${radek('Trenér', hodnota(k.trener))}${radek('Kontakt', kontakt(k.kontakt))}${radek('Soutěž', hodnota(k.soutez) + (k.rozpis && k.rozpis.length ? '<br><a href="#zapasy-mladez">Zápasy a rozpis</a>' : ''))}</dl>` +
+      `<a class="btn btn-accent kat-btn" href="#pridej-se" data-zajem="dite" data-kategorie="${esc(k.nazev)}">Přihlásit dítě</a></div></article>`).join('');
+  }
+
+  /* ---------- zápasy mládeže: pod zápasy mužů, ve stejné grafice ---------- */
+  // turnajové soutěže (turnaje: true) spojí zápasy jednoho dne do jednoho řádku
+  function renderMladezZapasy() {
+    const box = $('[data-mladez-zapasy]');
+    if (!box) return;
+    const sekce = box.closest('section');
+    const kat = MLADEZ.filter(k => k && k.nazev && Array.isArray(k.rozpis) && k.rozpis.length);
+    if (!kat.length) { if (sekce) sekce.hidden = true; return; }
+    const stav = $('[data-mladez-stav]');
+    if (stav && window.MLADEZ_AKTUALIZOVANO) { const d = toDate(window.MLADEZ_AKTUALIZOVANO); stav.textContent = `Rozpis k ${d.getDate()}. ${d.getMonth() + 1}. ${d.getFullYear()}`; }
+    const nm = n => (n === NAS ? `<span class="us">${esc(n)}</span>` : esc(n));
+    box.innerHTML = kat.map(k => {
+      const list = k.rozpis.filter(z => z && z.datum && z.souper).map(z => Object.assign({}, z, { dt: toDate(z.datum) })).sort((a, b) => a.dt - b.dt);
+      let html = `<article class="next mz-kat"><p class="next-k"><span class="pulse" aria-hidden="true"></span><span>${esc(k.nazev)}</span>`;
+      let radky;
+      if (k.turnaje) {
+        const dny = [];
+        list.forEach(z => { const p = dny[dny.length - 1]; if (p && p.den === z.datum.slice(0, 10)) p.souperi.push(z.souper); else dny.push({ den: z.datum.slice(0, 10), dt: z.dt, souperi: [z.souper] }); });
+        const dalsiDen = dny.find(p => p.dt.getTime() + 6 * 36e5 > Date.now());
+        html += dalsiDen ? `<span class="next-when">${zaKolik(dniDo(dalsiDen.dt))}</span></p>` +
+          `<p class="mz-turnaj"><span class="plate plate-time">${cas(dalsiDen.dt)}</span><span><span class="vs-date">${kratce(dalsiDen.dt)} · turnaj</span><span class="mz-turnaj-s">${esc(dalsiDen.souperi.join(', '))}</span></span></p>`
+          : '</p><p class="next-none">Podzim je odehraný. Jarní turnaje sem dáme, jakmile je svaz zveřejní.</p>';
+        radky = dny.map(p => `<li class="s-row s-turnaj${p.dt.getTime() + 6 * 36e5 < Date.now() ? ' is-played' : p === dalsiDen ? ' is-next' : ''}"><span class="s-d">${kratce(p.dt)} · ${cas(p.dt)} · turnaj</span><span class="s-t">${esc(p.souperi.join(', '))}</span></li>`).join('');
+      } else {
+        const dalsiZ = list.find(z => z.dt.getTime() + 2 * 36e5 > Date.now());
+        if (dalsiZ) {
+          const [h, a] = domaHoste(dalsiZ);
+          html += `<span class="next-when">${zaKolik(dniDo(dalsiZ.dt))}</span></p><div class="plates">${tymBox(h, 'Domácí')}` +
+            `<div class="vs"><span class="plate plate-time">${cas(dalsiZ.dt)}</span><span class="vs-date">${kratce(dalsiZ.dt)}</span></div>${tymBox(a, 'Hosté')}</div>` +
+            `<p class="next-meta">${dlouze(dalsiZ.dt)} · výkop ${cas(dalsiZ.dt)} · ${dalsiZ.doma ? 'doma v Července' : `venku${dalsiZ.misto ? ', ' + esc(dalsiZ.misto) : ''}`}</p>`;
+        } else html += '</p><p class="next-none">Sezóna je odehraná. Nový rozpis sem dáme, jakmile ho svaz zveřejní.</p>';
+        radky = list.map(z => {
+          const [h, a] = domaHoste(z);
+          const cls = z.dt.getTime() + 2 * 36e5 < Date.now() ? ' is-played' : z === dalsiZ ? ' is-next' : '';
+          return `<li class="s-row s-mz${cls}"><span class="s-d">${kratce(z.dt)} · ${cas(z.dt)}${z.doma ? "" : z.misto ? " · " + esc(z.misto) : ""}</span><span class="s-t">${nm(h)} – ${nm(a)}</span></li>`;
+        }).join('');
+      }
+      return html + `<p class="mz-soutez">${esc(k.soutez || '')}</p>` +
+        `<details class="season mz-season"><summary><span>Rozpis sezóny</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>` +
+        `<ol class="mz-list">${radky}</ol></details></article>`;
+    }).join('');
+  }
+
   /* ---------- partneři: loga, balíčky, doplňky ---------- */
   function renderPartneri() {
     const cena = c => (c != null && String(c).trim() ? esc(String(c).trim()) : 'Cena na dotaz');
     const txt = s => esc(s).replace(/(^|\s)(\p{Lu})-(?=\p{L})/gu, '$1$2‑');   // "A-mužstva" se nezlomí za pomlčkou
-    const loga = $('[data-loga]');
+    // pruh pod úvodem: loga šedá, při najetí barevná; volná místa doplní zástupná pole
+    const loga = $('[data-pruh-loga]');
     if (loga) {
       const list = (Array.isArray(PARTNERI.loga) ? PARTNERI.loga : []).filter(l => l && l.soubor);
-      const volna = Math.max(0, (PARTNERI.pocetPolicek || 6) - list.length);
+      const volna = Math.max(0, (PARTNERI.pocetPolicek || 4) - list.length);
       loga.innerHTML = list.map(l => {
         const img = `<img src="${esc(l.soubor)}" alt="${esc(l.nazev || 'Logo partnera')}" loading="lazy" decoding="async">`;
-        return `<li class="logo">${l.web ? `<a href="${esc(l.web)}" target="_blank" rel="noopener">${img}</a>` : img}</li>`;
-      }).join('') + '<li class="logo logo-ph" aria-hidden="true">Vaše logo zde</li>'.repeat(volna);
+        return `<li class="logo">${l.web ? `<a href="${esc(l.web)}" target="_blank" rel="noopener" aria-label="${esc((l.nazev || 'Web partnera') + ' (otevře se v nové záložce)')}">${img}</a>` : img}</li>`;
+      }).join('') + '<li class="logo logo-ph">Místo pro vaše logo</li>'.repeat(volna);
     }
     const bal = $('[data-balicky]');
     if (bal) {
@@ -259,6 +333,7 @@
 
   /* ---------- úvod: pohled zpoza branky, míč letí do sítě ---------- */
   function initHero() {
+    if (document.documentElement.dataset.hero === 'foto') return;   // varianta s fotkou je čisté HTML a CSS
     const hero = $('#uvod'), stage = $('[data-stage]'), canvas = $('[data-scene]');
     if (!hero || !stage || !canvas || !canvas.getContext) return;
     const ctx = canvas.getContext('2d', { alpha: false });
@@ -683,83 +758,53 @@
     io.observe(box);
   }
 
-  /* ---------- penalta ---------- */
-  function initPenalty() {
-    const svg = $('[data-pen-svg]');
-    if (!svg) return;
-    const ballEl = $('[data-pen-ball]', svg), gk = $('.pen-gk-body', svg), net = $('[data-pen-net]', svg);
-    const btns = $$('[data-shot]'), msg = $('[data-pen-msg]'), story = $('[data-pen-story]'), cta = $('[data-pen-cta]');
-    const youEl = $('[data-pen-you]'), gkEl = $('[data-pen-gk]');
-    if (!ballEl || !gk || !ballEl.animate) { btns.forEach(b => { b.hidden = true; }); return; }
-    let you = 0, saves = 0, shots = 0, busy = false, anims = [];
-    ballEl.classList.add('idle');
-    const SPOT = [400, 408];
-    const GOAL = { left: [214, 178], mid: [400, 172], right: [586, 178] };
-    const GLOVE = { left: [198, 212], right: [602, 212], mid: [400, 196] };
-    const POST = { left: [147, 198], right: [653, 198] };
-    const DIVE = { left: 'translate(-82px,-42px) rotate(-58deg)', right: 'translate(82px,-42px) rotate(58deg)', mid: 'translate(0px,-18px)' };
-    const tr = (pt, s) => `translate(${pt[0] - SPOT[0]}px,${pt[1] - SPOT[1]}px) scale(${s})`;
-    const play = (el, frames, opt) => { const a = el.animate(frames, Object.assign({ fill: 'forwards', easing: 'cubic-bezier(.22,.7,.25,1)' }, opt)); anims.push(a); return a; };
-    const flip = (el, v) => {
-      if (RM.matches) { el.textContent = v; return; }
-      el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
-      setTimeout(() => { el.textContent = v; }, 180);
+  /* ---------- prohlížeč fotek přes celou obrazovku (galerie i historie) ---------- */
+  // vrací funkci otevri(seznam, index, tlačítko); seznam = [{ src, w, h, popis }]
+  function initLightbox() {
+    const dlg = $('[data-lightbox]');
+    if (!dlg || typeof dlg.showModal !== 'function') return null;
+    const img = $('[data-lb-img]', dlg), cap = $('[data-lb-cap]', dlg), cnt = $('[data-lb-count]', dlg);
+    const prev = $('[data-lb-prev]', dlg), next = $('[data-lb-next]', dlg);
+    let list = [], cur = 0, opener = null, sx = null, swiped = false;
+    const show = i => {
+      cur = (i + list.length) % list.length;
+      const g = list[cur];
+      if (g.w) { img.width = g.w; img.height = g.h; } else { img.removeAttribute('width'); img.removeAttribute('height'); }
+      img.src = g.src;
+      img.alt = g.popis || `Fotka ${cur + 1}`;
+      cap.textContent = g.popis || '';
+      cnt.textContent = `${cur + 1} / ${list.length}`;
+      if (list.length > 1) [cur + 1, cur - 1].forEach(j => { const p = new Image(); p.src = list[(j + list.length) % list.length].src; });
     };
-    const setBusy = v => { busy = v; btns.forEach(b => b.setAttribute('aria-disabled', v ? 'true' : 'false')); };
-
-    const shoot = dir => {
-      if (busy) return;
-      setBusy(true);
-      ballEl.classList.remove('idle');
-      msg.textContent = '';
-      const r = Math.random();
-      const keeper = r < 0.39 ? 'left' : r < 0.78 ? 'right' : 'mid';
-      const out = dir === 'mid' ? (keeper === 'mid' ? 'save' : 'goal') : keeper === dir ? 'save' : Math.random() < 0.12 ? 'post' : 'goal';
-      const quick = RM.matches;
-      play(gk, [{ transform: 'none' }, { transform: DIVE[keeper] }], { duration: quick ? 1 : 420, delay: quick ? 0 : dir === 'mid' ? 40 : 110, easing: 'cubic-bezier(.2,.8,.3,1)' });
-      let frames;
-      if (out === 'goal') frames = dir === 'mid'
-        ? [{ transform: 'none' }, { transform: tr([400, 118], 0.8), offset: 0.55 }, { transform: tr(GOAL.mid, 0.66) }]
-        : [{ transform: 'none' }, { transform: tr(GOAL[dir], 0.64) }];
-      else if (out === 'save') {
-        const g = GLOVE[keeper];
-        frames = [{ transform: 'none' }, { transform: tr(g, 0.7), offset: 0.7 }, { transform: tr([g[0] + (dir === 'left' ? 34 : dir === 'right' ? -34 : 0), 302], 0.8) }];
-      } else {
-        const pp = POST[dir];
-        frames = [{ transform: 'none' }, { transform: tr(pp, 0.68), offset: 0.72 }, { transform: tr([pp[0] + (dir === 'left' ? -72 : 72), 292], 0.78) }];
-      }
-      const a = play(ballEl, frames, { duration: quick ? 1 : dir === 'mid' ? 980 : 560, easing: dir === 'mid' ? 'cubic-bezier(.3,.1,.4,1)' : 'cubic-bezier(.15,.75,.3,1)' });
-      a.onfinish = () => {
-        shots++;
-        if (out === 'goal') {
-          you++; flip(youEl, you);
-          msg.textContent = dir === 'mid' ? 'Gól! Přesně jako Panenka.' : 'Gól!';
-          if (!quick) {
-            const g = GOAL[dir];
-            net.style.transformOrigin = `${g[0]}px ${g[1]}px`;
-            play(net, [{ transform: 'scale(1)' }, { transform: 'scale(.955)' }, { transform: 'scale(1.012)' }, { transform: 'scale(1)' }], { duration: 650, easing: 'ease-out', fill: 'none' });
-          }
-        } else {
-          saves++; flip(gkEl, saves);
-          msg.textContent = out === 'post' ? 'Tyčka!' : dir === 'mid' ? 'Brankář zůstal stát a chytil to.' : 'Chytil to.';
-        }
-        if (shots === 1) story.hidden = false;
-        if (shots === 3) cta.hidden = false;
-        setTimeout(reset, quick ? 1300 : 1500);
-      };
+    const posun = d => { if (list.length > 1) show(cur + d); };
+    prev.addEventListener('click', () => posun(-1));
+    next.addEventListener('click', () => posun(1));
+    $('[data-lb-close]', dlg).addEventListener('click', () => dlg.close());
+    dlg.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); posun(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); posun(1); }
+    });
+    dlg.addEventListener('close', () => { document.documentElement.classList.remove('lb-open'); if (opener) opener.focus(); });
+    dlg.addEventListener('pointerdown', e => { sx = e.clientX; swiped = false; });
+    dlg.addEventListener('pointerup', e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx;
+      sx = null;
+      if (Math.abs(dx) > 50 && list.length > 1) { swiped = true; posun(dx < 0 ? 1 : -1); }
+    });
+    dlg.addEventListener('click', e => { if (e.target === dlg && !swiped) dlg.close(); swiped = false; });
+    return (seznam, i, btn) => {
+      list = seznam;
+      opener = btn || null;
+      [prev, next, cnt].forEach(el => { el.hidden = list.length < 2; });
+      show(i);
+      dlg.showModal();
+      document.documentElement.classList.add('lb-open');
     };
-    const reset = () => {
-      anims.forEach(x => x.cancel());
-      anims = [];
-      if (!RM.matches) ballEl.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)' });
-      ballEl.classList.add('idle');
-      setBusy(false);
-    };
-    setBusy(false);
-    btns.forEach(b => b.addEventListener('click', () => shoot(b.dataset.shot)));
   }
+  const otevriFotku = initLightbox();
 
-  /* ---------- galerie a prohlížeč ---------- */
+  /* ---------- galerie ---------- */
   function initGallery() {
     const box = $('[data-gallery]');
     if (!box) return;
@@ -775,48 +820,41 @@
     box.innerHTML = GALERIE.map((g, i) => `<button class="gal-item" type="button" data-i="${i}"${g.nw && g.nh ? ` style="--ar:${(g.nw / g.nh).toFixed(4)}"` : ''}>` +
       `<img src="${esc(g.nahled || g.src)}"${g.nw ? ` width="${g.nw}" height="${g.nh}"` : ''} alt="${esc(g.popis || 'Fotka z galerie ' + (i + 1))}" loading="lazy" decoding="async">` +
       `${g.popis ? `<span class="gal-cap" aria-hidden="true">${esc(g.popis)}</span>` : ''}</button>`).join('');
-
-    const dlg = $('[data-lightbox]');
-    if (!dlg || typeof dlg.showModal !== 'function') {
-      box.addEventListener('click', e => { const b = e.target.closest('.gal-item'); if (b) window.open(GALERIE[+b.dataset.i].src, '_blank', 'noopener'); });
-      return;
-    }
-    const img = $('[data-lb-img]', dlg), cap = $('[data-lb-cap]', dlg), cnt = $('[data-lb-count]', dlg);
-    let cur = 0, opener = null, sx = null, swiped = false;
-    const show = i => {
-      cur = (i + GALERIE.length) % GALERIE.length;
-      const g = GALERIE[cur];
-      if (g.w) { img.width = g.w; img.height = g.h; } else { img.removeAttribute('width'); img.removeAttribute('height'); }
-      img.src = g.src;
-      img.alt = g.popis || `Fotka z galerie ${cur + 1}`;
-      cap.textContent = g.popis || '';
-      cnt.textContent = `${cur + 1} / ${GALERIE.length}`;
-      [cur + 1, cur - 1].forEach(j => { const n = GALERIE[(j + GALERIE.length) % GALERIE.length]; if (n) { const p = new Image(); p.src = n.src; } });
-    };
     box.addEventListener('click', e => {
       const b = e.target.closest('.gal-item');
       if (!b) return;
-      opener = b;
-      show(+b.dataset.i);
-      dlg.showModal();
-      document.documentElement.classList.add('lb-open');
+      if (otevriFotku) otevriFotku(GALERIE, +b.dataset.i, b);
+      else window.open(GALERIE[+b.dataset.i].src, '_blank', 'noopener');
     });
-    $('[data-lb-close]', dlg).addEventListener('click', () => dlg.close());
-    $('[data-lb-prev]', dlg).addEventListener('click', () => show(cur - 1));
-    $('[data-lb-next]', dlg).addEventListener('click', () => show(cur + 1));
-    dlg.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+  }
+
+  /* ---------- historické fotky u milníků ---------- */
+  // fotka se ukáže, jen když soubor opravdu existuje; jinak zůstane zástupné pole
+  function initHistorieFotky() {
+    const nactene = [];
+    $$('[data-tl-foto]').forEach(fig => {
+      const src = fig.dataset.tlFoto, popis = fig.dataset.popis || '';
+      const pokus = new Image();
+      pokus.onload = () => {
+        const polozka = { src, w: pokus.naturalWidth, h: pokus.naturalHeight, popis };
+        nactene.push({ fig, polozka });
+        nactene.sort((a, b) => (a.fig.compareDocumentPosition(b.fig) & 2 ? 1 : -1));
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tl-foto-btn';
+        btn.setAttribute('aria-label', `Zvětšit fotku: ${popis}`);
+        btn.innerHTML = `<img src="${esc(src)}" alt="${esc(popis)}" decoding="async">`;
+        btn.addEventListener('click', () => {
+          const i = nactene.findIndex(n => n.fig === fig);
+          if (otevriFotku) otevriFotku(nactene.map(n => n.polozka), i, btn);
+          else window.open(src, '_blank', 'noopener');
+        });
+        fig.innerHTML = '';
+        fig.appendChild(btn);
+        fig.classList.add('has-photo');
+      };
+      pokus.src = src;
     });
-    dlg.addEventListener('close', () => { document.documentElement.classList.remove('lb-open'); if (opener) opener.focus(); });
-    dlg.addEventListener('pointerdown', e => { sx = e.clientX; swiped = false; });
-    dlg.addEventListener('pointerup', e => {
-      if (sx === null) return;
-      const dx = e.clientX - sx;
-      sx = null;
-      if (Math.abs(dx) > 50) { swiped = true; show(cur + (dx < 0 ? 1 : -1)); }
-    });
-    dlg.addEventListener('click', e => { if (e.target === dlg && !swiped) dlg.close(); swiped = false; });
   }
 
   /* ---------- navigace ---------- */
@@ -839,17 +877,22 @@
       addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); } });
       onMQ(matchMedia('(min-width: 921px)'), e => { if (e.matches) setOpen(false); });
     }
-    // zvýraznění sekce, ve které právě jsme; v úvodu a u penalty se nezvýrazňuje nic
+    // zvýraznění sekce, ve které právě jsme; v úvodu se nezvýrazňuje nic
     const links = $$('.nav-links a');
     const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    // Mládež leží uvnitř Týmů, proto vyhrává poslední sekce v pořadí stránky, která je zrovna uprostřed obrazovky
     if (!('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      if (!e.isIntersecting) return;
+    const secs = $$('main > section, #mladez');
+    const vidim = new Set();
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => (e.isIntersecting ? vidim.add(e.target) : vidim.delete(e.target)));
+      const akt = secs.filter(s => vidim.has(s)).pop();
+      if (!akt) return;
       links.forEach(l => l.removeAttribute('aria-current'));
-      const a = map.get(e.target.id);
+      const a = map.get(akt.id);
       if (a) a.setAttribute('aria-current', 'true');
-    }), { rootMargin: '-45% 0px -50% 0px' });
-    $$('main > section').forEach(s => io.observe(s));
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(s => io.observe(s));
   }
 
   /* ---------- formulář ---------- */
@@ -857,12 +900,15 @@
     const form = $('[data-form]');
     if (!form) return;
     const done = $('[data-form-done]', form), noMail = $('[data-form-noemail]', form), note = $('[data-form-note]', form);
-    // odkazy s data-zajem="..." (Přihlásit dítě, Chci se stát partnerem) zaškrtnou odpovídající volbu ve formuláři
+    // odkazy s data-zajem="..." (Přihlásit dítě, Staňte se partnerem) zaškrtnou odpovídající volbu ve formuláři,
+    // u mládeže se do prázdné zprávy předvyplní kategorie
     document.addEventListener('click', e => {
       const a = e.target.closest('[data-zajem]');
       if (!a) return;
       const chk = $(`[data-zajem-volba="${a.dataset.zajem}"]`, form);
       if (chk) chk.checked = true;
+      const zpr = form.elements.zprava;
+      if (a.dataset.kategorie && zpr && !zpr.value.trim()) zpr.value = `Kategorie: ${a.dataset.kategorie}\nVěk dítěte: `;
     });
     const fields = { jmeno: $('#f-jmeno', form), kontakt: $('#f-kontakt', form) };
     const errs = { jmeno: $('#e-jmeno', form), kontakt: $('#e-kontakt', form) };
@@ -911,16 +957,18 @@
   splitText();
   renderZapasy();
   renderKontakty();
-  renderFotky();
   renderAreal();
+  renderMladez();
+  renderMladezZapasy();
+  renderFotky();
   renderPartneri();
   initGallery();
+  initHistorieFotky();
   initHero();
   initReveal();
   initInview();
   initTimeline();
   initCounters();
-  initPenalty();
   initNav();
   initForm();
   onMQ(RM, e => (e.matches ? pinToFinalStates() : unpinFinalStates()));

@@ -215,5 +215,113 @@ window.GALERIE = [
         "nw":  720,
         "nh":  540,
         "popis":  "Příprava makrel, říjen 2021"
+    },
+    {
+        "src":  "assets/galerie/25-oslava-80-let-nastup-s-detmi-kveten-2025.jpg",
+        "w":  1920,
+        "h":  1281,
+        "nahled":  "assets/galerie/25-oslava-80-let-nastup-s-detmi-kveten-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Oslava 80 let – nástup s dětmi, květen 2025"
+    },
+    {
+        "src":  "assets/galerie/26-oslava-80-let-spolecne-foto-kveten-2025.jpg",
+        "w":  1920,
+        "h":  1280,
+        "nahled":  "assets/galerie/26-oslava-80-let-spolecne-foto-kveten-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Oslava 80 let – společné foto, květen 2025"
+    },
+    {
+        "src":  "assets/galerie/27-oslava-80-let-zapas-se-sigi-teamem.jpg",
+        "w":  1920,
+        "h":  1280,
+        "nahled":  "assets/galerie/27-oslava-80-let-zapas-se-sigi-teamem-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Oslava 80 let – zápas se Sigi teamem"
+    },
+    {
+        "src":  "assets/galerie/28-oslava-80-let-autogramiada-sigi-teamu.jpg",
+        "w":  1920,
+        "h":  1281,
+        "nahled":  "assets/galerie/28-oslava-80-let-autogramiada-sigi-teamu-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Oslava 80 let – autogramiáda Sigi teamu"
+    },
+    {
+        "src":  "assets/galerie/29-oslava-80-let-dovednostni-souteze-deti.jpg",
+        "w":  1920,
+        "h":  1281,
+        "nahled":  "assets/galerie/29-oslava-80-let-dovednostni-souteze-deti-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Oslava 80 let – dovednostní soutěže dětí"
+    },
+    {
+        "src":  "assets/galerie/30-byvali-hraci-hody-2024.jpg",
+        "w":  1599,
+        "h":  1066,
+        "nahled":  "assets/galerie/30-byvali-hraci-hody-2024-nahled.jpg",
+        "nw":  720,
+        "nh":  480,
+        "popis":  "Bývalí hráči, hody 2024"
+    },
+    {
+        "src":  "assets/galerie/31-mladez-sk-cervenka-zari-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/31-mladez-sk-cervenka-zari-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Mládež SK Červenka, září 2025"
+    },
+    {
+        "src":  "assets/galerie/32-mladez-na-hristi-zari-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/32-mladez-na-hristi-zari-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Mládež na hřišti, září 2025"
+    },
+    {
+        "src":  "assets/galerie/33-muzi-sk-cervenka-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/33-muzi-sk-cervenka-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Muži SK Červenka, duben 2025"
+    },
+    {
+        "src":  "assets/galerie/34-tribuna-pod-snehem.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/34-tribuna-pod-snehem-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Tribuna pod sněhem"
+    },
+    {
+        "src":  "assets/galerie/35-dogfrisbee-na-hristi-kveten-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/35-dogfrisbee-na-hristi-kveten-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Dogfrisbee na hřišti, květen 2025"
+    },
+    {
+        "src":  "assets/galerie/36-dogfrisbee-vyhlaseni-vitezu-kveten-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/36-dogfrisbee-vyhlaseni-vitezu-kveten-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Dogfrisbee – vyhlášení vítězů, květen 2025"
     }
 ];
