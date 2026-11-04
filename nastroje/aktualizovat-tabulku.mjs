@@ -5,6 +5,7 @@
 
   Spuštění (potřebuje Node 18+):   node nastroje/aktualizovat-tabulku.mjs
   Jen vyzkoušet, nic neukládat:    node nastroje/aktualizovat-tabulku.mjs --zkouska
+  Jen muži, bez is.fotbal.cz:      --bez-mladeze
   Bez internetu z uložených stránek (tabulka.html, rozlosovani.html, starsi-zaci-zapasy.html, ...):
                                    node nastroje/aktualizovat-tabulku.mjs --slozka test/
 
@@ -28,6 +29,7 @@ const DATA_JS = path.join(koren, 'sk-cervenka', 'assets', 'data.js');
 const argument = nazev => { const i = process.argv.indexOf(nazev); return i === -1 ? null : process.argv[i + 1] || ''; };
 const zkouska = process.argv.includes('--zkouska');
 const slozka = argument('--slozka');
+const bezMladeze = process.argv.includes('--bez-mladeze');   // GitHub: is.fotbal.cz ho nepustí
 const pockej = ms => new Promise(r => setTimeout(r, ms));
 
 async function stahni(nazev, url) {
@@ -62,7 +64,7 @@ async function stahniVse(adresy) {
 const data = await readFile(DATA_JS, 'utf8');
 const dnes = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Prague' }).format(new Date());   // RRRR-MM-DD v českém čase
 const muzi = aktualizujData(data, await stahniVse(STRANKY), dnes);
-const mladez = aktualizujMladez(muzi.data, await stahniVse(strankyMladeze(muzi.data)), dnes);
+const mladez = bezMladeze ? { data: muzi.data, zpravy: [], chyby: [] } : aktualizujMladez(muzi.data, await stahniVse(strankyMladeze(muzi.data)), dnes);
 const novaData = mladez.data;
 const chyby = [...muzi.chyby, ...mladez.chyby];
 

@@ -9,7 +9,12 @@ window.PARTNERI = {
   // Loga partnerů v pruhu hned pod úvodem. Soubory patří do složky assets/partneri/.
   // Logo je šedé a při najetí myší barevné; web = kam logo odkazuje (nepovinné).
   // Příklad: { nazev: 'Firma s.r.o.', soubor: 'assets/partneri/firma.png', web: 'https://www.firma.cz' }
-  loga: [],
+  loga: [
+    { nazev: 'Olomoucký kraj', soubor: 'assets/partneri/olomoucky-kraj.svg', web: 'https://www.olkraj.cz' },
+    { nazev: 'Obec Červenka', soubor: 'assets/partneri/obec-cervenka.png', web: 'https://www.obeccervenka.cz' },
+    { nazev: 'Pivovar Litovel', soubor: 'assets/partneri/pivovar-litovel.svg', web: 'https://www.litovel.cz' },
+    { nazev: 'Adriana pasta', soubor: 'assets/partneri/adriana.svg', web: 'https://www.adriana.cz' }
+  ],
 
   // Kolik políček má pruh aspoň mít. Chybějící místa se vyplní polem "Místo pro vaše logo".
   pocetPolicek: 4,

@@ -46,7 +46,7 @@ Soubor `sk-cervenka/assets/partneri.js`.
   ```js
   { nazev: 'Firma s.r.o.', soubor: 'assets/partneri/firma.png', web: 'https://www.firma.cz' },
   ```
-  Loga se ukazují v pruhu „Partneři klubu“ hned pod úvodem, šedá a při najetí myší barevná.
+  Loga se ukazují svisle přímo na úvodní fotce, barevná a bez pozadí.
   Volná místa do počtu `pocetPolicek` (teď 4) se vyplní polem „Místo pro vaše logo“.
   Nejlépe vypadají loga na průhledném pozadí (PNG nebo SVG).
 

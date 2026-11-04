@@ -1,4 +1,4 @@
-# Každé pondělí ráno stáhne z fotbalunas.cz tabulku, termíny a výsledky mužů, z is.fotbal.cz zápasy a tabulky mládeže,
+# Každé pondělí ráno stáhne z fotbalunas.cz tabulku, termíny a výsledky mužů. Mládež stahuje nastroje/tydenni-aktualizace.ps1 z počítače, is.fotbal.cz GitHub nepustí.
 # uloží je do sk-cervenka/assets/data.js a nasadí web na GitHub Pages. Nasadí ho i po každém tvém pushi.
 # Ručně jde spustit v záložce Actions → „Tabulka a nasazení webu“ → Run workflow.
 # Se zaškrtnutým „Jen vyzkoušet“ data jen stáhne a vypíše, nic neuloží ani nenasadí.
@@ -44,7 +44,7 @@ jobs:
         if: github.event_name != 'push'
         # když některý zdroj nejde, web se nasadí s posledními platnými daty a na konci se ohlásí chyba
         continue-on-error: true
-        run: node nastroje/aktualizovat-tabulku.mjs ${{ inputs.zkouska && '--zkouska' || '' }}
+        run: node nastroje/aktualizovat-tabulku.mjs --bez-mladeze ${{ inputs.zkouska && '--zkouska' || '' }}
 
       - name: Uložit změny dat
         if: github.event_name != 'push' && !inputs.zkouska

@@ -256,16 +256,15 @@
   function renderPartneri() {
     const cena = c => (c != null && String(c).trim() ? esc(String(c).trim()) : 'Cena na dotaz');
     const txt = s => esc(s).replace(/(^|\s)(\p{Lu})-(?=\p{L})/gu, '$1$2‑');   // "A-mužstva" se nezlomí za pomlčkou
-    // pruh pod úvodem: loga šedá, při najetí barevná; volná místa doplní zástupná pole
-    const loga = $('[data-pruh-loga]');
-    if (loga) {
-      const list = (Array.isArray(PARTNERI.loga) ? PARTNERI.loga : []).filter(l => l && l.soubor);
-      const volna = Math.max(0, (PARTNERI.pocetPolicek || 4) - list.length);
+    // loga na úvodní fotce a v pruhu pod brankou: šedá, při najetí barevná; volná místa doplní zástupná pole
+    const list = (Array.isArray(PARTNERI.loga) ? PARTNERI.loga : []).filter(l => l && l.soubor);
+    const volna = Math.max(0, (PARTNERI.pocetPolicek || 4) - list.length);
+    $$('[data-pruh-loga]').forEach(loga => {
       loga.innerHTML = list.map(l => {
         const img = `<img src="${esc(l.soubor)}" alt="${esc(l.nazev || 'Logo partnera')}" loading="lazy" decoding="async">`;
         return `<li class="logo">${l.web ? `<a href="${esc(l.web)}" target="_blank" rel="noopener" aria-label="${esc((l.nazev || 'Web partnera') + ' (otevře se v nové záložce)')}">${img}</a>` : img}</li>`;
       }).join('') + '<li class="logo logo-ph">Místo pro vaše logo</li>'.repeat(volna);
-    }
+    });
     const bal = $('[data-balicky]');
     if (bal) {
       bal.innerHTML = (PARTNERI.balicky || []).map(b => `<article class="balicek${b.zvyraznit ? ' is-top' : ''}">` +
