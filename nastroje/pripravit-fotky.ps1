@@ -108,6 +108,12 @@ function Get-Popis([string]$name, $datum) {
   return $t
 }
 
+# Galerie má záložky Fotbal a Akce. Fotbal se pozná podle slov v názvu souboru, ostatní fotky patří do Akcí.
+function Get-Kategorie([string]$name) {
+  if ($name -match 'zápas|nástup|muži|mládež|hráč|hřiště sk|tribuna|sigi|80 let') { return 'fotbal' }
+  return 'akce'
+}
+
 if ($soubory.Count -eq 0) {
   Write-Host "Ve složce $Zdroj zatím nejsou žádné fotky."
 }
@@ -155,6 +161,7 @@ foreach ($x in $poradi) {
       nw     = $bmpMala.PixelWidth
       nh     = $bmpMala.PixelHeight
       popis  = (Get-Popis $f.Name $x.Foto.Datum)
+      kategorie = (Get-Kategorie $f.Name)
     })
     Write-Host ("  hotovo  {0}  ({1} x {2})" -f $f.Name, $bmpVelka.PixelWidth, $bmpVelka.PixelHeight)
   } catch {

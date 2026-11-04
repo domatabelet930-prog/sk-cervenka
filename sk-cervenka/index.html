@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SK Červenka | Fotbal na Hané od roku 1945</title>
-<meta name="description" content="Fotbalový klub SK Červenka u Litovle. Zápasy a tabulka okresního přeboru, historie od roku 1945, týmy, galerie a kontakt.">
+<meta name="description" content="Fotbalový klub SK Červenka u Litovle. Zápasy a tabulky všech kategorií, historie od roku 1945, akce, galerie a kontakt.">
 <meta name="theme-color" content="#0d2618">
 <!-- DEPLOY STEP: až bude web online, doplnit do og:url a og:image plnou adresu webu (https://...) -->
 <meta property="og:type" content="website">
@@ -76,18 +76,16 @@
     <nav class="nav-links" aria-label="Hlavní menu">
       <a href="#zapasy">Zápasy</a>
       <a href="#klub">Klub</a>
-      <a href="#tymy">Týmy</a>
-      <a href="#mladez">Mládež</a>
+      <a href="#akce">Akce</a>
       <a href="#galerie">Galerie</a>
-      <a href="#areal">Areál</a>
+      <a href="#areal">Rozvoj</a>
       <a href="#partneri">Partneři</a>
       <a href="#pridej-se">Kontakt</a>
     </nav>
     <div class="nav-social">
-      <a class="soc" href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook" aria-label="SK Červenka na Facebooku (otevře se v nové záložce)" title="Facebook"><svg aria-hidden="true"><use href="#ico-fb"/></svg></a>
-      <a class="soc" href="#" target="_blank" rel="noopener" data-social="instagram" aria-label="SK Červenka na Instagramu (otevře se v nové záložce)" title="Instagram" hidden><svg aria-hidden="true"><use href="#ico-ig"/></svg></a>
+      <a class="soc" href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook" aria-label="SK Červenka na Facebooku (otevře se v nové záložce)"><svg aria-hidden="true"><use href="#ico-fb"/></svg><span>Facebook</span></a>
+      <a class="soc" href="https://www.instagram.com/sk.cervenka/" target="_blank" rel="noopener" data-social="instagram" aria-label="SK Červenka na Instagramu (otevře se v nové záložce)"><svg aria-hidden="true"><use href="#ico-ig"/></svg><span>Instagram</span></a>
     </div>
-    <a class="btn btn-accent btn-s nav-cta" href="#pridej-se">Přidejte se</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>
       <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
     </button>
@@ -96,14 +94,12 @@
     <nav aria-label="Menu pro mobil">
       <a href="#zapasy">Zápasy</a>
       <a href="#klub">Klub</a>
-      <a href="#tymy">Týmy</a>
-      <a href="#mladez">Mládež</a>
+      <a href="#akce">Akce</a>
       <a href="#galerie">Galerie</a>
-      <a href="#areal">Areál</a>
+      <a href="#areal">Rozvoj</a>
       <a href="#partneri">Partneři</a>
       <a href="#pridej-se">Kontakt</a>
     </nav>
-    <a class="btn btn-accent" href="#pridej-se">Přidejte se</a>
   </div>
 </header>
 
@@ -137,7 +133,6 @@
             <span class="chip-v" data-next-home-text>Rozpis zápasů</span>
           </a>
           <div class="ctas">
-            <a class="btn btn-accent" href="#pridej-se">Přidejte se</a>
             <a class="btn btn-ghost" href="#zapasy">Zápasy a tabulka</a>
           </div>
         </div>
@@ -151,24 +146,13 @@
   </section>
 
   <!-- ÚVOD, varianta "foto" (přepíná se v HERO_VARIANT v hlavičce stránky).
-       Zatím zástupná fotka hřiště z galerie; až bude fotka týmu, stačí změnit src. -->
-  <section class="hero-foto" id="uvod-foto" aria-label="Úvod">
+       Přes fotku jdou další zápasy, skládá je app.js. Až bude jiná fotka, stačí změnit src. -->
+  <section class="hero-foto" id="uvod-foto" aria-labelledby="uvod-h">
     <img class="hf-img" src="assets/galerie/17-hriste-sk-cervenka.jpg" width="1920" height="1080" alt="" fetchpriority="high">
     <div class="hf-scrim" aria-hidden="true"></div>
+    <h1 class="sr-only" id="uvod-h">SK Červenka</h1>
     <div class="wrap hf-in">
-      <p class="kicker">Sportovní klub · Červenka u Litovle</p>
-      <h1 class="h-hero">SK Červenka</h1>
-      <p class="lede">Fotbal na Hané od roku 1945. Muži hrají okresní přebor Olomoucka, přijďte fandit.</p>
-      <div class="hf-row">
-        <div class="ctas">
-          <a class="btn btn-accent" href="#pridej-se">Přidejte se</a>
-          <a class="btn btn-ghost" href="#zapasy">Zápasy a tabulka</a>
-        </div>
-        <a class="chip" href="#zapasy" data-next-home>
-          <span class="chip-k">Další zápas doma</span>
-          <span class="chip-v" data-next-home-text>Rozpis zápasů</span>
-        </a>
-      </div>
+      <div class="hf-zapasy" data-uvod-zapasy></div>
     </div>
   </section>
 
@@ -179,7 +163,7 @@
       <ul class="pruh-loga" data-pruh-loga>
         <li class="logo logo-ph">Místo pro vaše logo</li><li class="logo logo-ph">Místo pro vaše logo</li><li class="logo logo-ph">Místo pro vaše logo</li><li class="logo logo-ph">Místo pro vaše logo</li>
       </ul>
-      <a class="more" href="#pridej-se" data-zajem="partnerstvi">Staňte se partnerem</a>
+      <a class="more" href="#pridej-se" data-zprava="Mám zájem o partnerství klubu.">Staňte se partnerem</a>
     </div>
   </aside>
 
@@ -194,51 +178,12 @@
         <p class="stamp" data-updated></p>
       </header>
 
-      <div class="board">
-        <article class="next" data-reveal aria-labelledby="next-h">
-          <p class="next-k"><span class="pulse" aria-hidden="true"></span><span id="next-h">Další zápas</span><span class="next-when" data-next-when></span></p>
-          <div class="plates" data-next></div>
-          <p class="next-meta" data-next-meta></p>
-          <p class="next-home" data-next-home-line hidden></p>
-        </article>
-
-        <article class="results" data-reveal aria-labelledby="res-h">
-          <h3 class="h3" id="res-h">Poslední výsledky</h3>
-          <ol class="res" data-results></ol>
-        </article>
-
-        <aside class="table-card" data-reveal aria-labelledby="tab-h">
-          <h3 class="h3" id="tab-h">Tabulka</h3>
-          <div class="tab-wrap">
-            <table class="tab">
-              <thead><tr><th scope="col"><abbr title="Pořadí">#</abbr></th><th scope="col">Tým</th><th scope="col"><abbr title="Zápasy">Z</abbr></th><th scope="col" class="tab-score">Skóre</th><th scope="col"><abbr title="Body">B</abbr></th></tr></thead>
-              <tbody data-table></tbody>
-            </table>
-          </div>
-        </aside>
-      </div>
-
-      <dl class="stats" data-reveal data-stats></dl>
-
-      <details class="season" data-reveal>
-        <summary><span>Celý rozpis sezóny</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="season-in" data-schedule></div>
-      </details>
+      <!-- záložka pro každou kategorii, obsah skládá app.js ze SEZONA a MLADEZ v assets/data.js -->
+      <div class="zalozky" role="tablist" aria-label="Kategorie" data-kat-taby data-reveal></div>
+      <div data-kat-panely></div>
 
       <p class="src"><a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da" target="_blank" rel="noopener" data-link-fotbalcz>Oficiální výsledky na fotbal.cz</a></p>
       <noscript><p class="src">Rozpis a výsledky najdete na <a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da">fotbal.cz</a>.</p></noscript>
-
-      <!-- ZÁPASY MLÁDEŽE: rozpisy z window.MLADEZ v assets/data.js -->
-      <section class="mz" id="zapasy-mladez" aria-labelledby="mz-h">
-        <header class="sec-head sec-head-row" data-reveal>
-          <div>
-            <p class="kicker">Žáci a benjamínci</p>
-            <h3 class="h2 mz-h" id="mz-h">Zápasy mládeže</h3>
-          </div>
-          <p class="stamp" data-mladez-stav></p>
-        </header>
-        <div class="mz-grid" data-mladez-zapasy data-reveal></div>
-      </section>
     </div>
   </section>
 
@@ -250,8 +195,8 @@
       <div class="klub-intro">
         <div class="klub-sticky" data-reveal>
           <p class="kicker">Od roku 1945</p>
-          <h2 class="h2" id="klub-h">Osmdesát let. Pořád hrajeme.</h2>
-          <p class="lead">Červenka leží na Hané, dva kilometry od Litovle. Fotbal se tu hraje od roku 1945 a kolem hřiště se za tu dobu vystřídaly celé generace hráčů i fanoušků.</p>
+          <h2 class="h2" id="klub-h">80 let</h2>
+          <p class="lead">Historie klubu: od amatérského fotbalu téměř na poli ke klubu s moderním zázemím a širokou hráčskou základnou.</p>
           <figure class="slot slot-wide" data-slot="historie">
             <div class="ph ph-history" aria-hidden="true">
               <svg viewBox="0 0 400 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="40" y="30" width="320" height="190" rx="4"/><path d="M40 190 130 120l60 50 50-40 120 80"/><circle cx="290" cy="80" r="18"/></g></svg>
@@ -302,50 +247,14 @@
     </div>
   </section>
 
-  <!-- TÝMY -->
-  <section class="sec tymy" id="tymy" aria-labelledby="tymy-h">
+  <!-- AKCE: karty se skládají z window.AKCE v assets/data.js -->
+  <section class="sec akce" id="akce" aria-labelledby="akce-h">
     <div class="wrap">
       <header class="sec-head" data-reveal>
-        <p class="kicker">Kdo za Červenku kope</p>
-        <h2 class="h2" id="tymy-h">Týmy</h2>
+        <p class="kicker">Co u nás pořádáme</p>
+        <h2 class="h2" id="akce-h">Akce</h2>
       </header>
-      <div class="cards cards-2" data-reveal>
-        <article class="card">
-          <figure class="slot" data-slot="muzi">
-            <div class="ph" aria-hidden="true">
-              <svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M70 40 52 48 28 72l20 22 14-12v86h76V82l14 12 20-22-24-24-18-8c-4 12-16 18-30 18S74 52 70 40Z"/><circle cx="120" cy="94" r="8"/><path d="M62 150h76"/></g></svg>
-            </div>
-          </figure>
-          <div class="card-b">
-            <h3 class="h3">Muži</h3>
-            <p>Okresní přebor Olomoucka. Zápasy hrajeme o víkendech, doma i venku.</p>
-            <a class="more" href="#zapasy">Rozpis zápasů</a>
-          </div>
-        </article>
-        <article class="card">
-          <figure class="slot" data-slot="fanousci">
-            <div class="ph" aria-hidden="true">
-              <svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M40 160V40"/><path d="M40 44c30-12 50 12 80 0s40-6 50 0v60c-10-6-20-12-50 0s-50-12-80 0"/><path d="M78 160v-22M116 160v-30M154 160v-18"/></g></svg>
-            </div>
-          </figure>
-          <div class="card-b">
-            <h3 class="h3">Fanoušci</h3>
-            <p>Bez nich to nejde. Na derby přijde plno lidí a v okrese umíme i pořádné choreo.</p>
-            <a class="more" href="#zapasy">Kdy hrajeme doma</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- MLÁDEŽ: karty kategorií se skládají z window.MLADEZ v assets/data.js -->
-      <section class="mladez" id="mladez" aria-labelledby="mladez-h">
-        <header class="mladez-head" data-reveal>
-          <p class="kicker">Fotbal pro děti</p>
-          <h3 class="h2 mladez-h" id="mladez-h">Mládež</h3>
-          <p class="lead">Děti z Červenky a okolí u nás hrají v kategoriích podle věku. Najděte tu svou, přihlaste dítě a domluvíme první trénink.</p>
-        </header>
-        <div class="cards kat-cards" data-mladez data-reveal></div>
-        <noscript><p class="lead">Chcete přihlásit dítě? Napište nám přes kontakt níže.</p></noscript>
-      </section>
+      <div class="cards cards-4" data-akce data-reveal></div>
     </div>
   </section>
 
@@ -359,7 +268,12 @@
         </div>
         <p class="sec-sub">Zápasy, oslavy a všechno kolem nich.</p>
       </header>
-      <div class="gal" data-gallery></div>
+      <div class="zalozky zalozky-svetle" role="tablist" aria-label="Druh fotek" data-gal-taby data-reveal>
+        <button class="zalozka" type="button" role="tab" id="zal-g-fotbal" data-z="fotbal" aria-controls="gal-fotbal" aria-selected="true">Fotbal</button>
+        <button class="zalozka" type="button" role="tab" id="zal-g-akce" data-z="akce" aria-controls="gal-akce" aria-selected="false" tabindex="-1">Akce</button>
+      </div>
+      <div class="gal" id="gal-fotbal" role="tabpanel" aria-labelledby="zal-g-fotbal" data-gallery="fotbal"></div>
+      <div class="gal" id="gal-akce" role="tabpanel" aria-labelledby="zal-g-akce" data-gallery="akce" hidden></div>
     </div>
   </section>
 
@@ -369,12 +283,12 @@
       <header class="sec-head sec-head-row" data-reveal>
         <div>
           <p class="kicker">Náš areál</p>
-          <h2 class="h2" id="areal-h">Kus po kusu nový areál</h2>
+          <h2 class="h2" id="areal-h">Rozvoj SK Červenka</h2>
         </div>
         <p class="sec-sub">Za posledních pár let se v areálu změnilo skoro všechno. Tady je, co se opravilo a postavilo.</p>
       </header>
       <div class="projekty" data-areal data-reveal></div>
-      <p class="areal-dalsi" data-reveal>Další opravy čekají. <a href="#partneri">Pomozte nám s nimi.</a></p>
+      <p class="areal-dalsi" data-reveal>Na dalším rozvoji pracujeme.</p>
     </div>
   </section>
 
@@ -384,7 +298,7 @@
       <header class="sec-head" data-reveal>
         <p class="kicker">Podpora klubu</p>
         <h2 class="h2" id="partneri-h">Partneři klubu</h2>
-        <p class="lead">Po povodni v září 2024 jsme šatny i hřiště dávali znovu dohromady. S podporou partnerů opravíme zbytek zázemí a dětem z mládeže dáme lepší podmínky k fotbalu.</p>
+        <p class="lead">Neustále rozvíjíme areál klubu a podmínky pro hráče a mládež. I vy se můžete stát partnerem klubu.</p>
       </header>
 
       <h3 class="h3 balicky-h">Balíčky pro partnery</h3>
@@ -394,7 +308,7 @@
       <ul class="doplnky" aria-labelledby="doplnky-h" data-doplnky data-reveal></ul>
 
       <div class="partneri-cta" data-reveal>
-        <a class="btn btn-accent btn-l" href="#pridej-se" data-zajem="partnerstvi">Chci se stát partnerem</a>
+        <a class="btn btn-accent btn-l" href="#pridej-se" data-zprava="Mám zájem o partnerství klubu.">Chci se stát partnerem</a>
         <p>Napište nám a domluvíme, co dává smysl vaší firmě.</p>
       </div>
       <noscript><p class="lead">O možnostech partnerství nám napište přes kontakt níže.</p></noscript>
@@ -405,15 +319,15 @@
   <section class="sec sec-dark kontakt" id="pridej-se" aria-labelledby="kontakt-h">
     <div class="wrap kontakt-grid">
       <div class="kontakt-copy" data-reveal>
-        <p class="kicker">Kontakt</p>
-        <h2 class="h2" id="kontakt-h">Přidejte se k nám.</h2>
+        <p class="kicker">Napište nám</p>
+        <h2 class="h2" id="kontakt-h">Kontakt</h2>
         <p class="lead">Hledáme hráče, děti do mládeže, lidi, kteří pomůžou u zápasů, i firmy, které chtějí podpořit fotbal ve vsi. Napište nám, co vás láká.</p>
         <dl class="contacts" data-contacts>
           <div><dt>Adresa</dt><dd data-c-adresa>SK Červenka, Jižní 24, 784 01 Červenka</dd><dd><a href="https://mapy.cz/zakladni?q=SK%20%C4%8Cervenka%20fotbalov%C3%A9%20h%C5%99i%C5%A1t%C4%9B" target="_blank" rel="noopener" data-c-mapa>Navigovat na hřiště</a></dd></div>
           <div data-c-tel-row><dt>Telefon</dt><dd><a href="tel:+420605272347" data-c-tel>+420 605 272 347</a></dd></div>
           <div><dt>Sledujte nás</dt><dd class="soc-list">
             <a class="soc soc-l" href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook"><svg aria-hidden="true"><use href="#ico-fb"/></svg><span>Facebook</span></a>
-            <a class="soc soc-l" href="#" target="_blank" rel="noopener" data-social="instagram" hidden><svg aria-hidden="true"><use href="#ico-ig"/></svg><span>Instagram</span></a>
+            <a class="soc soc-l" href="https://www.instagram.com/sk.cervenka/" target="_blank" rel="noopener" data-social="instagram"><svg aria-hidden="true"><use href="#ico-ig"/></svg><span>Instagram</span></a>
           </dd></div>
         </dl>
       </div>
@@ -429,13 +343,6 @@
           <input id="f-kontakt" name="kontakt" type="text" autocomplete="email" placeholder="jan@email.cz nebo 777 123 456" required>
           <p class="err" id="e-kontakt" hidden>Napište nám e-mail nebo telefon, ať se můžeme ozvat.</p>
         </div>
-        <fieldset class="field chips">
-          <legend>Co vás zajímá?</legend>
-          <label><input type="checkbox" name="zajem" value="Chci hrát"><span>Chci hrát</span></label>
-          <label><input type="checkbox" name="zajem" value="Přihlásit dítě" data-zajem-volba="dite"><span>Přihlásit dítě</span></label>
-          <label><input type="checkbox" name="zajem" value="Pomáhat u zápasů"><span>Pomáhat u zápasů</span></label>
-          <label><input type="checkbox" name="zajem" value="Partnerství" data-zajem-volba="partnerstvi"><span>Partnerství</span></label>
-        </fieldset>
         <div class="field">
           <label for="f-zprava">Zpráva <span class="opt">(nepovinné)</span></label>
           <textarea id="f-zprava" name="zprava" rows="4" placeholder="Pár slov o sobě, věk dítěte, cokoliv."></textarea>
@@ -473,7 +380,7 @@
       <p class="foot-k">Odkazy</p>
       <p class="soc-list">
         <a class="soc soc-l" href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook"><svg aria-hidden="true"><use href="#ico-fb"/></svg><span>Facebook</span></a>
-        <a class="soc soc-l" href="#" target="_blank" rel="noopener" data-social="instagram" hidden><svg aria-hidden="true"><use href="#ico-ig"/></svg><span>Instagram</span></a>
+        <a class="soc soc-l" href="https://www.instagram.com/sk.cervenka/" target="_blank" rel="noopener" data-social="instagram"><svg aria-hidden="true"><use href="#ico-ig"/></svg><span>Instagram</span></a>
       </p>
       <p><a href="https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da" target="_blank" rel="noopener">Výsledky na fotbal.cz</a></p>
     </div>

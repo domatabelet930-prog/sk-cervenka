@@ -1,4 +1,4 @@
-# Každé pondělí ráno stáhne z fotbalunas.cz tabulku, termíny a výsledky Červenky a střelce,
+# Každé pondělí ráno stáhne z fotbalunas.cz tabulku, termíny a výsledky mužů, z is.fotbal.cz zápasy a tabulky mládeže,
 # uloží je do sk-cervenka/assets/data.js a nasadí web na GitHub Pages. Nasadí ho i po každém tvém pushi.
 # Ručně jde spustit v záložce Actions → „Tabulka a nasazení webu“ → Run workflow.
 # Se zaškrtnutým „Jen vyzkoušet“ data jen stáhne a vypíše, nic neuloží ani nenasadí.
@@ -39,10 +39,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Stáhnout data z fotbalunas.cz
+      - name: Stáhnout data
         id: data
         if: github.event_name != 'push'
-        # když fotbalunas.cz nejde, web se nasadí s posledními platnými daty a na konci se ohlásí chyba
+        # když některý zdroj nejde, web se nasadí s posledními platnými daty a na konci se ohlásí chyba
         continue-on-error: true
         run: node nastroje/aktualizovat-tabulku.mjs ${{ inputs.zkouska && '--zkouska' || '' }}
 
@@ -74,5 +74,5 @@ jobs:
       - name: Ohlásit chybu stažení
         if: steps.data.outcome == 'failure'
         run: |
-          echo "::error::Část dat z fotbalunas.cz se nepodařilo stáhnout. Web běží s posledními platnými daty, podrobnosti jsou v kroku Stáhnout data."
+          echo "::error::Část dat se nepodařilo stáhnout. Web běží s posledními platnými daty, podrobnosti jsou v kroku Stáhnout data."
           exit 1

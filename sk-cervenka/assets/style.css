@@ -66,7 +66,6 @@ main:focus{outline:none}
 .btn-accent:hover{--bg:var(--accent-hover);transform:translateY(-1px);box-shadow:0 10px 30px rgba(207,59,37,.36)}
 .btn-ghost{--fg:var(--chalk);border-color:rgba(241,244,236,.58)}
 .btn-ghost:hover{border-color:var(--chalk);background:rgba(241,244,236,.08)}
-.btn-s{min-height:40px;padding:0 18px;font-size:14.5px}
 .btn-l{min-height:56px;padding:0 32px;font-size:17px}
 
 /* ---------- prostředí v pozadí ---------- */
@@ -98,20 +97,19 @@ main:focus{outline:none}
 .menu[hidden]{display:none}
 .menu nav{display:flex;flex-direction:column}
 .menu nav a{font:900 42px/1.15 var(--f-display);text-transform:uppercase;text-decoration:none;color:var(--chalk);padding:10px 0;border-bottom:1px solid rgba(185,200,188,.14)}
-.menu .btn{align-self:flex-start}
 /* sociální sítě: ikony v hlavičce, v kontaktu a v patičce */
 .soc{display:inline-flex;align-items:center;justify-content:center;gap:9px;color:inherit;text-decoration:none}
 .soc svg{width:22px;height:22px;flex:none}
-.nav-social{display:flex;gap:2px;margin-inline:-8px -4px}
-.nav-social .soc{width:40px;height:40px;border-radius:50%;opacity:.84;transition:opacity .25s,background-color .25s}
-.nav-social .soc:hover{opacity:1;background:rgba(241,244,236,.1)}
+.nav-social{display:flex;gap:8px}
+.nav-social .soc{min-height:40px;padding:0 14px 0 11px;border-radius:999px;background:var(--chalk);color:var(--pitch-900);font:700 14.5px/1 var(--f-body);transition:background-color .25s}
+.nav-social .soc:hover{background:#fff}
 .soc-list{display:flex;flex-wrap:wrap;gap:10px}
 .soc-l{min-height:44px;padding:0 18px 0 13px;border:1.5px solid rgba(241,244,236,.38);border-radius:999px;font-weight:700;transition:border-color .25s,background-color .25s}
 .soc-l:hover{border-color:var(--chalk);background:rgba(241,244,236,.08)}
 .brand-t{white-space:nowrap}
 @media (max-width:1180px){.nav-in{gap:20px}.nav-links{gap:18px}}
-@media (max-width:1100px){.nav-cta{display:none}.nav-links{gap:14px}}
-@media (max-width:920px){.nav-links,.nav-cta{display:none}.menu-btn{display:inline-block}.nav-in{gap:10px}}
+@media (max-width:1100px){.nav-links{gap:14px}.nav-social .soc{width:40px;padding:0;border-radius:50%}.nav-social .soc span{display:none}}
+@media (max-width:920px){.nav-links{display:none}.menu-btn{display:inline-block}.nav-in{gap:10px}}
 @media (max-width:420px){.brand-t{font-size:20px}.brand-znak{width:40px;height:40px}}
 
 /* ---------- úvod (hero) ---------- */
@@ -189,13 +187,18 @@ html:not(.js) .cue{display:none}
 .hero-foto{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;background:var(--pitch-950);color:var(--chalk);overflow:hidden;isolation:isolate}
 .hf-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
 .hf-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,12,8,.62) 0%,rgba(4,12,8,.12) 24%,rgba(4,12,8,.2) 48%,rgba(4,12,8,.86) 100%),radial-gradient(ellipse 70% 60% at 15% 85%,rgba(4,12,8,.45),rgba(4,12,8,0) 70%)}
-.hf-in{padding-top:calc(var(--nav-h) + 48px);padding-bottom:clamp(32px,7vh,72px);text-shadow:var(--tshadow)}
-.hero-foto .kicker{color:var(--chalk-2);text-shadow:0 1px 3px rgba(3,10,6,.9)}
-.hero-foto .h-hero{font-size:clamp(58px,min(13vw,19vh),190px)}
-.hero-foto .lede{max-width:36ch}
-.hf-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:clamp(26px,4.5vh,44px)}
-.hf-row .btn,.hf-row .chip{text-shadow:none}
-@media (max-width: 720px){.hf-row{flex-direction:column;align-items:stretch}}
+.hf-in{padding-top:calc(var(--nav-h) + 24px);padding-bottom:clamp(24px,6vh,64px)}
+.hf-zapasy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.hz{display:flex;flex-direction:column;gap:12px;padding:clamp(16px,1.8vw,24px);border-radius:var(--radius);background:rgba(6,18,11,.74);border:1px solid rgba(185,200,188,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--chalk);text-decoration:none;container-type:inline-size;transition:border-color .3s,background-color .3s}
+.hz:hover{border-color:rgba(241,244,236,.7);background:rgba(6,18,11,.86)}
+.hz-k{display:flex;justify-content:space-between;gap:12px;font:500 12.5px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-2)}
+.hz-when{color:var(--chalk);letter-spacing:.08em;text-align:right}
+.hz-in{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.hz-tymy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hz-n{display:flex;align-items:center;gap:.22em;font:900 clamp(26px,10cqi,42px)/1 var(--f-display);text-transform:uppercase}
+.hz .plate-time{flex:none;font-size:34px;min-width:98px}
+.hz-m{font:500 12.5px/1.4 var(--f-mono);letter-spacing:.08em;color:var(--chalk-2)}
+@media (max-width:900px){.hf-zapasy{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- pruh partnerů pod úvodem ---------- */
 .pruh{position:relative;background:var(--panel);border-bottom:1px solid var(--line);padding-block:clamp(22px,3vw,34px)}
@@ -280,11 +283,6 @@ html:not(.js) .cue{display:none}
 .tab tr.is-us th:first-child,.tab tr.is-us td:first-child{border-radius:8px 0 0 8px}
 .tab tr.is-us td:last-child{border-radius:0 8px 8px 0}
 .tab tr.is-us+tr th,.tab tr.is-us+tr td{border-top-color:transparent}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:clamp(28px,4vw,48px) 0 0;padding:0}
-.stats div{padding:6px clamp(14px,2vw,28px) 6px 0;border-left:1px solid rgba(185,200,188,.16);padding-left:clamp(14px,2vw,28px)}
-.stats div:first-child{border-left:0;padding-left:0}
-.stats dt{font:900 clamp(52px,6.4vw,92px)/.9 var(--f-display);font-variant-numeric:tabular-nums}
-.stats dd{margin:8px 0 0;color:var(--chalk-2);font-size:15px;line-height:1.4;max-width:24ch}
 .season{margin-top:clamp(32px,4vw,52px);border:1px solid rgba(185,200,188,.17);border-radius:var(--radius);background:rgba(17,48,30,.4)}
 .season summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:0 clamp(18px,2.4vw,28px);cursor:pointer;list-style:none;font:800 22px/1 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
 .season summary::-webkit-details-marker{display:none}
@@ -304,36 +302,23 @@ html:not(.js) .cue{display:none}
 .s-row .us{font-weight:700;color:var(--chalk)}
 .s-row.is-next{background:rgba(241,244,236,.07);border-radius:8px;border-top-color:transparent}
 .src{margin:24px 0 0;font-size:15px;color:var(--chalk-2)}
-/* zápasy mládeže: stejné karty jako u mužů */
-.mz{margin-top:clamp(72px,9vw,120px);padding-top:clamp(48px,6vw,72px);border-top:1px solid rgba(185,200,188,.16)}
-.mz .mz-h{font-size:clamp(40px,5vw,72px)}
-.mz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,24px);align-items:start}
-.mz-kat{grid-area:auto}
-.mz-kat .next-k{margin-bottom:18px}
-.mz-kat .plates{grid-template-columns:minmax(0,1fr);gap:12px}
-.mz-kat .team+.vs+.team{align-items:flex-start;text-align:left}
-.mz-kat .team+.vs+.team .team-n{justify-content:flex-start}
-.mz-kat .vs{flex-direction:row;align-items:center;gap:14px}
-.mz-kat .team-n{font-size:clamp(24px,9cqi,38px)}
-.mz-kat .plate-time{font-size:28px;min-width:88px;height:52px}
-.mz-kat .next-meta{margin-top:18px;padding-top:14px}
-.mz-turnaj{display:flex;align-items:center;gap:16px;margin:0}
-.mz-turnaj>span:last-child{display:flex;flex-direction:column;gap:6px;min-width:0}
-.mz-turnaj-s{font:800 clamp(20px,6.4cqi,26px)/1.05 var(--f-display);text-transform:uppercase}
-.mz-soutez{margin:12px 0 0;font:500 12px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-3)}
-.mz-season{margin-top:18px;background:rgba(9,27,17,.35)}
-.mz-season summary{min-height:52px;font-size:19px}
-.mz-list{list-style:none;margin:0;padding:0 clamp(14px,2vw,20px) clamp(10px,1.6vw,16px)}
-.mz-list .s-row{grid-template-columns:minmax(0,1fr);row-gap:2px}
-.mz-list .s-row.is-played{opacity:.55}
-
-.mz-list .s-t{color:var(--chalk)}
-@media (max-width:1100px){.mz-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:700px){.mz-grid{grid-template-columns:minmax(0,1fr)}}
+/* záložky: kategorie u zápasů, druhy fotek v galerii */
+.zalozky{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 clamp(20px,2.6vw,32px)}
+.zalozka{min-height:46px;padding:0 20px;border:1.5px solid rgba(241,244,236,.38);border-radius:999px;background:none;color:var(--chalk);font:700 15px/1 var(--f-body);cursor:pointer;transition:background-color .25s,border-color .25s,color .25s}
+.zalozka:hover{border-color:var(--chalk)}
+.zalozka[aria-selected="true"]{background:var(--chalk);border-color:var(--chalk);color:var(--pitch-900)}
+.zalozky-svetle .zalozka{border-color:var(--line-strong);color:var(--ink)}
+.zalozky-svetle .zalozka:hover{border-color:var(--ink)}
+.zalozky-svetle .zalozka[aria-selected="true"]{background:var(--pitch-900);border-color:var(--pitch-900);color:var(--chalk)}
+.board-1{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"next results"}
+.r-turnaj{grid-template-columns:minmax(0,1fr)}
+.r-turnaj .r-m{font:400 14.5px/1.45 var(--f-body);letter-spacing:0;color:var(--chalk-2)}
+.s-turnaj{grid-template-columns:13em minmax(0,1fr)}
+.s-t{color:var(--chalk)}
+.kat-vyzva{margin:clamp(24px,3vw,36px) 0 0;color:var(--chalk-2);font-size:clamp(17px,1.4vw,20px)}
+.kat-vyzva a{color:var(--chalk);font-weight:700}
 @media (max-width:980px){
   .board{grid-template-columns:minmax(0,1fr);grid-template-areas:"next" "results" "table"}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
-  .stats div:nth-child(3){border-left:0;padding-left:0}
   .season-in{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:560px){
@@ -343,6 +328,7 @@ html:not(.js) .cue{display:none}
   .vs{flex-direction:row;align-items:center;gap:14px}
   .tab .tab-score{display:none}
   .s-row{grid-template-columns:minmax(0,1fr) 4em minmax(0,1fr);row-gap:2px}
+  .s-turnaj{grid-template-columns:minmax(0,1fr)}
   .s-d{grid-column:1/-1}
 }
 
@@ -378,15 +364,12 @@ html:not(.js) .cue{display:none}
 .tl-h{font:800 22px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.04em;margin:.4em 0 .35em}
 .tl p:not(.tl-year){max-width:50ch;color:var(--ink-2);margin:0}
 .tl .tl-year+p{margin-top:12px}
-.tl-year.tl-doplnit{display:inline-block;padding:6px 12px 4px;border:2px dashed #b7c2b6;border-radius:8px;background:#e2e7df;color:#536458;font-size:clamp(28px,3vw,40px)}
 .tl-foto{position:relative;max-width:400px;aspect-ratio:3/2;margin:18px 0 0;border-radius:12px;overflow:hidden;background:var(--pitch-800)}
 .tl-foto .ph::after{content:attr(data-label)}
 .tl-foto-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
 .tl-foto-btn img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .9s var(--ease-out)}
 .tl-foto-btn:hover img{transform:scale(1.04)}
 .tl-foto-btn:focus-visible{outline-offset:-3px;border-radius:12px}
-/* zástupný text, dokud klub nedodá údaje */
-.doplnit{display:inline-block;padding:1px 8px;border:1.5px dashed var(--line-strong);border-radius:6px;background:#e2e7df;color:#536458;font:700 12px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
 @media (max-width:900px){
   .klub-grid{grid-template-columns:minmax(0,1fr)}
   .klub-sticky{position:static}
@@ -394,20 +377,8 @@ html:not(.js) .cue{display:none}
 
 /* ---------- týmy ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
-.cards-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.cards-2 .card .slot{aspect-ratio:16/9}
-.kat .slot{aspect-ratio:21/9}
-@media (max-width:1180px){.kat-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.mladez{margin-top:clamp(72px,9vw,120px)}
-.mladez-head{margin-bottom:clamp(28px,4vw,48px)}
-.mladez .mladez-h{font-size:clamp(40px,5vw,72px)}
-.kat-info{display:grid;margin:0 0 26px}
-.kat-info>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
-.kat-info>div:first-child{border-top:0;padding-top:0}
-.kat-info dt{font:500 11.5px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
-.kat-info dd{margin:0;font-weight:500}
-.kat-info a{font-weight:700}
-.kat-btn{margin-top:auto;align-self:flex-start}
+.cards-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.cards-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
 .card:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(16,36,26,.13)}
 .card .slot{aspect-ratio:4/3}
@@ -455,7 +426,6 @@ html:not(.js) .cue{display:none}
 .projekt-n{font:800 clamp(22px,1.9vw,27px)/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.02em;margin:0 0 .4em}
 .projekt-b p{margin:0;color:var(--chalk-2);font-size:16px;line-height:1.5}
 .areal-dalsi{margin:clamp(28px,3.5vw,44px) 0 0;color:var(--chalk-2);font-size:clamp(17px,1.4vw,20px)}
-.areal-dalsi a{color:var(--chalk);font-weight:700}
 @media (max-width:980px){.projekty{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.projekty{grid-template-columns:minmax(0,1fr)}}
 
@@ -509,7 +479,7 @@ html:not(.js) .cue{display:none}
 .contacts a{font-weight:700}
 .form{background:var(--panel);color:var(--ink);border-radius:22px;padding:clamp(24px,3vw,42px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
 .field{margin:0 0 22px;padding:0;border:0;min-width:0}
-.field label,.field legend{display:block;padding:0;margin:0 0 8px;font:700 15px/1.35 var(--f-body)}
+.field label{display:block;padding:0;margin:0 0 8px;font:700 15px/1.35 var(--f-body)}
 .opt{font-weight:400;color:var(--ink-2)}
 .field input[type=text],.field textarea{width:100%;padding:13px 15px;border:2px solid var(--line-strong);border-radius:11px;background:#fff;color:var(--ink);font:400 17px/1.4 var(--f-body);transition:border-color .25s,box-shadow .25s}
 .field textarea{resize:vertical;min-height:110px}
@@ -517,12 +487,6 @@ html:not(.js) .cue{display:none}
 .field input:focus-visible,.field textarea:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-muted)}
 .field.bad input{border-color:var(--accent-hover)}
 .err{margin:8px 0 0;color:var(--accent-hover);font-size:14.5px;font-weight:500}
-.chips label{position:relative;display:inline-flex;margin:0 8px 10px 0;font:inherit}
-.chips input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
-.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 17px;border:2px solid var(--line-strong);border-radius:999px;font:500 15px/1 var(--f-body);transition:background-color .25s,border-color .25s,color .25s}
-.chips input:checked+span{background:var(--pitch-900);border-color:var(--pitch-900);color:var(--chalk)}
-.chips input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
-.chips label:hover span{border-color:var(--ink)}
 .form .btn-l{width:100%}
 .form-note{margin:14px 0 0;font-size:14.5px;color:var(--ink-2);text-align:center}
 .form-done{margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(44,122,73,.12);border:1px solid rgba(44,122,73,.3);animation:fadeup .6s var(--ease-out) both}

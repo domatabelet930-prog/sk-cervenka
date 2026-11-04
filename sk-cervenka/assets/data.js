@@ -13,7 +13,7 @@ window.KLUB = {
   ico: '45213046',
   // sociální sítě: ikony v hlavičce, v kontaktu a v patičce; prázdná adresa = ikona se neukáže
   facebook: 'https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/',
-  instagram: '',                    // DOPLNIT: adresa profilu, třeba 'https://www.instagram.com/skcervenka/'
+  instagram: 'https://www.instagram.com/sk.cervenka/',
   fotbalcz: 'https://souteze.fotbal.cz/club/club/60467a7e-0594-4ed5-a2a9-4e965426a1da',
   mapa: 'https://mapy.cz/zakladni?q=SK%20%C4%8Cervenka%20fotbalov%C3%A9%20h%C5%99i%C5%A1t%C4%9B'
 };
@@ -22,7 +22,6 @@ window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
   aktualizovano: '2026-11-02',
-  strelec: { jmeno: 'Vojtěch Schulmeister', goly: 20, nejvic: true },   // nejvic: vede tabulku střelců soutěže
 
   zapasy: [
     // podzim 2026
@@ -79,112 +78,152 @@ window.SEZONA = {
   Prázdné src = místo fotky se ukáže kreslená výplň.
 */
 window.FOTKY = {
-  historie:   { src: '', alt: '' },
-  muzi:       { src: 'assets/foto/muzi.jpg',     alt: 'Muži SK Červenka před zápasem na hodech 2026' },
-  fanousci:   { src: 'assets/foto/fanousci.jpg', alt: 'Návštěvníci soutěže ve vaření gulášů na hřišti SK Červenka' },
-  starsizaci: { src: '', alt: '' },
-  mladsizaci: { src: '', alt: '' },
-  benjaminci: { src: 'assets/galerie/31-mladez-sk-cervenka-zari-2025.jpg', alt: 'Děti z mládeže SK Červenka s trenéry na hřišti, září 2025' }
+  historie: { src: '', alt: '' }
 };
 
 /*
-  Mládež: jedna položka = jedna karta v sekci Týmy.
-  Další kategorii přidáte zkopírováním celého bloku { ... }.
-  'DOPLNIT' nebo prázdný text se na webu ukáže jako zvýrazněné DOPLNIT.
-  foto: název políčka ve FOTKY výše.
-  rozpis: zápasy z kalendářů (.ics) z fotbal.cz, stav k 27. 10. 2026. doma: true = hrajeme v Července.
-  turnaje: true = soutěž se hraje na turnajích, zápasy jednoho dne se na webu spojí do jednoho řádku.
+  Akce pořádané klubem: jedna položka = jedna karta v sekci Akce.
+  foto: soubor z assets/galerie/, alt: popis fotky pro čtečky.
 */
-window.MLADEZ_AKTUALIZOVANO = '2026-10-27';   // datum, ke kterému sedí rozpisy mládeže
+window.AKCE = [
+  {
+    nazev: 'Hody',
+    popis: 'Tradiční hody na hřišti. Přípravné i mistrovské zápasy, pečené makrely a občerstvení, pouťové atrakce a v sobotu hodová zábava.',
+    foto: 'assets/galerie/02-hody-2026-vecer-na-hristi.jpg',
+    alt: 'Večer na hřišti při hodech 2026'
+  },
+  {
+    nazev: 'Gulášfest',
+    popis: 'Soutěž ve vaření gulášů na hřišti. Týmy vaří v kotlících, porota ochutnává a vybírá vítěze.',
+    foto: 'assets/galerie/14-soutez-ve-vareni-gulasu-2026-plne-hriste.jpg',
+    alt: 'Plné hřiště při soutěži ve vaření gulášů 2026'
+  },
+  {
+    nazev: 'Turnaj Kubb',
+    popis: 'Hanácké kolék, turnaj ve hře kubb. Týmy házením dřevěných kolíků shazují špalíky soupeře a hrají o vítěznou trofej.',
+    foto: 'assets/galerie/18-kubbovy-turnaj-hanacke-kolek-2026.jpg',
+    alt: 'Kubbový turnaj Hanácké kolék 2026'
+  },
+  {
+    nazev: 'Evropský šampionát dogfrisbee',
+    popis: 'V květnu 2025 patřilo naše hřiště psům a jejich psovodům. Závodníci soutěžili v chytání disků a bojovali o poháry.',
+    foto: 'assets/galerie/36-dogfrisbee-vyhlaseni-vitezu-kveten-2025.jpg',
+    alt: 'Vyhlášení vítězů dogfrisbee, květen 2025'
+  }
+];
 
+/*
+  Mládež: zápasy, výsledky a tabulky z is.fotbal.cz. Seznam přepisuje týdenní automat
+  (nastroje/isfotbal.mjs), ručně není potřeba nic měnit. Skóre se píše z pohledu Červenky.
+  req: číslo soutěže v adrese na is.fotbal.cz, pro novou sezónu ho je potřeba vyměnit.
+  turnaje: true = soutěž se hraje na turnajích, zápasy jednoho dne se na webu spojí do jednoho řádku.
+  bezTabulky: true = is.fotbal.cz tabulku nezveřejňuje (přípravka), na webu se neukáže.
+  V seznamu zápasů se klíč jmenuje rozpis, aby ho automat nepletl se zápasy mužů.
+*/
 window.MLADEZ = [
   {
+    id: 'starsi-zaci',
     nazev: 'Starší žáci',
-    vek: 'U15, ročníky 2012 a mladší',    // podle věkových kategorií FAČR pro sezónu 2026/27, ověřit
-    treninky: 'DOPLNIT',                   // kdy, třeba 'úterý a čtvrtek 16:30–18:00'
-    misto: 'DOPLNIT',                      // kde, třeba 'hřiště SK Červenka'
-    trener: 'DOPLNIT',                     // jméno trenéra
-    kontakt: 'DOPLNIT',                    // telefon nebo e-mail trenéra
     soutez: '5. liga starších žáků, skupina A',
-    foto: 'starsizaci',
+    req: '08b058ec-38d8-476a-b43f-f2a1ad9318fe',
+    aktualizovano: '2026-11-04',
+    poradi: [
+      { tym: 'SK Červenka',         z: 9,  skore: '80:5',    b: 27, nas: true },
+      { tym: 'Sokol Troubelice',    z: 8,  skore: '31:9',    b: 21 },
+      { tym: '1.FC Olešnice',       z: 9,  skore: '27:43',   b: 12 },
+      { tym: 'FC Kolos Jiříkov',    z: 9,  skore: '18:37',   b: 12 },
+      { tym: 'SK Šumvald',          z: 9,  skore: '23:27',   b: 9 },
+      { tym: 'Sokol Pňovice',       z: 8,  skore: '11:28',   b: 6 },
+      { tym: 'Sokol Újezd (u Un.)', z: 8,  skore: '10:51',   b: 3 }
+    ],
     rozpis: [
-      { datum: '2026-08-30T10:00', doma: false, souper: 'Sokol Pňovice', misto: 'Pňovice' },
-      { datum: '2026-09-02T17:00', doma: true, souper: 'SK Šumvald' },
-      { datum: '2026-09-13T13:30', doma: false, souper: 'Sokol Troubelice', misto: 'Troubelice' },
-      { datum: '2026-09-19T13:00', doma: true, souper: '1.FC Olešnice' },
-      { datum: '2026-09-26T10:30', doma: false, souper: 'FC Kolos Jiříkov', misto: 'Jiříkov' },
-      { datum: '2026-10-03T12:30', doma: true, souper: 'Sokol Újezd (u Un.)' },
-      { datum: '2026-10-11T12:00', doma: false, souper: '1.FC Olešnice', misto: 'Olešnice' },
-      { datum: '2026-10-17T12:00', doma: true, souper: 'FC Kolos Jiříkov' },
-      { datum: '2026-10-25T09:30', doma: false, souper: 'Sokol Újezd (u Un.)', misto: 'Újezd' },
-      { datum: '2027-04-03T13:00', doma: true, souper: 'Sokol Pňovice' },
-      { datum: '2027-04-04T13:00', doma: false, souper: 'SK Šumvald', misto: 'Šumvald' },
-      { datum: '2027-04-17T13:30', doma: true, souper: 'Sokol Troubelice' },
-      { datum: '2027-04-25T12:00', doma: false, souper: '1.FC Olešnice', misto: 'Olešnice' },
-      { datum: '2027-05-01T14:00', doma: true, souper: 'FC Kolos Jiříkov' },
+      { datum: '2026-08-30T10:00', doma: false, souper: 'Sokol Pňovice',     misto: 'Pňovice', skore: '11:1' },
+      { datum: '2026-09-02T17:00', doma: true,  souper: 'SK Šumvald',        skore: '9:2' },
+      { datum: '2026-09-13T13:30', doma: false, souper: 'Sokol Troubelice',  misto: 'Troubelice', skore: '4:0' },
+      { datum: '2026-09-19T13:00', doma: true,  souper: '1.FC Olešnice',     skore: '12:1' },
+      { datum: '2026-09-26T10:30', doma: false, souper: 'FC Kolos Jiříkov',  misto: 'Jiříkov', skore: '8:1' },
+      { datum: '2026-10-03T12:30', doma: true,  souper: 'Sokol Újezd (u Un.)', skore: '7:0' },
+      { datum: '2026-10-11T12:00', doma: false, souper: '1.FC Olešnice',     misto: 'Olešnice', skore: '10:0' },
+      { datum: '2026-10-17T12:00', doma: true,  souper: 'FC Kolos Jiříkov',  skore: '5:0' },
+      { datum: '2026-10-25T09:30', doma: false, souper: 'Sokol Újezd (u Un.)', misto: 'Újezd', skore: '14:0' },
+      { datum: '2027-04-03T13:00', doma: true,  souper: 'Sokol Pňovice' },
+      { datum: '2027-04-04T13:00', doma: false, souper: 'SK Šumvald',        misto: 'Šumvald' },
+      { datum: '2027-04-17T13:30', doma: true,  souper: 'Sokol Troubelice' },
+      { datum: '2027-04-25T12:00', doma: false, souper: '1.FC Olešnice',     misto: 'Olešnice' },
+      { datum: '2027-05-01T14:00', doma: true,  souper: 'FC Kolos Jiříkov' },
       { datum: '2027-05-09T09:30', doma: false, souper: 'Sokol Újezd (u Un.)', misto: 'Újezd' },
-      { datum: '2027-05-15T14:00', doma: true, souper: 'SK Šumvald' },
-      { datum: '2027-05-23T10:00', doma: false, souper: 'Sokol Pňovice', misto: 'Pňovice' },
-      { datum: '2027-06-06T14:30', doma: false, souper: 'Sokol Troubelice', misto: 'Troubelice' },
+      { datum: '2027-05-15T14:00', doma: true,  souper: 'SK Šumvald' },
+      { datum: '2027-05-23T10:00', doma: false, souper: 'Sokol Pňovice',     misto: 'Pňovice' },
+      { datum: '2027-06-06T14:30', doma: false, souper: 'Sokol Troubelice',  misto: 'Troubelice' }
     ]
   },
   {
+    id: 'mladsi-zaci',
     nazev: 'Mladší žáci',
-    vek: 'U13, ročníky 2014 a mladší',    // podle věkových kategorií FAČR pro sezónu 2026/27, ověřit
-    treninky: 'DOPLNIT',
-    misto: 'DOPLNIT',
-    trener: 'DOPLNIT',
-    kontakt: 'DOPLNIT',
     soutez: '5. liga mladších žáků, skupina A',
-    foto: 'mladsizaci',
+    req: '20a346db-751d-4aee-81e5-a96b0cc7fcb4',
+    aktualizovano: '2026-11-04',
+    poradi: [
+      { tym: 'Sokol Bohuňovice',     z: 11, skore: '80:15',   b: 29 },
+      { tym: 'SK Šumvald',           z: 11, skore: '68:15',   b: 27 },
+      { tym: 'TJ Štěpánov',          z: 11, skore: '76:23',   b: 25 },
+      { tym: 'Sokol Mladeč',         z: 11, skore: '57:18',   b: 25 },
+      { tym: 'FC Dolany',            z: 11, skore: '29:38',   b: 22 },
+      { tym: 'SK Štarnov',           z: 11, skore: '37:34',   b: 19 },
+      { tym: 'Granitol Mor. Beroun', z: 11, skore: '31:38',   b: 16 },
+      { tym: 'SK Červenka',          z: 11, skore: '46:37',   b: 14, nas: true },
+      { tym: 'Olešnice/Hvozd',       z: 11, skore: '48:45',   b: 9 },
+      { tym: 'Sokol Troubelice',     z: 11, skore: '23:50',   b: 7 },
+      { tym: 'Sokol Újezd (u Un.)',  z: 11, skore: '5:89',    b: 5 },
+      { tym: 'Sokol Babice',         z: 11, skore: '5:103',   b: 0 }
+    ],
     rozpis: [
-      { datum: '2026-08-23T14:00', doma: true, souper: 'Granitol Mor. Beroun' },
-      { datum: '2026-08-29T10:00', doma: false, souper: 'Sokol Újezd (u Un.)', misto: 'Újezd' },
-      { datum: '2026-09-05T11:00', doma: true, souper: 'Sokol Mladeč' },
-      { datum: '2026-09-13T11:15', doma: false, souper: 'SK Šumvald', misto: 'Šumvald' },
-      { datum: '2026-09-19T10:30', doma: true, souper: 'SK Štarnov' },
-      { datum: '2026-09-27T10:00', doma: false, souper: 'FC Dolany', misto: 'Dolany' },
-      { datum: '2026-10-03T10:00', doma: true, souper: 'TJ Štěpánov' },
-      { datum: '2026-10-10T10:00', doma: false, souper: 'Sokol Bohuňovice', misto: 'Bohuňovice' },
-      { datum: '2026-10-17T10:00', doma: false, souper: 'Sokol Troubelice', misto: 'Troubelice' },
-      { datum: '2026-10-24T11:00', doma: true, souper: 'Sokol Babice' },
-      { datum: '2026-11-01T09:30', doma: false, souper: 'Olešnice/Hvozd', misto: 'Olešnice' },
+      { datum: '2026-08-23T14:00', doma: true,  souper: 'Granitol Mor. Beroun', skore: '11:0' },
+      { datum: '2026-08-29T10:00', doma: false, souper: 'Sokol Újezd (u Un.)', misto: 'Újezd', skore: '4:0' },
+      { datum: '2026-09-05T11:00', doma: true,  souper: 'Sokol Mladeč',       skore: '3:7' },
+      { datum: '2026-09-13T11:15', doma: false, souper: 'SK Šumvald',         misto: 'Šumvald', skore: '0:2' },
+      { datum: '2026-09-19T10:30', doma: true,  souper: 'SK Štarnov',         skore: '3:5' },
+      { datum: '2026-09-27T10:00', doma: false, souper: 'FC Dolany',          misto: 'Dolany', skore: '1:4' },
+      { datum: '2026-10-03T10:00', doma: true,  souper: 'TJ Štěpánov',        skore: '1:8' },
+      { datum: '2026-10-10T10:00', doma: false, souper: 'Sokol Bohuňovice',   misto: 'Bohuňovice', skore: '1:7' },
+      { datum: '2026-10-17T10:00', doma: false, souper: 'Sokol Troubelice',   misto: 'Troubelice', skore: '3:3', pen: 'V' },
+      { datum: '2026-10-24T11:00', doma: true,  souper: 'Sokol Babice',       skore: '15:0' },
+      { datum: '2026-11-01T10:15', doma: false, souper: 'Olešnice/Hvozd',     misto: 'Olešnice', skore: '4:1' }
     ]
   },
   {
-    nazev: 'Benjamínci',
-    vek: 'DOPLNIT',
-    treninky: 'DOPLNIT',
-    misto: 'DOPLNIT',
-    trener: 'DOPLNIT',
-    kontakt: 'DOPLNIT',
-    soutez: 'BST 16, turnajová soutěž',   // název soutěže tak, jak ho uvádí fotbal.cz
-    foto: 'benjaminci',
+    id: 'starsi-pripravka',
+    nazev: 'Starší přípravka',
+    soutez: 'BST 16, starší přípravka',
+    req: 'd1edf19d-68c7-4614-a19b-dd1d3c03c9e8',
     turnaje: true,
+    bezTabulky: true,
+    aktualizovano: '2026-11-04',
+    poradi: [],
     rozpis: [
-      { datum: '2026-09-05T09:00', doma: false, souper: 'FK Hlubočky' },
-      { datum: '2026-09-05T09:00', doma: false, souper: 'Tatran Litovel' },
-      { datum: '2026-09-12T12:00', doma: false, souper: 'FK Slavonín' },
-      { datum: '2026-09-12T12:00', doma: false, souper: 'SK Chválkovice' },
-      { datum: '2026-09-12T12:00', doma: false, souper: 'Sokol Újezd (u Un.)' },
-      { datum: '2026-09-20T09:00', doma: false, souper: 'FK Horka nad Mor.' },
-      { datum: '2026-09-20T09:00', doma: false, souper: 'Sokol Doloplazy' },
-      { datum: '2026-09-20T09:00', doma: true, souper: 'Sokol Příkazy' },
-      { datum: '2026-09-26T09:00', doma: false, souper: 'FC Lužice' },
-      { datum: '2026-09-26T09:00', doma: false, souper: 'Sokol Příkazy' },
-      { datum: '2026-09-26T09:00', doma: false, souper: 'TJ Štěpánov' },
-      { datum: '2026-10-04T12:00', doma: true, souper: 'FK Velká Bystřice' },
-      { datum: '2026-10-04T12:00', doma: true, souper: 'Sigma Lutín' },
-      { datum: '2026-10-04T12:00', doma: true, souper: 'Sokol Velký Týnec' },
-      { datum: '2026-10-11T12:00', doma: true, souper: '1.FC Olešnice' },
-      { datum: '2026-10-11T12:00', doma: true, souper: 'SFK Nedvězí' },
-      { datum: '2026-10-11T12:00', doma: true, souper: 'SK Chválkovice' },
-      { datum: '2026-10-17T09:00', doma: false, souper: 'FC Dolany' },
-      { datum: '2026-10-17T09:00', doma: false, souper: 'Granitol Mor. Beroun' },
-      { datum: '2026-10-17T09:00', doma: false, souper: 'Slovan Černovír' },
-      { datum: '2026-10-25T09:00', doma: false, souper: 'SK Náměšť' },
-      { datum: '2026-10-25T09:00', doma: false, souper: 'SK Těšetice' },
-      { datum: '2026-10-25T09:00', doma: true, souper: 'Sokol Mladeč' },
+      { datum: '2026-09-05T09:00', doma: false, souper: 'Tatran Litovel',     skore: '2:3' },
+      { datum: '2026-09-05T09:00', doma: false, souper: 'FK Hlubočky',        skore: '7:6' },
+      { datum: '2026-09-12T12:00', doma: false, souper: 'FK Slavonín',        skore: '2:4' },
+      { datum: '2026-09-12T12:00', doma: false, souper: 'Sokol Újezd (u Un.)', skore: '11:0' },
+      { datum: '2026-09-12T12:00', doma: false, souper: 'SK Chválkovice',     skore: '3:6' },
+      { datum: '2026-09-20T09:00', doma: false, souper: 'Sokol Doloplazy',    skore: '3:6' },
+      { datum: '2026-09-20T09:00', doma: true,  souper: 'Sokol Příkazy',      skore: '2:8' },
+      { datum: '2026-09-20T09:00', doma: false, souper: 'FK Horka nad Mor.',  skore: '2:4' },
+      { datum: '2026-09-26T09:00', doma: false, souper: 'FC Lužice',          skore: '5:1' },
+      { datum: '2026-09-26T09:00', doma: false, souper: 'TJ Štěpánov',        skore: '0:6' },
+      { datum: '2026-09-26T09:00', doma: false, souper: 'Sokol Příkazy',      skore: '4:7' },
+      { datum: '2026-10-04T12:00', doma: true,  souper: 'Sokol Velký Týnec',  skore: '3:6' },
+      { datum: '2026-10-04T12:00', doma: true,  souper: 'Sigma Lutín',        skore: '15:1' },
+      { datum: '2026-10-04T12:00', doma: true,  souper: 'FK Velká Bystřice',  skore: '3:5' },
+      { datum: '2026-10-11T12:00', doma: true,  souper: 'SK Chválkovice',     skore: '1:11' },
+      { datum: '2026-10-11T12:00', doma: true,  souper: 'SFK Nedvězí',        skore: '3:5' },
+      { datum: '2026-10-11T12:00', doma: true,  souper: '1.FC Olešnice',      skore: '3:3' },
+      { datum: '2026-10-17T09:00', doma: false, souper: 'Granitol Mor. Beroun', skore: '1:3' },
+      { datum: '2026-10-17T09:00', doma: false, souper: 'FC Dolany',          skore: '3:2' },
+      { datum: '2026-10-17T09:00', doma: false, souper: 'Slovan Černovír',    skore: '1:2' },
+      { datum: '2026-10-25T09:00', doma: false, souper: 'SK Těšetice',        skore: '1:7' },
+      { datum: '2026-10-25T09:00', doma: true,  souper: 'Sokol Mladeč',       skore: '4:5' },
+      { datum: '2026-10-25T09:00', doma: false, souper: 'SK Náměšť',          skore: '2:1' }
     ]
   }
 ];

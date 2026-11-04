@@ -2,7 +2,7 @@
   Čtení stránek fotbalunas.cz a přepis dat v sk-cervenka/assets/data.js.
   Nepoužívá nic z Node, takže jde vyzkoušet i v prohlížeči. Spouští ho aktualizovat-tabulku.mjs.
 
-  Každá část (tabulka, zápasy, střelec) se zpracuje zvlášť. Když jedna selže,
+  Každá část (tabulka, zápasy) se zpracuje zvlášť. Když jedna selže,
   ostatní se uloží a v data.js zůstane její poslední platná podoba.
 */
 
@@ -196,21 +196,8 @@ function blokZapasu(zapasy) {
   return 'zapasy: [\n' + vystup.map((v, i) => v.komentar || v.radek + (i < posledni ? ',' : '')).join('\n') + '\n  ]';
 }
 
-/* ---------- střelci soutěže ---------- */
-function parsujStrelce(html) {
-  const tabulky = html.match(/<table[\s\S]*?<\/table>/gi) || [];
-  const tab = tabulky.find(t => /<th[^>]*>\s*Hráč\s*<\/th>/.test(t) && /<th[^>]*>\s*Počet\s*<\/th>/.test(t));
-  if (!tab) throw new Error('na stránce jsem nenašel žebříček střelců');
-  const hraci = [...tab.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)].map(m => {
-    const bunky = [...m[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(x => bezTagu(x[1]));
-    return bunky.length >= 3 ? { jmeno: bunky[1], goly: Number(bunky[2]) } : null;
-  }).filter(h => h && h.jmeno && Number.isInteger(h.goly));
-  if (!hraci.length) throw new Error('žebříček střelců je prázdný');
-  return hraci;
-}
-
 /* ---------- celé zpracování ---------- */
-// dataJs: obsah data.js, stranky: { tabulka, rozlosovani, strelci } (HTML, nebo null když se nestáhlo)
+// dataJs: obsah data.js, stranky: { tabulka, rozlosovani } (HTML, nebo null když se nestáhlo)
 function aktualizujData(dataJs, stranky, dnes) {
   const zpravy = [], chyby = [];
   const okno = {};
@@ -240,17 +227,6 @@ function aktualizujData(dataJs, stranky, dnes) {
     zpravy.push(`Zápasy: ${zapasy.length} v rozlosování, ${zapasy.filter(z => z.skore).length} odehraných.`);
   } catch (e) { chyby.push('Zápasy: ' + e.message); }
 
-  try {
-    if (!stranky.strelci) throw new Error('stránku se nepodařilo stáhnout');
-    const hraci = parsujStrelce(stranky.strelci);
-    const kdo = sezona.strelec && sezona.strelec.jmeno;
-    const hrac = kdo && hraci.find(h => bezDiakritiky(h.jmeno) === bezDiakritiky(kdo));
-    if (!hrac) throw new Error(`${kdo || 'střelec z data.js'} v žebříčku střelců není`);
-    const nejvic = hrac.goly === Math.max(...hraci.map(h => h.goly));
-    data = data.replace(/strelec:\s*\{[^}]*\}/, `strelec: { jmeno: ${jsText(hrac.jmeno)}, goly: ${hrac.goly}, nejvic: ${nejvic} }`);
-    zpravy.push(`Střelec: ${hrac.jmeno} ${hrac.goly} gólů${nejvic ? ', nejvíc v soutěži' : ''}.`);
-  } catch (e) { chyby.push('Střelec: ' + e.message); }
-
   // pojistka: nový data.js musí jít načíst a mít všechna data
   const kontrola = {};
   new Function('window', data)(kontrola);
@@ -260,4 +236,4 @@ function aktualizujData(dataJs, stranky, dnes) {
   return { data, zpravy, chyby };
 }
 
-export { aktualizujData, parsujTabulku, parsujRozlosovani, parsujStrelce };
+export { aktualizujData, parsujTabulku, parsujRozlosovani };
