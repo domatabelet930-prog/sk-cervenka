@@ -71,12 +71,5 @@ window.AREAL = [
       { src: 'assets/areal/vysadba-pred.jpg', stitek: 'Před 2023', alt: 'Uschlé smrky napadené kůrovcem u areálu' },
       { src: 'assets/areal/vysadba-po.jpg', stitek: 'Po 2023', alt: 'Nově vysazené stromky v zasněženém areálu' }
     ]
-  },
-  {
-    nazev: 'Závlaha',
-    text: 'Trávník se zavlažuje, aby vydržel i suché léto.',
-    fotky: [
-      { src: 'assets/areal/zavlaha.jpg', stitek: 'Srpen 2025', alt: 'Zavlažování hřiště za soumraku' }
-    ]
   }
 ];
