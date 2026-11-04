@@ -7,7 +7,7 @@
 
 window.KLUB = {
   nazev: 'SK Červenka',
-  email: '',                        // DOPLNIT: e-mail klubu, kam chodí zprávy z formuláře
+  formKlic: '15ca089e-f955-450b-bc8d-2046d53c7ec2',   // klíč z web3forms.com, zprávy z formuláře chodí na e-mail, na který je registrovaný
   telefon: '+420 605 272 347',      // z veřejného zápisu klubu na Firmy.cz, ověřit
   adresa: 'Jižní 24, 784 01 Červenka',
   ico: '45213046',

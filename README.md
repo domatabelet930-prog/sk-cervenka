@@ -74,7 +74,8 @@ se sama objeví místo zástupného pole a po kliknutí se otevře přes celou o
 
 ## Kontakty a fotky
 
-- Telefon, adresa, e-mail pro formulář, Facebook a Instagram: `window.KLUB` na začátku `data.js`.
+- Telefon, adresa, Facebook, Instagram a klíč formuláře z web3forms.com (`formKlic`): `window.KLUB` na začátku `data.js`.
+  Zprávy z formuláře chodí na e-mail, na který je klíč registrovaný.
   Prázdná adresa sociální sítě = ikona se na webu neukáže.
 - Fotky do galerie: dejte je do složky `fotky 1` a spusťte `.\nastroje\pripravit-fotky.ps1 -Zdroj "fotky 1"`.
   Skript je otočí, zmenší a zapíše do `assets/galerie.js`. Popisek se vezme z názvu souboru.

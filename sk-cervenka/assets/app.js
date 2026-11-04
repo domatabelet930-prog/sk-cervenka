@@ -885,7 +885,7 @@
   function initForm() {
     const form = $('[data-form]');
     if (!form) return;
-    const done = $('[data-form-done]', form), noMail = $('[data-form-noemail]', form), note = $('[data-form-note]', form);
+    const done = $('[data-form-done]', form), fail = $('[data-form-fail]', form), note = $('[data-form-note]', form), btn = $('[type="submit"]', form);
     // odkazy s data-zprava="..." (Staňte se partnerem) předvyplní do prázdné zprávy text
     document.addEventListener('click', e => {
       const a = e.target.closest('[data-zprava]');
@@ -901,21 +901,27 @@
       if (bad) fields[k].setAttribute('aria-describedby', errs[k].id); else fields[k].removeAttribute('aria-describedby');
     };
     Object.keys(fields).forEach(k => fields[k].addEventListener('input', () => { if (!errs[k].hidden && fields[k].value.trim()) setErr(k, false); }));
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const jm = fields.jmeno.value.trim(), ko = fields.kontakt.value.trim();
       setErr('jmeno', !jm);
       setErr('kontakt', !ko);
       if (!jm) { fields.jmeno.focus(); return; }
       if (!ko) { fields.kontakt.focus(); return; }
-      const zprava = form.elements.zprava.value.trim();
       done.hidden = true;
-      noMail.hidden = true;
-      if (!KLUB.email) { noMail.hidden = false; noMail.focus(); return; }
-      const subject = 'Web SK Červenka: zpráva';
-      const lines = [`Jméno: ${jm}`, `Kontakt: ${ko}`];
-      if (zprava) lines.push('', zprava);
-      location.href = `mailto:${KLUB.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+      fail.hidden = true;
+      btn.disabled = true;
+      // zprávu doručí služba Web3Forms na e-mail, na který je klíč registrovaný; botcheck je past na roboty
+      const data = { access_key: KLUB.formKlic, subject: `Web SK Červenka: zpráva od ${jm}`, from_name: 'Web SK Červenka', jmeno: jm, kontakt: ko, zprava: form.elements.zprava.value.trim(), botcheck: form.elements.botcheck.checked };
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ko)) data.replyto = ko;
+      let ok = false;
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+        ok = (await res.json()).success === true;
+      } catch (err) { ok = false; }
+      btn.disabled = false;
+      if (!ok) { fail.hidden = false; fail.focus(); return; }
+      form.reset();
       done.hidden = false;
       note.hidden = true;
       done.focus();

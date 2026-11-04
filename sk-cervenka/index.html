@@ -328,15 +328,16 @@
           <label for="f-zprava">Zpráva <span class="opt">(nepovinné)</span></label>
           <textarea id="f-zprava" name="zprava" rows="4" placeholder="Pár slov o sobě, věk dítěte, cokoliv."></textarea>
         </div>
+        <input class="form-past" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn btn-accent btn-l" type="submit">Odeslat zprávu</button>
-        <p class="form-note" data-form-note>Po odeslání se otevře váš e-mail s připravenou zprávou. Stačí ji poslat.</p>
+        <p class="form-note" data-form-note>Údaje použijeme jen k odpovědi na vaši zprávu. Doručí ji služba Web3Forms.</p>
         <div class="form-done" data-form-done hidden tabindex="-1">
           <p class="form-done-h">Hotovo.</p>
-          <p>Zpráva čeká ve vašem e-mailu, stačí ji odeslat. Ozveme se co nejdřív.</p>
+          <p>Zprávu máme, ozveme se co nejdřív.</p>
         </div>
-        <div class="form-done" data-form-noemail hidden tabindex="-1">
-          <p class="form-done-h">Ještě chvilku.</p>
-          <p>E-mail klubu teprve doplňujeme. Zatím nám prosím napište na <a href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook">Facebooku</a> nebo zavolejte.</p>
+        <div class="form-done" data-form-fail hidden tabindex="-1">
+          <p class="form-done-h">Nepovedlo se.</p>
+          <p>Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo nám napište na <a href="https://www.facebook.com/people/SK-%C4%8Cervenka/100057497947163/" target="_blank" rel="noopener" data-social="facebook">Facebooku</a> nebo zavolejte.</p>
         </div>
       </form>
     </div>
