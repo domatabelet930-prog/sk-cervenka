@@ -359,5 +359,115 @@ window.GALERIE = [
         "nh":  405,
         "popis":  "Dogfrisbee – vyhlášení vítězů, květen 2025",
         "kategorie":  "akce"
+    },
+    {
+        "src":  "assets/galerie/37-mladez-na-tribune-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/37-mladez-na-tribune-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Mládež na tribuně, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/38-nastup-k-zapasu-muzu-duben-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/38-nastup-k-zapasu-muzu-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Nástup k zápasu mužů, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/39-sala-sk-cervenka-u-zapasu-duben-2025.jpg",
+        "w":  1081,
+        "h":  1920,
+        "nahled":  "assets/galerie/39-sala-sk-cervenka-u-zapasu-duben-2025-nahled.jpg",
+        "nw":  405,
+        "nh":  720,
+        "popis":  "Šála SK Červenka u zápasu, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/40-zapas-muzu-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/40-zapas-muzu-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Zápas mužů, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/41-hriste-sk-cervenka-pri-zapadu-slunce.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/41-hriste-sk-cervenka-pri-zapadu-slunce-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Hřiště SK Červenka při západu slunce",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/42-zapas-mladeze-duben-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/42-zapas-mladeze-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Zápas mládeže, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/43-zapas-pohled-pres-sit-duben-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/43-zapas-pohled-pres-sit-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Zápas – pohled přes síť, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/44-mladez-v-akci-duben-2025.jpg",
+        "w":  1920,
+        "h":  1080,
+        "nahled":  "assets/galerie/44-mladez-v-akci-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Mládež v akci, duben 2025",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/45-kubbovy-turnaj-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/45-kubbovy-turnaj-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Kubbový turnaj, duben 2025",
+        "kategorie":  "akce"
+    },
+    {
+        "src":  "assets/galerie/46-hanacke-kolek-trofeje-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/46-hanacke-kolek-trofeje-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Hanácké kolék – trofeje, duben 2025",
+        "kategorie":  "akce"
+    },
+    {
+        "src":  "assets/galerie/47-kubbovy-turnaj-spolecne-foto-duben-2025.jpg",
+        "w":  1920,
+        "h":  1081,
+        "nahled":  "assets/galerie/47-kubbovy-turnaj-spolecne-foto-duben-2025-nahled.jpg",
+        "nw":  720,
+        "nh":  405,
+        "popis":  "Kubbový turnaj – společné foto, duben 2025",
+        "kategorie":  "akce"
     }
 ];
