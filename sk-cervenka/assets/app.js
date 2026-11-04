@@ -57,7 +57,7 @@
   const domaHoste = z => (z.doma ? [NAS, z.souper] : [z.souper, NAS]);
   const skoreDH = z => { const [a, b] = z.skore.split(':'); return z.doma ? `${a}:${b}` : `${b}:${a}`; };
   const kde = z => (z.doma ? 'doma' : z.misto ? `venku, ${z.misto}` : 'venku');
-  const ZNAK = '<svg class="team-znak" aria-hidden="true"><use href="#znak"/></svg>';
+  const ZNAK = '<img class="team-znak" src="assets/logo.png" alt="">';
   const tymBox = (n, tag) => `<div class="team"><span class="team-tag">${tag}</span><span class="team-n">${n === NAS ? ZNAK : ''}${esc(n)}</span></div>`;
   const stav = iso => { const d = toDate(iso); return `Stav k ${d.getDate()}. ${d.getMonth() + 1}. ${d.getFullYear()}`; };
 

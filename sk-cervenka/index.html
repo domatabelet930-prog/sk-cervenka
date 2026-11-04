@@ -13,7 +13,7 @@
 <meta property="og:description" content="Fotbal na Hané od roku 1945. Zápasy, tabulka, historie a galerie klubu.">
 <meta property="og:url" content="">
 <meta property="og:image" content="">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23f4f6ef' stroke='%231f5a36' stroke-width='5'/%3E%3Cpath d='M6 40Q32 28 58 40V46Q32 34 6 46Z' fill='%232c7a49'/%3E%3Cpath d='M17 39C13 30 14 20 17 11C20 20 21 30 17 39Z' fill='%231f5a36'/%3E%3Ccircle cx='42' cy='21' r='8' fill='%23fff' stroke='%2310241a' stroke-width='2'/%3E%3Cpath d='M42 16.5l4.3 3.1-1.6 5h-5.4l-1.6-5z' fill='%23cf3b25'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/logo-ikona.png">
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/style.css">
 <script>
@@ -30,28 +30,6 @@
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
-    <pattern id="znak-sit" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-      <path d="M0 0H7M0 0V7" stroke="#8fa898" stroke-width=".8" fill="none"/>
-    </pattern>
-    <clipPath id="znak-kruh"><circle cx="60" cy="60" r="52"/></clipPath>
-    <symbol id="znak" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="57" fill="#f4f6ef"/>
-      <g clip-path="url(#znak-kruh)">
-        <rect x="0" y="0" width="120" height="78" fill="url(#znak-sit)"/>
-        <path d="M2 74Q60 50 118 74V92Q60 70 2 92Z" fill="#2c7a49"/>
-      </g>
-      <path d="M31 77C25 62 26 42 31 22C36 42 37 62 31 77Z" fill="#1f5a36"/>
-      <path d="M41 74C36 61 37 46 41 33C45 46 46 61 41 74Z" fill="#2a6b42"/>
-      <g transform="translate(80 35)">
-        <circle r="10" fill="#fff" stroke="#10241a" stroke-width="1.8"/>
-        <path d="M0-5 4.76-1.55 2.94 4.05H-2.94L-4.76-1.55Z" fill="#cf3b25"/>
-      </g>
-      <path id="znak-pas" d="M12 87Q60 67 108 87" fill="none"/>
-      <text fill="#f4f6ef" font-family="'Big Shoulders Display','Arial Narrow',sans-serif" font-weight="900" font-size="15" letter-spacing="1.2"><textPath href="#znak-pas" startOffset="50%" text-anchor="middle">ČERVENKA</textPath></text>
-      <path id="znak-spodek" d="M22.5 91.5A49 49 0 0 0 97.5 91.5" fill="none"/>
-      <text fill="#1f5a36" font-family="'Big Shoulders Display','Arial Narrow',sans-serif" font-weight="800" font-size="8.4" letter-spacing="1.7"><textPath href="#znak-spodek" startOffset="50%" text-anchor="middle">SPORTOVNÍ KLUB</textPath></text>
-      <circle cx="60" cy="60" r="57" fill="none" stroke="#1f5a36" stroke-width="3.2"/>
-    </symbol>
     <symbol id="ico-fb" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
       <path d="M12.9 21v-7.2h2.3l.35-2.7H12.9V9.5c0-.8.25-1.3 1.35-1.3h1.4V5.8a18 18 0 0 0-2.05-.1c-2.05 0-3.45 1.25-3.45 3.55v1.85H7.9v2.7h2.25V21Z" fill="currentColor"/>
@@ -70,7 +48,7 @@
 <header class="nav" data-nav>
   <div class="nav-in wrap">
     <a class="brand" href="#main" aria-label="SK Červenka, na začátek stránky">
-      <svg class="brand-znak" aria-hidden="true"><use href="#znak"/></svg>
+      <img class="brand-znak" src="assets/logo.png" width="44" height="44" alt="">
       <span class="brand-t">SK Červenka</span>
     </a>
     <nav class="nav-links" aria-label="Hlavní menu">
@@ -368,7 +346,7 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <div class="foot-brand">
-      <svg class="foot-znak" aria-hidden="true"><use href="#znak"/></svg>
+      <img class="foot-znak" src="assets/logo.png" width="64" height="64" alt="">
       <div>
         <p class="foot-name">SK Červenka</p>
         <p class="foot-tag">Fotbal na Hané od roku 1945.</p>
