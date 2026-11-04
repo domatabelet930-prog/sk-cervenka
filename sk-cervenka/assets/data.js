@@ -21,7 +21,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-11-02',
+  aktualizovano: '2026-11-04',
 
   zapasy: [
     // podzim 2026
