@@ -21,7 +21,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-11-04',
+  aktualizovano: '2026-11-09',
 
   zapasy: [
     // podzim 2026
@@ -37,7 +37,7 @@ window.SEZONA = {
     { datum: '2026-10-24T14:30', doma: false, souper: 'Blatec',        skore: '5:4', id: 611178 },
     { datum: '2026-10-28T15:00', doma: false, souper: 'Velký Újezd',   skore: '1:4', pozn: 'dohrávka', id: 611152 },
     { datum: '2026-11-01T14:00', doma: false, souper: 'Nemilany',      skore: '1:4', id: 611185 },
-    { datum: '2026-11-07T14:00', doma: false, souper: 'Dlouhá Loučka', id: 611190 },
+    { datum: '2026-11-07T14:00', doma: false, souper: 'Dlouhá Loučka', skore: '6:2', id: 611190 },
     // jaro 2027
     { datum: '2027-03-27T15:00', doma: true,  souper: 'Nemilany',      id: 611196 },
     { datum: '2027-04-04T15:30', doma: true,  souper: 'Slavonín B',    id: 611208 },
@@ -56,20 +56,20 @@ window.SEZONA = {
 
   // tabulka ke dni "aktualizovano"
   tabulka: [
-    { tym: 'FC Hněvotín',            z: 12,  skore: '50:9',   b: 31 },
-    { tym: 'Sokol Velký Újezd',      z: 12,  skore: '33:18',  b: 27 },
-    { tym: 'TJ Sokol Slavonín B',    z: 12,  skore: '34:21',  b: 26 },
-    { tym: 'FK Nemilany',            z: 12,  skore: '34:15',  b: 23 },
-    { tym: 'SK Červenka',            z: 12,  skore: '38:29',  b: 23, nas: true },
-    { tym: 'SFK Nedvězí',            z: 12,  skore: '32:27',  b: 21 },
-    { tym: 'SK Grygov',              z: 12,  skore: '30:29',  b: 18 },
-    { tym: 'Sokol Mladeč',           z: 12,  skore: '30:33',  b: 18 },
-    { tym: 'SK Chválkovice B',       z: 12,  skore: '40:28',  b: 17 },
-    { tym: 'TJ Blatec',              z: 12,  skore: '31:32',  b: 14 },
-    { tym: 'TJ Štěpánov u Olomouce', z: 12,  skore: '23:34',  b: 14 },
-    { tym: 'TJ Mladějovice',         z: 12,  skore: '25:37',  b: 10 },
-    { tym: 'Sokol Dlouhá Loučka',    z: 12,  skore: '18:47',  b: 10 },
-    { tym: 'SK Šumvald',             z: 12,  skore: '10:69',  b: 0 }
+    { tym: 'FC Hněvotín',            z: 13,  skore: '51:9',   b: 34 },
+    { tym: 'Sokol Velký Újezd',      z: 13,  skore: '40:20',  b: 30 },
+    { tym: 'TJ Sokol Slavonín B',    z: 13,  skore: '34:21',  b: 28 },
+    { tym: 'FK Nemilany',            z: 13,  skore: '39:15',  b: 26 },
+    { tym: 'SK Červenka',            z: 13,  skore: '44:31',  b: 26, nas: true },
+    { tym: 'SFK Nedvězí',            z: 13,  skore: '33:33',  b: 21 },
+    { tym: 'SK Chválkovice B',       z: 13,  skore: '46:29',  b: 20 },
+    { tym: 'SK Grygov',              z: 13,  skore: '30:29',  b: 19 },
+    { tym: 'Sokol Mladeč',           z: 13,  skore: '30:34',  b: 18 },
+    { tym: 'TJ Štěpánov u Olomouce', z: 13,  skore: '26:35',  b: 17 },
+    { tym: 'TJ Blatec',              z: 13,  skore: '31:37',  b: 14 },
+    { tym: 'TJ Mladějovice',         z: 13,  skore: '27:44',  b: 10 },
+    { tym: 'Sokol Dlouhá Loučka',    z: 13,  skore: '20:53',  b: 10 },
+    { tym: 'SK Šumvald',             z: 13,  skore: '11:72',  b: 0 }
   ]
 };
 
