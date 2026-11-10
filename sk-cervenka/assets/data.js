@@ -21,7 +21,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-11-09',
+  aktualizovano: '2026-11-10',
 
   zapasy: [
     // podzim 2026
@@ -126,7 +126,7 @@ window.MLADEZ = [
     nazev: 'Starší žáci',
     soutez: '5. liga starších žáků, skupina A',
     req: '08b058ec-38d8-476a-b43f-f2a1ad9318fe',
-    aktualizovano: '2026-11-04',
+    aktualizovano: '2026-11-10',
     poradi: [
       { tym: 'SK Červenka',         z: 9,  skore: '80:5',    b: 27, nas: true },
       { tym: 'Sokol Troubelice',    z: 8,  skore: '31:9',    b: 21 },
@@ -198,7 +198,7 @@ window.MLADEZ = [
     req: 'd1edf19d-68c7-4614-a19b-dd1d3c03c9e8',
     turnaje: true,
     bezTabulky: true,
-    aktualizovano: '2026-11-04',
+    aktualizovano: '2026-11-10',
     poradi: [],
     rozpis: [
       { datum: '2026-09-05T09:00', doma: false, souper: 'Tatran Litovel',     skore: '2:3' },
