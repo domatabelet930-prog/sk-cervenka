@@ -78,7 +78,7 @@ window.SEZONA = {
   Prázdné src = místo fotky se ukáže kreslená výplň.
 */
 window.FOTKY = {
-  historie: { src: '', alt: '' }
+  historie: { src: 'assets/foto/historie/historie-1990-muzi.jpg', alt: 'Muži Sokola Červenka, 1990' }
 };
 
 /*

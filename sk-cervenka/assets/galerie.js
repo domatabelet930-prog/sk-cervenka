@@ -469,5 +469,25 @@ window.GALERIE = [
         "nh":  405,
         "popis":  "Kubbový turnaj – společné foto, duben 2025",
         "kategorie":  "akce"
+    },
+    {
+        "src":  "assets/galerie/48-archivni-foto-zaci.jpg",
+        "w":  1600,
+        "h":  1130,
+        "nahled":  "assets/galerie/48-archivni-foto-zaci-nahled.jpg",
+        "nw":  720,
+        "nh":  509,
+        "popis":  "Archivní foto – žáci",
+        "kategorie":  "fotbal"
+    },
+    {
+        "src":  "assets/galerie/49-archivni-foto-zapas.jpg",
+        "w":  1596,
+        "h":  1015,
+        "nahled":  "assets/galerie/49-archivni-foto-zapas-nahled.jpg",
+        "nw":  720,
+        "nh":  458,
+        "popis":  "Archivní foto – zápas",
+        "kategorie":  "fotbal"
     }
 ];
