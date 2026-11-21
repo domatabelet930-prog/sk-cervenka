@@ -3,6 +3,9 @@
   Každý projekt má název, krátký text a jednu nebo dvě fotky ze složky assets/areal/.
   stitek: krátký popisek přes fotku, třeba 'Před 2019' a 'Po 2025'.
   sipka: false = mezi dvěma fotkami se neukáže šipka (když nejde o před a po).
+  Místo fotky může být otaznik: true = velký otazník na tmavém pozadí (věc, kterou teprve chystáme).
+  Když soubor s fotkou ještě není ve složce, ukáže se zástupné pole.
+  odkaz: { text, href } = odkaz pod textem projektu.
   Pořadí na webu je stejné jako tady.
 */
 
@@ -70,6 +73,15 @@ window.AREAL = [
     fotky: [
       { src: 'assets/areal/vysadba-pred.jpg', stitek: 'Před 2023', alt: 'Uschlé smrky napadené kůrovcem u areálu' },
       { src: 'assets/areal/vysadba-po.jpg', stitek: 'Po 2023', alt: 'Nově vysazené stromky v zasněženém areálu' }
+    ]
+  },
+  {
+    nazev: 'Střecha tribuny',
+    text: 'Tribuna prošla v roce 2023 opravou, teď je na řadě chátrající střecha.',
+    odkaz: { text: 'Pomozte nám s opravou →', href: '#partneri' },
+    fotky: [
+      { src: 'assets/rozvoj/strecha-tribuny.jpg', stitek: 'Dnes', alt: 'Chátrající střecha tribuny' },
+      { otaznik: true, stitek: 'Připravujeme' }
     ]
   }
 ];

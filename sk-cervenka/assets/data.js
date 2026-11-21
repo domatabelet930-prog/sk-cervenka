@@ -21,7 +21,7 @@ window.KLUB = {
 window.SEZONA = {
   soutez: 'Okresní přebor mužů',
   rocnik: '2026/27',
-  aktualizovano: '2026-11-16',
+  aktualizovano: '2026-11-21',
 
   zapasy: [
     // podzim 2026
@@ -84,31 +84,39 @@ window.FOTKY = {
 /*
   Akce pořádané klubem: jedna položka = jedna karta v sekci Akce.
   foto: soubor z assets/galerie/, alt: popis fotky pro čtečky.
+  plakat: aktuální plakát akce. Jak ho přidat: obrázek (JPG nebo PNG) uložte do složky
+  assets/plakaty/ a jeho cestu napište do uvozovek, třeba plakat: 'assets/plakaty/hody-2027.jpg'.
+  Pod kartou se pak ukáže náhled plakátu, který se po kliknutí zvětší přes celou obrazovku.
+  Prázdné plakat: '' = pod kartou nic není.
 */
 window.AKCE = [
   {
     nazev: 'Hody',
     popis: 'Tradiční hody na hřišti. Přípravné i mistrovské zápasy, pečené makrely a občerstvení, pouťové atrakce a v sobotu hodová zábava.',
     foto: 'assets/galerie/02-hody-2026-vecer-na-hristi.jpg',
-    alt: 'Večer na hřišti při hodech 2026'
+    alt: 'Večer na hřišti při hodech 2026',
+    plakat: ''
   },
   {
     nazev: 'Gulášfest',
-    popis: 'Soutěž ve vaření gulášů na hřišti. Týmy vaří v kotlících, porota ochutnává a vybírá vítěze.',
+    popis: 'Soutěž ve vaření netradičních gulášů na otevřeném ohni. Vítěze vybírá laická i odborná porota. Součástí akce je i Chilifest.',
     foto: 'assets/galerie/14-soutez-ve-vareni-gulasu-2026-plne-hriste.jpg',
-    alt: 'Plné hřiště při soutěži ve vaření gulášů 2026'
+    alt: 'Plné hřiště při soutěži ve vaření gulášů 2026',
+    plakat: ''
   },
   {
     nazev: 'Turnaj Kubb',
     popis: 'Hanácké kolék, turnaj ve hře kubb. Týmy házením dřevěných kolíků shazují špalíky soupeře a hrají o vítěznou trofej.',
     foto: 'assets/galerie/18-kubbovy-turnaj-hanacke-kolek-2026.jpg',
-    alt: 'Kubbový turnaj Hanácké kolék 2026'
+    alt: 'Kubbový turnaj Hanácké kolék 2026',
+    plakat: ''
   },
   {
     nazev: 'Evropský šampionát dogfrisbee',
     popis: 'V květnu 2025 patřilo naše hřiště psům a jejich psovodům. Závodníci soutěžili v chytání disků a bojovali o poháry.',
     foto: 'assets/galerie/36-dogfrisbee-vyhlaseni-vitezu-kveten-2025.jpg',
-    alt: 'Vyhlášení vítězů dogfrisbee, květen 2025'
+    alt: 'Vyhlášení vítězů dogfrisbee, květen 2025',
+    plakat: ''
   }
 ];
 
@@ -126,7 +134,7 @@ window.MLADEZ = [
     nazev: 'Starší žáci',
     soutez: '5. liga starších žáků, skupina A',
     req: '08b058ec-38d8-476a-b43f-f2a1ad9318fe',
-    aktualizovano: '2026-11-16',
+    aktualizovano: '2026-11-21',
     poradi: [
       { tym: 'SK Červenka',         z: 9,  skore: '80:5',    b: 27, nas: true },
       { tym: 'Sokol Troubelice',    z: 8,  skore: '31:9',    b: 21 },
@@ -198,7 +206,7 @@ window.MLADEZ = [
     req: 'd1edf19d-68c7-4614-a19b-dd1d3c03c9e8',
     turnaje: true,
     bezTabulky: true,
-    aktualizovano: '2026-11-16',
+    aktualizovano: '2026-11-21',
     poradi: [],
     rozpis: [
       { datum: '2026-09-05T09:00', doma: false, souper: 'Tatran Litovel',     skore: '2:3' },
@@ -224,6 +232,40 @@ window.MLADEZ = [
       { datum: '2026-10-25T09:00', doma: false, souper: 'SK Těšetice',        skore: '1:7' },
       { datum: '2026-10-25T09:00', doma: true,  souper: 'Sokol Mladeč',       skore: '4:5' },
       { datum: '2026-10-25T09:00', doma: false, souper: 'SK Náměšť',          skore: '2:1' }
+    ]
+  },
+  {
+    id: 'mladsi-pripravka',
+    nazev: 'Mladší přípravka',
+    soutez: 'BML 19, mladší přípravka',
+    req: 'afbe0dcc-c5f8-4838-ade6-52e639eb14fe',
+    turnaje: true,
+    bezTabulky: true,
+    aktualizovano: '2026-11-21',
+    poradi: [],
+    rozpis: [
+      { datum: '2026-09-05T09:30', doma: false, souper: 'SK Chválkovice',    skore: '6:4' },
+      { datum: '2026-09-05T09:30', doma: true,  souper: 'SK Štarnov',        skore: '7:3' },
+      { datum: '2026-09-05T09:30', doma: true,  souper: 'Sokol Velký Týnec', skore: '15:2' },
+      { datum: '2026-09-12T09:00', doma: true,  souper: 'Nemilany/Nové Sady', skore: '10:1' },
+      { datum: '2026-09-12T09:00', doma: false, souper: 'SK Sigma Olomouc',  skore: '6:5' },
+      { datum: '2026-09-12T09:00', doma: false, souper: 'Sokol Újezd (u Un.)', skore: '5:3' },
+      { datum: '2026-09-20T12:00', doma: false, souper: 'SK Paseka',         skore: '9:0' },
+      { datum: '2026-09-20T12:00', doma: false, souper: 'FK Přáslavice',     skore: '9:1' },
+      { datum: '2026-09-27T10:00', doma: false, souper: 'SK Těšetice',       skore: '3:3' },
+      { datum: '2026-09-27T10:00', doma: true,  souper: 'FC Hněvotín',       skore: '4:3' },
+      { datum: '2026-09-27T10:00', doma: false, souper: 'FK Šternberk',      skore: '15:4' },
+      { datum: '2026-10-04T09:00', doma: true,  souper: 'SK Náměšť',         skore: '6:3' },
+      { datum: '2026-10-04T09:00', doma: true,  souper: 'SK Těšetice',       skore: '3:3' },
+      { datum: '2026-10-04T09:00', doma: true,  souper: 'FC Lužice',         skore: '2:2' },
+      { datum: '2026-10-11T09:00', doma: true,  souper: 'SK Štarnov',        skore: '8:4' },
+      { datum: '2026-10-11T09:00', doma: true,  souper: 'SK Sigma Olomouc',  skore: '16:0' },
+      { datum: '2026-10-11T09:00', doma: true,  souper: 'FK Přáslavice',     skore: '10:2' },
+      { datum: '2026-10-17T09:00', doma: false, souper: 'SK Paseka',         skore: '10:4' },
+      { datum: '2026-10-17T09:00', doma: true,  souper: 'FC Hněvotín',       skore: '9:3' },
+      { datum: '2026-10-17T09:00', doma: false, souper: '1. HFK Olomouc',    skore: '8:5' },
+      { datum: '2026-10-24T09:00', doma: false, souper: 'Sokol Újezd (u Un.)', skore: '2:1' },
+      { datum: '2026-10-24T09:00', doma: false, souper: 'FK Šternberk',      skore: '3:5' }
     ]
   }
 ];

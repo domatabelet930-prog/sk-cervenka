@@ -51,7 +51,7 @@
     { id: 'muzi', nazev: 'Muži', soutez: SEZONA.soutez, tabulka: SEZONA.tabulka || [], aktualizovano: SEZONA.aktualizovano, zapasy: seDaty(SEZONA.zapasy) },
     ...MLADEZ.filter(k => k && k.id && k.nazev).map(k => ({ id: k.id, nazev: k.nazev, soutez: k.soutez, tabulka: k.poradi || [], aktualizovano: k.aktualizovano, turnaje: !!k.turnaje, mladez: true, zapasy: seDaty(k.rozpis) }))
   ];
-  const NA_UVODU = ['muzi', 'starsi-zaci', 'mladsi-zaci'];
+  const NA_UVODU = ['muzi', 'starsi-zaci', 'mladsi-zaci', 'mladsi-pripravka'];
   const budouci = z => !z.skore && z.dt.getTime() + 2 * 36e5 > Date.now();
   const vysl = z => { const [a, b] = z.skore.split(':').map(Number); return a > b ? 'v' : a < b ? 'p' : 'r'; };
   const domaHoste = z => (z.doma ? [NAS, z.souper] : [z.souper, NAS]);
@@ -78,7 +78,8 @@
   function renderUvod() {
     const box = $('[data-uvod-zapasy]');
     if (!box) return;
-    const nm = n => `<span class="hz-n">${n === NAS ? ZNAK : ''}${esc(n)}</span>`;
+    // dlouhý název s lomítkem (Olešnice/Hvozd) se smí zlomit za lomítkem
+    const nm = n => `<span class="hz-n">${n === NAS ? ZNAK : ''}<span>${esc(n).replace(/\//g, '/<wbr>')}</span></span>`;
     box.innerHTML = NA_UVODU.map(id => KATEGORIE.find(k => k.id === id)).filter(Boolean).map(k => {
       const dalsi = k.zapasy.find(budouci), z = dalsi || k.zapasy.filter(x => x.skore).pop();
       if (!z) return '';
@@ -164,7 +165,7 @@
     const up = $('[data-updated]'), sl = $('[data-season-label]');
     const hlavicka = k => {
       if (up) up.textContent = k.aktualizovano ? stav(k.aktualizovano) : '';
-      if (sl) sl.textContent = `Sezóna ${SEZONA.rocnik || ''} · ${k.soutez || ''}`;
+      if (sl) sl.textContent = `Sezóna ${SEZONA.rocnik || ''}`;
     };
     hlavicka(KATEGORIE[0]);
     const vyber = zalozky(taby, id => {
@@ -234,22 +235,49 @@
     const projekty = AREAL.filter(p => p && p.nazev && Array.isArray(p.fotky) && p.fotky.length);
     if (!projekty.length) { if (sekce) sekce.hidden = true; return; }
     const sipka = '<span class="projekt-sipka" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+    const zastupne = '<div class="ph" aria-hidden="true"><svg viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="50" width="140" height="100" rx="6"/><circle cx="72" cy="88" r="12"/><path d="M30 138l44-34 30 24 26-20 40 30"/></g></svg></div>';
     box.innerHTML = projekty.map(p => {
       const fotky = p.fotky.slice(0, 2);
-      const obr = fotky.map(f => `<figure><img src="${esc(f.src)}" alt="${esc(f.alt || p.nazev)}" loading="lazy" decoding="async">` +
-        `${f.stitek ? `<figcaption class="projekt-stitek">${esc(f.stitek)}</figcaption>` : ''}</figure>`).join('');
+      const obr = fotky.map(f => {
+        const vnitrek = f.otaznik ? '<div class="projekt-otaznik" aria-hidden="true">?</div>'
+          : f.src ? `<img src="${esc(f.src)}" alt="${esc(f.alt || p.nazev)}" loading="lazy" decoding="async">` : zastupne;
+        return `<figure>${vnitrek}${f.stitek ? `<figcaption class="projekt-stitek">${esc(f.stitek)}</figcaption>` : ''}</figure>`;
+      }).join('');
+      const odkaz = p.odkaz && p.odkaz.text ? `<a class="projekt-odkaz" href="${esc(p.odkaz.href || '#partneri')}">${esc(p.odkaz.text)}</a>` : '';
       return `<article class="projekt"><div class="projekt-foto projekt-foto-${fotky.length}">${obr}` +
         `${fotky.length === 2 && p.sipka !== false ? sipka : ''}</div>` +
-        `<div class="projekt-b"><h3 class="projekt-n">${esc(p.nazev)}</h3>${p.text ? `<p>${esc(p.text)}</p>` : ''}</div></article>`;
+        `<div class="projekt-b"><h3 class="projekt-n">${esc(p.nazev)}</h3>${p.text ? `<p>${esc(p.text)}</p>` : ''}${odkaz}</div></article>`;
     }).join('');
+    // fotka, která ve složce ještě není: místo rozbitého obrázku zástupné pole
+    $$('.projekt-foto img', box).forEach(img => img.addEventListener('error', () => img.insertAdjacentHTML('afterend', zastupne) || img.remove(), { once: true }));
   }
 
   /* ---------- akce pořádané klubem ---------- */
   function renderAkce() {
     const box = $('[data-akce]');
     if (!box) return;
-    box.innerHTML = AKCE.filter(a => a && a.nazev).map(a => `<article class="card"><figure class="slot has-photo"><img src="${esc(a.foto)}" alt="${esc(a.alt || a.nazev)}" loading="lazy" decoding="async"></figure>` +
-      `<div class="card-b"><h3 class="h3">${esc(a.nazev)}</h3><p>${esc(a.popis)}</p></div></article>`).join('');
+    const akce = AKCE.filter(a => a && a.nazev);
+    // plakát: jen když je vyplněný; když soubor chybí, slot zmizí
+    const plakat = (a, i) => (String(a.plakat || '').trim() ? `<button class="akce-plakat" type="button" data-plakat="${i}" hidden>` +
+      `<img src="${esc(a.plakat.trim())}" alt="" decoding="async"><span>Aktuální plakát<small>Zvětšit</small></span></button>` : '');
+    box.innerHTML = akce.map((a, i) => `<article class="card"><figure class="slot has-photo"><img src="${esc(a.foto)}" alt="${esc(a.alt || a.nazev)}" loading="lazy" decoding="async"></figure>` +
+      `<div class="card-b"><h3 class="h3">${esc(a.nazev)}</h3><p>${esc(a.popis)}</p>${plakat(a, i)}</div></article>`).join('');
+    const plakaty = $$('[data-plakat]', box);
+    const seznam = () => plakaty.filter(b => !b.hidden).map(b => {
+      const a = akce[+b.dataset.plakat], img = $('img', b);
+      return { src: a.plakat.trim(), w: img.naturalWidth, h: img.naturalHeight, popis: `Plakát: ${a.nazev}` };
+    });
+    plakaty.forEach(b => {
+      const img = $('img', b);
+      const ok = () => { b.hidden = false; img.alt = `Plakát: ${akce[+b.dataset.plakat].nazev}`; };
+      if (img.complete && img.naturalWidth) ok(); else img.addEventListener('load', ok, { once: true });
+      img.addEventListener('error', () => b.remove(), { once: true });
+      b.addEventListener('click', () => {
+        const s = seznam(), i = plakaty.filter(x => !x.hidden).indexOf(b);
+        if (otevriFotku) otevriFotku(s, i, b);
+        else window.open(s[i].src, '_blank', 'noopener');
+      });
+    });
   }
 
   /* ---------- partneři: loga, balíčky, doplňky ---------- */

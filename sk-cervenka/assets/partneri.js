@@ -25,7 +25,7 @@ window.PARTNERI = {
       cena: '',
       vyhody: [
         'Jméno na tabuli partnerů a na webu',
-        'Poděkování na Facebooku na začátku sezóny'
+        'Propagace na sociálních sítích'
       ]
     },
     {
@@ -45,7 +45,7 @@ window.PARTNERI = {
         'Banner na nejlepším místě',
         'Logo na zápasových grafikách a plakátech',
         'Hlášení rozhlasem',
-        'Partner jednoho domácího zápasu'
+        'Partner všech domácích zápasů'
       ]
     },
     {
@@ -55,9 +55,9 @@ window.PARTNERI = {
       zvyraznit: true,
       stitek: 'Logo na dresu',
       vyhody: [
-        'Logo na prsou dresu A-mužstva',
+        'Logo na dresu A-mužstva',
         'Největší banner u vchodu',
-        '4 VIP vstupy s občerstvením',
+        'Vstup na domácí zápasy zdarma',
         'Jedna firemní akce v areálu'
       ]
     }
@@ -66,7 +66,6 @@ window.PARTNERI = {
   doplnky: [
     { nazev: 'Partner mládeže', cena: '' },
     { nazev: 'Partner zápasu', cena: '' },
-    { nazev: 'Rukáv nebo záda dresu', cena: '' },
-    { nazev: 'Partner obnovy po povodni', popis: 'Dar na konkrétní věc, třeba střídačky nebo šatny.', cena: '' }
+    { nazev: 'Partner rozvoje', popis: 'Dar na konkrétní věc, třeba hrací pomůcky nebo zázemí.', cena: '' }
   ]
 };
