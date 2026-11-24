@@ -10,7 +10,11 @@ const NAS = 'SK Červenka';            // tak se Červenka jmenuje na is.fotbal.
 const MIN_TYMU = 4;                   // pojistka: méně řádků v tabulce = něco je špatně
 const MIN_ZAPASU = 5;                 // pojistka: méně zápasů Červenky = něco je špatně
 
-const bezTagu = s => s.replace(/<i>[\s\S]*?<\/i>/g, ' ').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+const bezTagu = s => s.replace(/<i>[\s\S]*?<\/i>/g, ' ').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ')
+  .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
+  .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+// v tabulce mají týmy za názvem šipku ▲/▼ (postup do horní či dolní skupiny), do názvu nepatří
+const nazevTymu = s => bezTagu(s).replace(/[▲-▿]/g, '').trim();
 const jsText = s => `'${String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
 const bunky = radek => [...radek.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(m => m[1]);
 
@@ -20,7 +24,7 @@ function parsujZapasy(html) {
   for (const [, radek] of html.matchAll(/<tr class="type_[^"]*">([\s\S]*?)<\/tr>/g)) {
     const b = bunky(radek);
     if (b.length < 5) continue;
-    const domaci = bezTagu(b[1]), hoste = bezTagu(b[2]);
+    const domaci = nazevTymu(b[1]), hoste = nazevTymu(b[2]);
     if (domaci !== NAS && hoste !== NAS) continue;
     const termin = bezTagu(b[0]).match(/(\d\d)\.(\d\d)\.(\d{4})\s+(\d\d):(\d\d)/);
     if (!termin) throw new Error(`u zápasu ${domaci} - ${hoste} chybí termín`);
@@ -50,7 +54,7 @@ function parsujTabulku(html) {
   const celkova = (html.match(/Tabulka celková[\s\S]*?<table[\s\S]*?<\/table>/i) || [''])[0];
   const radky = [...celkova.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)].map(m => bunky(m[1])).filter(b => b.length >= 8);
   const poradi = radky.map((b, i) => {
-    const tym = bezTagu(b[1]), z = Number(bezTagu(b[2])), skore = bezTagu(b[6]).replace(/\s/g, ''), body = Number(bezTagu(b[7]));
+    const tym = nazevTymu(b[1]), z =Number(bezTagu(b[2])), skore = bezTagu(b[6]).replace(/\s/g, ''), body = Number(bezTagu(b[7]));
     if (!tym || !Number.isInteger(z) || !Number.isInteger(body) || !/^\d+:\d+$/.test(skore)) throw new Error(`řádek ${i + 1} tabulky nejde přečíst (${tym || '?'})`);
     return { tym, z, skore, b: body, nas: tym === NAS };
   });
