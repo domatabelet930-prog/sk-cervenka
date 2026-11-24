@@ -257,23 +257,22 @@
     const box = $('[data-akce]');
     if (!box) return;
     const akce = AKCE.filter(a => a && a.nazev);
-    // plakát: jen když je vyplněný; když soubor chybí, slot zmizí
-    const plakat = (a, i) => (String(a.plakat || '').trim() ? `<button class="akce-plakat" type="button" data-plakat="${i}" hidden>` +
-      `<img src="${esc(a.plakat.trim())}" alt="" decoding="async"><span>Aktuální plakát<small>Zvětšit</small></span></button>` : '');
-    box.innerHTML = akce.map((a, i) => `<article class="card"><figure class="slot has-photo"><img src="${esc(a.foto)}" alt="${esc(a.alt || a.nazev)}" loading="lazy" decoding="async"></figure>` +
-      `<div class="card-b"><h3 class="h3">${esc(a.nazev)}</h3><p>${esc(a.popis)}</p>${plakat(a, i)}</div></article>`).join('');
+    // malý plakát přímo pod kartou akce; jen když je vyplněný, chybějící soubor se vynechá
+    const plakat = (a, i) => (String(a.plakat || '').trim() ? `<button class="plakat" type="button" data-plakat="${i}" hidden aria-label="Zvětšit plakát: ${esc(a.nazev)}">` +
+      `<span class="plakat-k">Aktuální plakát</span><img src="${esc(a.plakat.trim())}" alt="Plakát: ${esc(a.nazev)}" decoding="async"></button>` : '');
+    box.innerHTML = akce.map((a, i) => `<div class="akce-sloupec"><article class="card"><figure class="slot has-photo"><img src="${esc(a.foto)}" alt="${esc(a.alt || a.nazev)}" loading="lazy" decoding="async"></figure>` +
+      `<div class="card-b"><h3 class="h3">${esc(a.nazev)}</h3><p>${esc(a.popis)}</p></div></article>${plakat(a, i)}</div>`).join('');
+
     const plakaty = $$('[data-plakat]', box);
-    const seznam = () => plakaty.filter(b => !b.hidden).map(b => {
-      const a = akce[+b.dataset.plakat], img = $('img', b);
-      return { src: a.plakat.trim(), w: img.naturalWidth, h: img.naturalHeight, popis: `Plakát: ${a.nazev}` };
-    });
+    const viditelne = () => plakaty.filter(b => b.isConnected && !b.hidden);
     plakaty.forEach(b => {
       const img = $('img', b);
-      const ok = () => { b.hidden = false; img.alt = `Plakát: ${akce[+b.dataset.plakat].nazev}`; };
+      const ok = () => { b.hidden = false; };
       if (img.complete && img.naturalWidth) ok(); else img.addEventListener('load', ok, { once: true });
       img.addEventListener('error', () => b.remove(), { once: true });
       b.addEventListener('click', () => {
-        const s = seznam(), i = plakaty.filter(x => !x.hidden).indexOf(b);
+        const vid = viditelne(), i = vid.indexOf(b);
+        const s = vid.map(x => { const a = akce[+x.dataset.plakat], im = $('img', x); return { src: a.plakat.trim(), w: im.naturalWidth, h: im.naturalHeight, popis: `Plakát: ${a.nazev}` }; });
         if (otevriFotku) otevriFotku(s, i, b);
         else window.open(s[i].src, '_blank', 'noopener');
       });

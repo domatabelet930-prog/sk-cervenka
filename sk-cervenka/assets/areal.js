@@ -80,7 +80,7 @@ window.AREAL = [
     text: 'Tribuna prošla v roce 2023 opravou, teď je na řadě chátrající střecha.',
     odkaz: { text: 'Pomozte nám s opravou →', href: '#partneri' },
     fotky: [
-      { src: 'assets/rozvoj/strecha-tribuny.jpg', stitek: 'Dnes', alt: 'Chátrající střecha tribuny' },
+      { src: 'assets/rozvoj/strecha-tribuny.jpg', stitek: 'Dnes', alt: 'Tribuna se starou střechou pod sněhem' },
       { otaznik: true, stitek: 'Připravujeme' }
     ]
   }

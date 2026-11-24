@@ -86,8 +86,8 @@ window.FOTKY = {
   foto: soubor z assets/galerie/, alt: popis fotky pro čtečky.
   plakat: aktuální plakát akce. Jak ho přidat: obrázek (JPG nebo PNG) uložte do složky
   assets/plakaty/ a jeho cestu napište do uvozovek, třeba plakat: 'assets/plakaty/hody-2027.jpg'.
-  Pod kartou se pak ukáže náhled plakátu, který se po kliknutí zvětší přes celou obrazovku.
-  Prázdné plakat: '' = pod kartou nic není.
+  Plakát se pak ukáže zmenšený pod kartou akce a po kliknutí se zvětší přes celou obrazovku.
+  Prázdné plakat: '' = pod kartou žádný plakát není.
 */
 window.AKCE = [
   {
@@ -95,14 +95,14 @@ window.AKCE = [
     popis: 'Tradiční hody na hřišti. Přípravné i mistrovské zápasy, pečené makrely a občerstvení, pouťové atrakce a v sobotu hodová zábava.',
     foto: 'assets/galerie/02-hody-2026-vecer-na-hristi.jpg',
     alt: 'Večer na hřišti při hodech 2026',
-    plakat: ''
+    plakat: 'assets/plakaty/hody-2026.jpg'
   },
   {
     nazev: 'Gulášfest',
     popis: 'Soutěž ve vaření netradičních gulášů na otevřeném ohni. Vítěze vybírá laická i odborná porota. Součástí akce je i Chilifest.',
     foto: 'assets/galerie/14-soutez-ve-vareni-gulasu-2026-plne-hriste.jpg',
     alt: 'Plné hřiště při soutěži ve vaření gulášů 2026',
-    plakat: ''
+    plakat: 'assets/plakaty/gulasfest-2026.jpg'
   },
   {
     nazev: 'Turnaj Kubb',
@@ -116,7 +116,7 @@ window.AKCE = [
     popis: 'V květnu 2025 patřilo naše hřiště psům a jejich psovodům. Závodníci soutěžili v chytání disků a bojovali o poháry.',
     foto: 'assets/galerie/36-dogfrisbee-vyhlaseni-vitezu-kveten-2025.jpg',
     alt: 'Vyhlášení vítězů dogfrisbee, květen 2025',
-    plakat: ''
+    plakat: 'assets/plakaty/dogfrisbee-2025.jpg'
   }
 ];
 
